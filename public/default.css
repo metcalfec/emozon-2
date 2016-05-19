@@ -13,3 +13,12 @@
 #cart {
   font-family: sans-serif;;
 }
+
+.thumbnail {
+  padding: 20px;
+}
+
+.product-price {
+  font-size: 20px;
+  color: red;
+}
