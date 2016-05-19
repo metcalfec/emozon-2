@@ -1,0 +1,24 @@
+.item {
+  height: 400px;
+}
+
+#search-bar {
+  width: 600px;
+}
+
+.navbar {
+  height: 100px;
+}
+
+#cart {
+  font-family: sans-serif;;
+}
+
+.thumbnail {
+  padding: 20px;
+}
+
+.product-price {
+  font-size: 20px;
+  color: red;
+}
