@@ -3,6 +3,13 @@ var productsTemp = [
     name: "Eloquent JavaScript: A Modern Introduction to Programming",
     image: "http://ecx.images-amazon.com/images/I/51zFTdNilAL._SX377_BO1,204,203,200_.jpg",
     price: 21.57,
+    description: [
+      "The essential elements of programming, including syntax, control, and data",
+      "How to organize and clarify your code with object-oriented and functional programming techniques",
+      "How to script the browser and make basic web applications",
+      "How to use the DOM effectively to interact with browsers",
+      "How to harness Node.js to build servers and utilities"
+    ],
     keywords: ["book", "javascript"]
   },
   {
@@ -81,10 +88,24 @@ function showItem(object) {
   var prodMediaObject = $('<img class="product-img" src="' + object.image + '">');
   var prodMediaBody = $('<div class="media-body"></div>');
   var prodMediaHeading = $('<h3 class="media-heading">' + object.name + '</h3>');
+  var prodMediaPrice = $('<p>Price: <span class="media-price">$' + object.price + '</span></p>');
+  var prodMediaAboutUL = $('<ul class="media-ul"></ul>');
+  var prodMediaAboutLiOne = $('<li>' + object.description[0] + '</li>');
+  var prodMediaAboutLiTwo = $('<li>' + object.description[1] + '</li>');
+  var prodMediaAboutLiThree = $('<li>' + object.description[2] + '</li>');
+  var prodMediaAboutLiFour = $('<li>' + object.description[3] + '</li>');
+  var prodMediaAboutLiFive = $('<li>' + object.description[4] + '</li>');
   $('#product').append(prodCol);
   $(prodCol).append(prodMedia);
   $(prodMedia).append(prodMediaLeft);
   $(prodMediaLeft).append(prodMediaObject);
   $(prodMedia).append(prodMediaBody);
   $(prodMediaBody).append(prodMediaHeading);
+  $(prodMediaBody).append(prodMediaPrice);
+  $(prodMediaBody).append(prodMediaAboutUL);
+  $(prodMediaAboutUL).append(prodMediaAboutLiOne);
+  $(prodMediaAboutUL).append(prodMediaAboutLiTwo);
+  $(prodMediaAboutUL).append(prodMediaAboutLiThree);
+  $(prodMediaAboutUL).append(prodMediaAboutLiFour);
+  $(prodMediaAboutUL).append(prodMediaAboutLiFive);
 }
