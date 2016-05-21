@@ -6,6 +6,12 @@ var productsTemp = [
     keywords: ["book", "javascript"]
   },
   {
+    name: "JavaScript: The Definitive Guide: Activate Your Web Pages (Definitive Guides)",
+    image: "http://ecx.images-amazon.com/images/I/51WD-F3GobL.jpg",
+    price: 33.89,
+    keywords: ["book", "javascript"]
+  },
+  {
     name: "Sony KDL32R300C 32-Inch 720p LED TV (2015 Model)",
     image: "http://ecx.images-amazon.com/images/I/81RstnIX0iL._SL1500_.jpg",
     price: 149.99,
@@ -21,19 +27,32 @@ $(document).ready(function() {
   $('#results').on('click', '.product-title', function(event) {
     for (var i = 0; i < productsTemp.length; i++) {
       if ($(this).text() === productsTemp[i].name) {
-        $('#results').hide();
         showItem(productsTemp[i]);
       }
     }
   })
+  $('#results').on('mouseenter', '.product-col', function() {
+    $(this).animate({
+    opacity: 0.5
+  }, 100);
+  })
+  $('#results').on('mouseleave', '.product-col', function() {
+    $(this).animate({
+    opacity: 1
+  }, 100);
+  })
+
   $('.navbar-brand').on('click', function() {
-    $('#results').hide();
-    $('#product').hide();
+    $('#results').empty();
+    $('#product').empty();
     $('#carousel-ads').show();
   });
 });
 
 function findItem(item) {
+  $('#product').empty();
+  $('#results').empty();
+  $('#carousel-ads').hide();
   for (var i = 0; i < productsTemp.length; i++) {
     for (var j = 0; j < productsTemp[i].keywords.length; j++) {
       if (productsTemp[i].keywords[j] === item.toLowerCase()) {
@@ -43,22 +62,29 @@ function findItem(item) {
         var productTitleDiv = $('<div>')
         var productTitle = $('<a href="#"><h5 class="product-title">' + productsTemp[i].name + '</h5></a>')
         var productPrice = $('<p class="product-price">$' + productsTemp[i].price + '</p>')
-        $('#carousel-ads').hide();
         $('#results').append(productCol);
         $(productCol).append(productThumb);
         $(productThumb).append(productImg);
         $(productThumb).append(productTitleDiv);
         $(productTitleDiv).append(productTitle);
         $(productTitleDiv).append(productPrice);
-        return productsTemp[i];
       }
     }
   }
 }
 
 function showItem(object) {
-  var productCol = $('<div class="col-md-4 product-col"></div>');
-  var productImg = $('<img class="product-img" src="' + object.image + '">')
-  $('#product').append(productCol);
-  $(productCol).append(productImg);
+  $('#results').empty();
+  var prodCol = $('<div class="col-md-10"></div>');
+  var prodMedia = $('<div class="media"></div>');
+  var prodMediaLeft = $('<div class="media-left"></div>');
+  var prodMediaObject = $('<img class="product-img" src="' + object.image + '">');
+  var prodMediaBody = $('<div class="media-body"></div>');
+  var prodMediaHeading = $('<h3 class="media-heading">' + object.name + '</h3>');
+  $('#product').append(prodCol);
+  $(prodCol).append(prodMedia);
+  $(prodMedia).append(prodMediaLeft);
+  $(prodMediaLeft).append(prodMediaObject);
+  $(prodMedia).append(prodMediaBody);
+  $(prodMediaBody).append(prodMediaHeading);
 }

@@ -1,3 +1,6 @@
+#product {
+  margin-top: 25px;
+}
 .item {
   height: 400px;
 }
@@ -20,4 +23,18 @@
 }
 .col-md-3:nth-child(4n+1){
     clear: left;
+}
+.product-img {
+  width: 390px;
+}
+.hide-para {
+  position: absolute;
+  display: none;
+  background-color: rgba(255, 0, 0, 0.5);;
+  color: red;
+  font-size: 25px;
+  margin-top: -300px;
+}
+.media-body {
+  padding-left: 20px;
 }
