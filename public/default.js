@@ -16,6 +16,7 @@ var productsTemp = [
     name: "JavaScript: The Definitive Guide: Activate Your Web Pages (Definitive Guides)",
     image: "http://ecx.images-amazon.com/images/I/51WD-F3GobL.jpg",
     price: 33.89,
+    description: [],
     keywords: ["book", "javascript"]
   },
   {
@@ -90,11 +91,7 @@ function showItem(object) {
   var prodMediaHeading = $('<h3 class="media-heading">' + object.name + '</h3>');
   var prodMediaPrice = $('<p>Price: <span class="media-price">$' + object.price + '</span></p>');
   var prodMediaAboutUL = $('<ul class="media-ul"></ul>');
-  var prodMediaAboutLiOne = $('<li>' + object.description[0] + '</li>');
-  var prodMediaAboutLiTwo = $('<li>' + object.description[1] + '</li>');
-  var prodMediaAboutLiThree = $('<li>' + object.description[2] + '</li>');
-  var prodMediaAboutLiFour = $('<li>' + object.description[3] + '</li>');
-  var prodMediaAboutLiFive = $('<li>' + object.description[4] + '</li>');
+  displayList(object.description, prodMediaAboutUL);
   $('#product').append(prodCol);
   $(prodCol).append(prodMedia);
   $(prodMedia).append(prodMediaLeft);
@@ -103,9 +100,15 @@ function showItem(object) {
   $(prodMediaBody).append(prodMediaHeading);
   $(prodMediaBody).append(prodMediaPrice);
   $(prodMediaBody).append(prodMediaAboutUL);
-  $(prodMediaAboutUL).append(prodMediaAboutLiOne);
-  $(prodMediaAboutUL).append(prodMediaAboutLiTwo);
-  $(prodMediaAboutUL).append(prodMediaAboutLiThree);
-  $(prodMediaAboutUL).append(prodMediaAboutLiFour);
-  $(prodMediaAboutUL).append(prodMediaAboutLiFive);
+}
+
+//Appending Item Description Function
+function displayList(array, parent) {
+  if (array.length !== 0) {
+    var productMediaAboutLi = [];
+    for (var i = 0; i < array.length; i++) {
+      productMediaAboutLi[i] = $('<li>' + array[i] + '</li>');
+      $(parent).append(productMediaAboutLi[i]);
+    }
+  }
 }
