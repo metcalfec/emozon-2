@@ -83,23 +83,29 @@ function findItem(item) {
 
 function showItem(object) {
   $('#results').empty();
-  var prodCol = $('<div class="col-md-10"></div>');
+  var prodMediaCol = $('<div class="col-md-10"></div>');
   var prodMedia = $('<div class="media"></div>');
   var prodMediaLeft = $('<div class="media-left"></div>');
-  var prodMediaObject = $('<img class="product-img" src="' + object.image + '">');
+  var prodMediaImg = $('<img class="product-img" src="' + object.image + '">');
   var prodMediaBody = $('<div class="media-body"></div>');
   var prodMediaHeading = $('<h3 class="media-heading">' + object.name + '</h3>');
+  var prodHR = $('<hr>');
   var prodMediaPrice = $('<p>Price: <span class="media-price">$' + object.price + '</span></p>');
   var prodMediaAboutUL = $('<ul class="media-ul"></ul>');
+  var prodAddCol = $('<div class="col-md-2 add-col"></div>');
+  var prodAdd = $('<button class="btn btn-warning add-to-cart">Add to Cart</button>');
   displayList(object.description, prodMediaAboutUL);
-  $('#product').append(prodCol);
-  $(prodCol).append(prodMedia);
+  $('#product').append(prodMediaCol);
+  $(prodMediaCol).append(prodMedia);
   $(prodMedia).append(prodMediaLeft);
-  $(prodMediaLeft).append(prodMediaObject);
+  $(prodMediaLeft).append(prodMediaImg);
   $(prodMedia).append(prodMediaBody);
   $(prodMediaBody).append(prodMediaHeading);
+  $(prodMediaBody).append(prodHR);
   $(prodMediaBody).append(prodMediaPrice);
   $(prodMediaBody).append(prodMediaAboutUL);
+  $('#product').append(prodAddCol);
+  $(prodAddCol).append(prodAdd);
 }
 
 //Appending Item Description Function
