@@ -26,6 +26,7 @@ var productsTemp = [
     keywords: ["tv", "television"]
   }
 ]
+var cartCount = 0;
 
 $(document).ready(function() {
   $('#search-btn').on('click', function(event) {
@@ -39,17 +40,13 @@ $(document).ready(function() {
       }
     }
   })
-  $('#results').on('mouseenter', '.product-col', function() {
-    $(this).animate({
-    opacity: 0.5
-  }, 100);
-  })
-  $('#results').on('mouseleave', '.product-col', function() {
-    $(this).animate({
-    opacity: 1
-  }, 100);
-  })
+  $('#product').on('click', '.add-to-cart', function() {
 
+    $('#cart-count').text(cartUpdate());
+    $('#cart-count').show( "bounce", 500);
+
+
+  })
   $('.navbar-brand').on('click', function() {
     $('#results').empty();
     $('#product').empty();
@@ -64,18 +61,18 @@ function findItem(item) {
   for (var i = 0; i < productsTemp.length; i++) {
     for (var j = 0; j < productsTemp[i].keywords.length; j++) {
       if (productsTemp[i].keywords[j] === item.toLowerCase()) {
-        var productCol = $('<div class="col-md-3 product-col"></div>');
-        var productThumb = $('<div class="thumbnail"></div>');
-        var productImg = $('<img class="product-img" src="' + productsTemp[i].image + '">')
-        var productTitleDiv = $('<div>')
-        var productTitle = $('<a href="#"><h5 class="product-title">' + productsTemp[i].name + '</h5></a>')
-        var productPrice = $('<p class="product-price">$' + productsTemp[i].price + '</p>')
-        $('#results').append(productCol);
-        $(productCol).append(productThumb);
-        $(productThumb).append(productImg);
-        $(productThumb).append(productTitleDiv);
-        $(productTitleDiv).append(productTitle);
-        $(productTitleDiv).append(productPrice);
+        var resultCol = $('<div class="col-md-3 product-col"></div>');
+        var resultThumb = $('<a  class="thumbnail" href="#"></a>');
+        var resultImg = $('<img class="product-img" src="' + productsTemp[i].image + '">')
+        var resultTitleDiv = $('<div>')
+        var resultTitle = $('<h5 class="product-title">' + productsTemp[i].name + '</h5>')
+        var resultPrice = $('<p class="product-price">$' + productsTemp[i].price + '</p>')
+        $('#results').append(resultCol);
+        $(resultCol).append(resultThumb);
+        $(resultThumb).append(resultImg);
+        $(resultThumb).append(resultTitleDiv);
+        $(resultTitleDiv).append(resultTitle);
+        $(resultTitleDiv).append(resultPrice);
       }
     }
   }
@@ -117,4 +114,9 @@ function displayList(array, parent) {
       $(parent).append(productMediaAboutLi[i]);
     }
   }
+}
+
+function cartUpdate() {
+  cartCount++;
+  return cartCount;
 }
