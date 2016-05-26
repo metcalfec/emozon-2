@@ -1,11 +1,12 @@
 var express = require('express');
 var app = express();
+var port = process.env.PORT || 1337;
 
 app.use(express.static('./public/'));
 
 app.get('/', function(req, res) {
 });
 
-app.listen(1313, function() {
-  console.log('Listening on port 1313');
-})
+app.listen(port, function() {
+ console.log("listening on port " + port);
+});
