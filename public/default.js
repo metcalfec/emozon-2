@@ -18,13 +18,22 @@ var productsTemp = [
     image: "http://ecx.images-amazon.com/images/I/51WD-F3GobL.jpg",
     price: 33.89,
     stock: 100,
-    description: [],
+    description: [
+      "Since 1996, JavaScript: The Definitive Guide has been the bible for JavaScript programmers—a programmer's guide and comprehensive reference to the core language and to the client-side JavaScript APIs defined by web browsers. The 6th edition covers HTML5 and ECMAScript 5. Many chapters have been completely rewritten to bring them in line with today's best web development practices. New chapters in this edition document jQuery and server side JavaScript. It's recommended for experienced programmers who want to learn the programming language of the Web, and for current JavaScript programmers who want to master it."
+    ],
     keywords: ["book", "javascript"]
   },
   {
     name: "Sony KDL32R300C 32-Inch 720p LED TV (2015 Model)",
     image: "http://ecx.images-amazon.com/images/I/81RstnIX0iL._SL1500_.jpg",
-    description: [],
+    description: [
+      "Refresh Rate: 60Hz (Native); Motionflow XR120 (Effective)",
+      "Backlight: LED (Direct-Lit)",
+      "Smart Functionality: No",
+      "Crisp detail & contrast with Clear Resolution Enhancer",
+      "Superior picture delivered via Direct-lit LED panel",
+      "Inputs: 2 HDMI, 1 USB"
+    ],
     price: 149.99,
     stock: 100,
     keywords: ["tv", "television"]
@@ -68,20 +77,29 @@ $('#product').on('click', '.add-to-cart', function() {
       }
     }
   }
+  $('.modal-header').empty();
   $('.modal-body').empty();
   addedSum += currentItem.price * quantity;
-  var title = currentItem.name + ' Added to Cart';
-  $('#cartAddModal').find('.modal-title').text(title);
+  if (quantity == 1) {
+    var addedModalTitle = $('<h4 class="modal-title">' + quantity +' Item Added to Cart</h4>');
+  } else {
+    var addedModalTitle = $('<h4 class="modal-title">' + quantity +' Items Added to Cart</h4>');
+  }
+  var addedModalClose = $('<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>');
   var addedMedia = $('<div class="media"></div>');
   var addedMediaLeft = $('<div class="media-left"></div>');
   var addedMediaObject = $('<img class="media-object cart-added-img" src="' + currentItem.image + '">');
   var addedMediaBody = $('<div class="media-body"></div>');
-  var addedMediaHeading = $('<div class="media-heading">' + quantity + 'item(s): ' + addedSum + '</div>');
+  var addedMediaHeading = $('<div class="media-heading">' + truncate(currentItem.name, 60) + '</div>');
+  var addedMediaPrice = $('<p class="cart-added-price pull-right"><strong>Cart subtotal </strong>' + subTotalPreview() + '</p>');
+  $('.modal-header').append(addedModalClose);
+  $('.modal-header').append(addedModalTitle);
   $('.modal-body').append(addedMedia);
   $(addedMedia).append(addedMediaLeft);
   $(addedMediaLeft).append(addedMediaObject);
   $(addedMedia).append(addedMediaBody);
   $(addedMediaBody).append(addedMediaHeading);
+  $(addedMediaBody).append(addedMediaPrice);
   $('#cartAddModal').modal('show');
   $('#cart-count').text(cartContents.length).show( "bounce", 500);
 })
@@ -129,8 +147,6 @@ function showItem(object) {
   var prodQtyText = $('<div class="form-control-static">Qty:</div>');
   var prodQty = $('<select class="form-control qty"></select');
   var prodAdd = $('<button class="btn btn-warning add-to-cart">Add to Cart</button>');
-  displayHelper(object.description, prodMediaAboutUL, "prodMediaAboutLi", "li");
-  displayHelper(object.stock, prodQty, "prodQtyOption", "option");
   $('#product').append(prodMediaCol);
   $(prodMediaCol).append(prodMedia);
   $(prodMedia).append(prodMediaLeft);
@@ -139,13 +155,19 @@ function showItem(object) {
   $(prodMediaBody).append(prodMediaHeading);
   $(prodMediaBody).append(prodHR);
   $(prodMediaBody).append(prodMediaPrice);
-  $(prodMediaBody).append(prodMediaAboutUL);
   $('#product').append(prodAddCol);
   $(prodAddCol).append(prodQtyForm);
   $(prodQtyForm).append(prodQtyGroup);
   $(prodQtyGroup).append(prodQtyText);
   $(prodQtyGroup).append(prodQty);
   $(prodAddCol).append(prodAdd);
+  if (object.description.length === 1) {
+    displayHelper(object.description, prodMediaBody, "prodMediaAboutP", "p");
+  } else {
+    displayHelper(object.description, prodMediaAboutUL, "prodMediaAboutLi", "li");
+    $(prodMediaBody).append(prodMediaAboutUL);
+  }
+  displayHelper(object.stock, prodQty, "prodQtyOption");
 }
 
 //Appending Item Description Function
@@ -158,8 +180,42 @@ function displayHelper(data, parent, child, el) {
     }
   } else if (typeof data === 'number') {
     for (var i = 1; i < data + 1; i++) {
-      child = $('<' + el + '>' + i + '</' + el + '>');
+      child = $('<option>' + i + '</option>');
       $(parent).append(child);
     }
+  }
+}
+
+//Truncate title Function
+function truncate(string, amount) {
+  var truncated = "";
+  var i = 0;
+  do {
+    truncated += (string[i]);
+    i++;
+  }
+  while (i < amount && i < string.length);
+  if (amount > string.length) {
+    return truncated;
+  } else {
+    truncated += '...';
+    return truncated;
+  }
+}
+
+//Cart SubTotal Preview Function
+function subTotalPreview() {
+  var numItems = cartContents.length;
+  var total = 0;
+  var subTotalMsg;
+  for (var i = 0; i < numItems; i++) {
+    total += cartContents[i].price;
+  }
+  if (numItems > 1) {
+    subTotalMsg = '(' + numItems + ' items): $' + total.toFixed(2);
+    return subTotalMsg;
+  } else {
+    subTotalMsg = '(' + numItems + ' item): $' + total.toFixed(2);
+    return subTotalMsg;
   }
 }
