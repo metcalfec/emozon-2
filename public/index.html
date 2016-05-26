@@ -11,14 +11,14 @@
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse-1">
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="#">emozon</a>
       </div>
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <div class="collapse navbar-collapse" id="collapse-1">
         <form class="navbar-form navbar-left">
           <div id="search-bar" class="input-group">
             <input id="search-txt" type="text" class="form-control" placeholder="Search">
@@ -28,11 +28,14 @@
           </div>
         </form>
         <ul class="nav navbar-nav">
-          <li><a href="#">Link</a></li>
+          <li><a href="#">Order History</a></li>
+          <li><a href="#">Saved For Later</a></li>
         </ul>
         <form class="navbar-form navbar-right">
           <div class="form-group">
-            <button id="cart" class="btn btn-default"><i class="fa fa-shopping-cart fa-2x"></i><strong> Cart</strong></button>
+            <a id="cart" href="#">
+              <i class="fa fa-shopping-cart fa-3x"><p id="cart-count">0</p></i>
+            </a>
           </div>
         </form>
       </div>
@@ -90,7 +93,24 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
+  <!-- Add Item(s) To Cart Modal-->
+  <div id="cartAddModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Continue Shopping</button>
+          <button type="button" class="btn btn-primary">Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script src="default.js"></script>
 </body>
