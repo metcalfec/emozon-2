@@ -47,15 +47,15 @@
   padding-left: 5px;
 }
 .add-to-cart {
-  margin-top: 60px;
+  margin-top: 50px;
   padding-left: 45px;
   padding-right: 45px;
 }
 .quantity {
-  margin-top: 20px;
+  display: inline-block;
+  margin-top: 40px;
   margin-left: auto;
   margin-right: auto;
-  width: 50px;
 }
 .media-ul {
   padding-top: 30px;
@@ -65,4 +65,7 @@
   border: 1px solid #e7e5e5;
   border-radius: 5px;
   height: 300px;
+}
+.qty {
+  margin-left: 10px;
 }

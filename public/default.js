@@ -57,9 +57,13 @@ $('.navbar-brand').on('click', function() {
 
 //Add product to cart event
 $('#product').on('click', '.add-to-cart', function() {
+  var quantity = $('#product').find('.qty').val();
+  console.log(quantity);
   for (var i = 0; i < productsTemp.length; i++) {
     if ($('.media-heading').text() === productsTemp[i].name) {
-      cartContents.push(productsTemp[i])
+      for (var j = 0; j < quantity; j++) {
+        cartContents.push(productsTemp[i])
+      }
     }
   }
   $('#cart-count').text(cartContents.length).show( "bounce", 500);
@@ -93,7 +97,7 @@ function findItem(item) {
 //Display product detail function
 function showItem(object) {
   $('#results').empty();
-  var prodMediaCol = $('<div class="col-md-10"></div>');
+  var prodMediaCol = $('<div class="col-xs-10 col-sm-10 col-md-10"></div>');
   var prodMedia = $('<div class="media"></div>');
   var prodMediaLeft = $('<div class="media-left"></div>');
   var prodMediaImg = $('<img class="product-img" src="' + object.image + '">');
@@ -102,11 +106,14 @@ function showItem(object) {
   var prodHR = $('<hr>');
   var prodMediaPrice = $('<p>Price: <span class="media-price">$' + object.price + '</span></p>');
   var prodMediaAboutUL = $('<ul class="media-ul"></ul>');
-  var prodAddCol = $('<div class="col-md-2 add-col"></div>');
-  var prodQuantity = $('<select class="form-control quantity"></select');
+  var prodAddCol = $('<div class="col-xs-2 col-sm-2 col-md-2 add-col text-center"></div>');
+  var prodQtyForm = $('<form class="form-inline"></form>');
+  var prodQtyGroup = $('<div class="form-group quantity"></div>');
+  var prodQtyText = $('<div class="form-control-static">Qty:</div>');
+  var prodQty = $('<select class="form-control qty"></select');
   var prodAdd = $('<button class="btn btn-warning add-to-cart">Add to Cart</button>');
   displayHelper(object.description, prodMediaAboutUL, "prodMediaAboutLi", "li");
-  displayHelper(object.stock, prodQuantity, "prodQuantityOption", "option");
+  displayHelper(object.stock, prodQty, "prodQtyOption", "option");
   $('#product').append(prodMediaCol);
   $(prodMediaCol).append(prodMedia);
   $(prodMedia).append(prodMediaLeft);
@@ -117,7 +124,10 @@ function showItem(object) {
   $(prodMediaBody).append(prodMediaPrice);
   $(prodMediaBody).append(prodMediaAboutUL);
   $('#product').append(prodAddCol);
-  $(prodAddCol).append(prodQuantity);
+  $(prodAddCol).append(prodQtyForm);
+  $(prodQtyForm).append(prodQtyGroup);
+  $(prodQtyGroup).append(prodQtyText);
+  $(prodQtyGroup).append(prodQty);
   $(prodAddCol).append(prodAdd);
 }
 
