@@ -58,14 +58,31 @@ $('.navbar-brand').on('click', function() {
 //Add product to cart event
 $('#product').on('click', '.add-to-cart', function() {
   var quantity = $('#product').find('.qty').val();
-  console.log(quantity);
+  var currentItem = {};
+  var addedSum = 0;
   for (var i = 0; i < productsTemp.length; i++) {
-    if ($('.media-heading').text() === productsTemp[i].name) {
+    if ($('#product').find('.media-heading').text() === productsTemp[i].name) {
+      currentItem = productsTemp[i];
       for (var j = 0; j < quantity; j++) {
         cartContents.push(productsTemp[i])
       }
     }
   }
+  $('.modal-body').empty();
+  addedSum += currentItem.price * quantity;
+  var title = currentItem.name + ' Added to Cart';
+  $('#cartAddModal').find('.modal-title').text(title);
+  var addedMedia = $('<div class="media"></div>');
+  var addedMediaLeft = $('<div class="media-left"></div>');
+  var addedMediaObject = $('<img class="media-object cart-added-img" src="' + currentItem.image + '">');
+  var addedMediaBody = $('<div class="media-body"></div>');
+  var addedMediaHeading = $('<div class="media-heading">' + quantity + 'item(s): ' + addedSum + '</div>');
+  $('.modal-body').append(addedMedia);
+  $(addedMedia).append(addedMediaLeft);
+  $(addedMediaLeft).append(addedMediaObject);
+  $(addedMedia).append(addedMediaBody);
+  $(addedMediaBody).append(addedMediaHeading);
+  $('#cartAddModal').modal('show');
   $('#cart-count').text(cartContents.length).show( "bounce", 500);
 })
 
