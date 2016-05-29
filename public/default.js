@@ -1,6 +1,7 @@
 var productsTemp = [
   {
     name: "Eloquent JavaScript: A Modern Introduction to Programming",
+    by: "Marijn Haverbeke",
     image: "http://ecx.images-amazon.com/images/I/51zFTdNilAL._SX377_BO1,204,203,200_.jpg",
     price: 21.57,
     stock: 100,
@@ -15,6 +16,7 @@ var productsTemp = [
   },
   {
     name: "JavaScript: The Definitive Guide: Activate Your Web Pages (Definitive Guides)",
+    by: "David Flanagan",
     image: "http://ecx.images-amazon.com/images/I/51WD-F3GobL.jpg",
     price: 33.89,
     stock: 100,
@@ -25,6 +27,7 @@ var productsTemp = [
   },
   {
     name: "Sony KDL32R300C 32-Inch 720p LED TV (2015 Model)",
+    by: "Sony",
     image: "http://ecx.images-amazon.com/images/I/81RstnIX0iL._SL1500_.jpg",
     description: [
       "Refresh Rate: 60Hz (Native); Motionflow XR120 (Effective)",
@@ -36,6 +39,22 @@ var productsTemp = [
     ],
     price: 149.99,
     stock: 100,
+    keywords: ["tv", "television"]
+  },
+  {
+    name: "Samsung UN40H5003 40-Inch (39.5-Inch Measured Diagonally)1080p LED TV (2014 Model)",
+    by: "Samsung",
+    image: "http://ecx.images-amazon.com/images/I/91BZ7U%2Bn1%2BL._SL1500_.jpg",
+    description: [
+      "Refresh Rate: 60Hz (Native); 120 CMR (Effective)",
+      "Backlight: LED (Edge-Lit)",
+      "Smart Functionality: No",
+      "Dimensions (W x H x D): TV without stand: 36.1\" x 21\" x 3.7\", TV with stand: 36.1\" x 23.3\" x 9\"",
+      "Inputs: 2 HDMI, 1 USB, 1 Component In, 1 Composite In",
+      "Accessories Included: Standard Remote Control"
+    ],
+    price: 277.99,
+    stock: 30,
     keywords: ["tv", "television"]
   }
 ]
@@ -102,8 +121,13 @@ $('#product').on('click', '.add-to-cart', function() {
   $(addedMediaBody).append(addedMediaPrice);
   $('#cartAddModal').modal('show');
   $('#cart-count').text(cartContents.length).show( "bounce", 500);
-})
+});
 
+//View items in cart
+$('#cartAddModal').on('click', '.btn-primary', function() {
+  $('#view-cart').removeClass('hide');
+  showCart();
+});
 //Display product results
 function findItem(item) {
   $('#product').empty();
@@ -217,5 +241,36 @@ function subTotalPreview() {
   } else {
     subTotalMsg = '(' + numItems + ' item): $' + total.toFixed(2);
     return subTotalMsg;
+  }
+}
+
+//Display cart contents
+function showCart() {
+  $('#results').empty();
+  $('#product').empty();
+  $('#view-cart').find('.hide').removeClass('hide');
+  for (var i = 0; i < cartContents.length; i++) {
+    var cartMediaRow = $('<div class="row"></div>');
+    var cartMediaCol = $('<div class="col-xs-7 col-sm-7 col-md-6"></div>');
+    var cartMediaList = $('<ul class="media-list"></ul>');
+    var cartMedia = $('<li class="media"></li>');
+    var cartMediaLeft = $('<div class="media-left"></div>');
+    var cartMediaImgLink = $('<a href="#"></a>');
+    var cartMediaImg = $('<img class="media-object cart-img" src="' + cartContents[i].image + '">');
+    var cartMediaBody = $('<div class="media-body"></div>');
+    var cartMediaHeadingLink = $('<a href="#"></a>');
+    var cartMediaHeading = $('<h4 class="media-heading">' + cartContents[i].name + '</h4>');
+    var cartMediaBy = $('<p>By ' + cartContents[i].by + '</p>');
+    $('#view-cart').append(cartMediaRow);
+    $(cartMediaRow).append(cartMediaCol);
+    $(cartMediaCol).append(cartMediaList);
+    $(cartMediaList).append(cartMedia);
+    $(cartMedia).append(cartMediaLeft);
+    $(cartMediaLeft).append(cartMediaImgLink);
+    $(cartMediaImgLink).append(cartMediaImg);
+    $(cartMedia).append(cartMediaBody);
+    $(cartMediaBody).append(cartMediaHeadingLink);
+    $(cartMediaHeadingLink).append(cartMediaHeading);
+    $(cartMediaBody).append(cartMediaBy);
   }
 }
