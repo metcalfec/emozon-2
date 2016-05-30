@@ -87,7 +87,7 @@ $('.navbar-brand').on('click', function() {
 $('#product').on('click', '.add-to-cart', function() {
   var quantity = $('#product').find('.qty').val();
   var currentItem = {};
-  var addedSum = 0;
+  var subtotal = 0;
   for (var i = 0; i < productsTemp.length; i++) {
     if ($('#product').find('.media-heading').text() === productsTemp[i].name) {
       currentItem = productsTemp[i];
@@ -98,7 +98,7 @@ $('#product').on('click', '.add-to-cart', function() {
   }
   $('.modal-header').empty();
   $('.modal-body').empty();
-  addedSum += currentItem.price * quantity;
+  subtotal += currentItem.price * quantity;
   if (quantity == 1) {
     var addedModalTitle = $('<h4 class="modal-title">' + quantity +' Item Added to Cart</h4>');
   } else {
@@ -110,7 +110,8 @@ $('#product').on('click', '.add-to-cart', function() {
   var addedMediaObject = $('<img class="media-object cart-added-img" src="' + currentItem.image + '">');
   var addedMediaBody = $('<div class="media-body"></div>');
   var addedMediaHeading = $('<div class="media-heading">' + truncate(currentItem.name, 60) + '</div>');
-  var addedMediaPrice = $('<p class="cart-added-price pull-right"><strong>Cart subtotal </strong>' + subTotalPreview() + '</p>');
+  var addedMediaPriceText = $('<h5 class="cart-added-price pull-right">Cart subtotal' + subTotalPreview() + '</h5>');
+  var addedMediaPrice = $('<h5 class="cart-added-price pull-right cart-price">$' + subtotal.toFixed(2) + '</h5>');
   $('.modal-header').append(addedModalClose);
   $('.modal-header').append(addedModalTitle);
   $('.modal-body').append(addedMedia);
@@ -119,6 +120,7 @@ $('#product').on('click', '.add-to-cart', function() {
   $(addedMedia).append(addedMediaBody);
   $(addedMediaBody).append(addedMediaHeading);
   $(addedMediaBody).append(addedMediaPrice);
+  $(addedMediaBody).append(addedMediaPriceText);
   $('#cartAddModal').modal('show');
   $('#cart-count').text(cartContents.length).show( "bounce", 500);
 });
@@ -230,16 +232,12 @@ function truncate(string, amount) {
 //Cart SubTotal Preview Function
 function subTotalPreview() {
   var numItems = cartContents.length;
-  var total = 0;
   var subTotalMsg;
-  for (var i = 0; i < numItems; i++) {
-    total += cartContents[i].price;
-  }
   if (numItems > 1) {
-    subTotalMsg = '(' + numItems + ' items): $' + total.toFixed(2);
+    subTotalMsg = '(' + numItems + ' items): ';
     return subTotalMsg;
   } else {
-    subTotalMsg = '(' + numItems + ' item): $' + total.toFixed(2);
+    subTotalMsg = '(' + numItems + ' item): ';
     return subTotalMsg;
   }
 }
@@ -248,8 +246,11 @@ function subTotalPreview() {
 function showCart() {
   $('#results').empty();
   $('#product').empty();
+  $('#view-cart').find('.item-list').empty();
   $('#view-cart').find('.hide').removeClass('hide');
+  var subtotal = 0;
   for (var i = 0; i < cartContents.length; i++) {
+    var link = $('<a href="#"></a>');
     var cartMediaRow = $('<div class="row"></div>');
     var cartMediaCol = $('<div class="col-xs-7 col-sm-7 col-md-6"></div>');
     var cartMediaList = $('<ul class="media-list"></ul>');
@@ -259,8 +260,23 @@ function showCart() {
     var cartMediaImg = $('<img class="media-object cart-img" src="' + cartContents[i].image + '">');
     var cartMediaBody = $('<div class="media-body"></div>');
     var cartMediaHeadingLink = $('<a href="#"></a>');
-    var cartMediaHeading = $('<h4 class="media-heading">' + cartContents[i].name + '</h4>');
-    var cartMediaBy = $('<p>By ' + cartContents[i].by + '</p>');
+    var cartMediaHeading = $('<h4 class="media-heading inline">' + cartContents[i].name + '</h4>');
+    var cartMediaBy = $('<p class="cart-pad inline">By ' + cartContents[i].by + '</p>');
+    var cartOptions = $('<div class="cart-options"></div>');
+    var cartOptionsDelLink = $('<a href="#"></a>');
+    var cartOptionsDel = $('<p class="inline">Delete</p>');
+    var cartOptionsSpacer = $('<p class="cart-pad inline">|</p>');
+    var cartOptionsSaveLink = $('<a href="#"></a>');
+    var cartOptionsSave = $('<p class="cart-pad inline">Save for later</p>');
+    var cartPriceCol = $('<div class="col-xs-1 col-sm-1 col-md-2"></div>');
+    var cartPrice = $('<h6 class="media-heading">' + cartContents[i].price + '</h6>');
+    var cartQtyCol = $('<div class="col-xs-2 col-sm-2 col-md-2"></div>');
+    var cartQtyForm = $('<div class="form-group cart-qty pull-right"></div>');
+    var cartQty = $('<select class="form-control qty"></select');
+    displayHelper(cartContents[i].stock, cartQty, "cartQtyOption");
+    var cartMediaEndRow = $('<div class="row"></div>');
+    var cartMediaEndCol = $('<div class="col-xs-10 col-sm-10 col-md-10"></div>');
+    var cartMediaEndHr = $('<hr class="cart-hr">');
     $('#view-cart').append(cartMediaRow);
     $(cartMediaRow).append(cartMediaCol);
     $(cartMediaCol).append(cartMediaList);
@@ -272,5 +288,28 @@ function showCart() {
     $(cartMediaBody).append(cartMediaHeadingLink);
     $(cartMediaHeadingLink).append(cartMediaHeading);
     $(cartMediaBody).append(cartMediaBy);
+    $(cartMediaBody).append(cartOptions);
+    $(cartOptions).append(cartOptionsDelLink);
+    $(cartOptionsDelLink).append(cartOptionsDel);
+    $(cartOptions).append(cartOptionsSpacer);
+    $(cartOptions).append(cartOptionsSaveLink);
+    $(cartOptionsSaveLink).append(cartOptionsSave);
+    $(cartMediaRow).append(cartPriceCol);
+    $(cartPriceCol).append(cartPrice);
+    $(cartMediaRow).append(cartQtyCol);
+    $(cartQtyCol).append(cartQtyForm);
+    $(cartQtyForm).append(cartQty);
+    $('#view-cart').append(cartMediaEndRow);
+    $(cartMediaEndRow).append(cartMediaEndCol);
+    $(cartMediaEndCol).append(cartMediaEndHr);
+    subtotal += cartContents[i].price;
   }
+  var cartSubtotalRow = $('<div class="row"></div>');
+  var cartSubtotalCol = $('<div class="col-xs-10 col-sm-10 col-md-10"></div>');
+  var cartSubtotalCount = $('<h4 class="pull-right inline subtotal-footer">Subtotal ' + subTotalPreview() + '</h4>');
+  var cartSubtotalPrice = $('<h4 class="pull-right subtotal-footer cart-price inline">' + '$' + subtotal.toFixed(2) + '</h4>');
+  $('#view-cart').append(cartSubtotalRow);
+  $(cartSubtotalRow).append(cartSubtotalCol);
+  $(cartSubtotalCol).append(cartSubtotalPrice);
+  $(cartSubtotalCol).append(cartSubtotalCount);
 }
