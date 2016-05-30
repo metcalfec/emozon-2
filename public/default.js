@@ -1,6 +1,7 @@
 var productsTemp = [
   {
     name: "Eloquent JavaScript: A Modern Introduction to Programming",
+    by: "Marijn Haverbeke",
     image: "http://ecx.images-amazon.com/images/I/51zFTdNilAL._SX377_BO1,204,203,200_.jpg",
     price: 21.57,
     stock: 100,
@@ -15,6 +16,7 @@ var productsTemp = [
   },
   {
     name: "JavaScript: The Definitive Guide: Activate Your Web Pages (Definitive Guides)",
+    by: "David Flanagan",
     image: "http://ecx.images-amazon.com/images/I/51WD-F3GobL.jpg",
     price: 33.89,
     stock: 100,
@@ -25,6 +27,7 @@ var productsTemp = [
   },
   {
     name: "Sony KDL32R300C 32-Inch 720p LED TV (2015 Model)",
+    by: "Sony",
     image: "http://ecx.images-amazon.com/images/I/81RstnIX0iL._SL1500_.jpg",
     description: [
       "Refresh Rate: 60Hz (Native); Motionflow XR120 (Effective)",
@@ -37,10 +40,31 @@ var productsTemp = [
     price: 149.99,
     stock: 100,
     keywords: ["tv", "television"]
+  },
+  {
+    name: "Samsung UN40H5003 40-Inch (39.5-Inch Measured Diagonally)1080p LED TV (2014 Model)",
+    by: "Samsung",
+    image: "http://ecx.images-amazon.com/images/I/91BZ7U%2Bn1%2BL._SL1500_.jpg",
+    description: [
+      "Refresh Rate: 60Hz (Native); 120 CMR (Effective)",
+      "Backlight: LED (Edge-Lit)",
+      "Smart Functionality: No",
+      "Dimensions (W x H x D): TV without stand: 36.1\" x 21\" x 3.7\", TV with stand: 36.1\" x 23.3\" x 9\"",
+      "Inputs: 2 HDMI, 1 USB, 1 Component In, 1 Composite In",
+      "Accessories Included: Standard Remote Control"
+    ],
+    price: 277.99,
+    stock: 30,
+    keywords: ["tv", "television"]
   }
 ]
 
 var cartContents = [];
+
+
+////////////////////////////////////////////////////////////////////////////////
+//       EVENTS       //////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
 //Search for products event
 $('#search-btn').on('click', function(event) {
@@ -66,20 +90,18 @@ $('.navbar-brand').on('click', function() {
 
 //Add product to cart event
 $('#product').on('click', '.add-to-cart', function() {
-  var quantity = $('#product').find('.qty').val();
+  var quantity = parseInt($('#product').find('.qty').val());
   var currentItem = {};
-  var addedSum = 0;
+  var subtotal = 0;
   for (var i = 0; i < productsTemp.length; i++) {
     if ($('#product').find('.media-heading').text() === productsTemp[i].name) {
       currentItem = productsTemp[i];
-      for (var j = 0; j < quantity; j++) {
-        cartContents.push(productsTemp[i])
-      }
     }
   }
+  quantity = cartQuantity(cartContents, currentItem, quantity);
   $('.modal-header').empty();
   $('.modal-body').empty();
-  addedSum += currentItem.price * quantity;
+  subtotal += currentItem.price * quantity;
   if (quantity == 1) {
     var addedModalTitle = $('<h4 class="modal-title">' + quantity +' Item Added to Cart</h4>');
   } else {
@@ -91,7 +113,8 @@ $('#product').on('click', '.add-to-cart', function() {
   var addedMediaObject = $('<img class="media-object cart-added-img" src="' + currentItem.image + '">');
   var addedMediaBody = $('<div class="media-body"></div>');
   var addedMediaHeading = $('<div class="media-heading">' + truncate(currentItem.name, 60) + '</div>');
-  var addedMediaPrice = $('<p class="cart-added-price pull-right"><strong>Cart subtotal </strong>' + subTotalPreview() + '</p>');
+  var addedMediaPriceText = $('<h5 class="cart-added-price pull-right">Cart subtotal' + subTotalPreview() + '</h5>');
+  var addedMediaPrice = $('<h5 class="cart-added-price pull-right cart-price">$' + calcSubtotal(cartContents).toFixed(2) + '</h5>');
   $('.modal-header').append(addedModalClose);
   $('.modal-header').append(addedModalTitle);
   $('.modal-body').append(addedMedia);
@@ -100,15 +123,36 @@ $('#product').on('click', '.add-to-cart', function() {
   $(addedMedia).append(addedMediaBody);
   $(addedMediaBody).append(addedMediaHeading);
   $(addedMediaBody).append(addedMediaPrice);
+  $(addedMediaBody).append(addedMediaPriceText);
   $('#cartAddModal').modal('show');
-  $('#cart-count').text(cartContents.length).show( "bounce", 500);
-})
+  var cartCount = function() {
+    var count = 0;
+    for (var x = 0; x < cartContents.length; x ++) {
+      count += cartContents[x][1];
+    }
+    return count;
+  }
+  $('#cart-count').text(cartCount()).show( "bounce", 500);
+});
 
-//Display product results
+//View items in cart
+$('#cartAddModal').on('click', '.btn-primary', function() {
+  $('#view-cart').removeClass('hide');
+  showCart();
+});
+
+
+////////////////////////////////////////////////////////////////////////////////
+//       DOM APPENDING FUNCTIONS       /////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+//Display search results
 function findItem(item) {
   $('#product').empty();
   $('#results').empty();
   $('#carousel-ads').hide();
+  $('#view-cart').find('.cart-items').empty();
+  $('#view-cart').find('.cart-head').addClass('hide');
   for (var i = 0; i < productsTemp.length; i++) {
     for (var j = 0; j < productsTemp[i].keywords.length; j++) {
       if (productsTemp[i].keywords[j] === item.toLowerCase()) {
@@ -129,9 +173,11 @@ function findItem(item) {
   }
 }
 
-//Display product detail function
+//Display product detail
 function showItem(object) {
   $('#results').empty();
+  $('#view-cart').find('.cart-items').empty();
+  $('#view-cart').find('.cart-head').addClass('hide');
   var prodMediaCol = $('<div class="col-xs-10 col-sm-10 col-md-10"></div>');
   var prodMedia = $('<div class="media"></div>');
   var prodMediaLeft = $('<div class="media-left"></div>');
@@ -162,16 +208,95 @@ function showItem(object) {
   $(prodQtyGroup).append(prodQty);
   $(prodAddCol).append(prodAdd);
   if (object.description.length === 1) {
-    displayHelper(object.description, prodMediaBody, "prodMediaAboutP", "p");
+    displayHelper(object.description, prodMediaBody, 'prodMediaAboutP', 'p');
   } else {
-    displayHelper(object.description, prodMediaAboutUL, "prodMediaAboutLi", "li");
+    displayHelper(object.description, prodMediaAboutUL, 'prodMediaAboutLi', 'li');
     $(prodMediaBody).append(prodMediaAboutUL);
   }
-  displayHelper(object.stock, prodQty, "prodQtyOption");
+  displayHelper(object.stock, prodQty, 'prodQtyOption', 'option', 1);
 }
 
-//Appending Item Description Function
-function displayHelper(data, parent, child, el) {
+//Display cart contents
+function showCart() {
+  $('#results').empty();
+  $('#product').empty();
+  $('#view-cart').find('.cart-items').empty();
+  $('#view-cart').find('.hide').removeClass('hide');
+  var subtotal = 0;
+  for (var i = 0; i < cartContents.length; i++) {
+    var link = $('<a href="#"></a>');
+    var cartItems = $('<div class="cart-items"></div>');
+    var cartMediaRow = $('<div class="row"></div>');
+    var cartMediaCol = $('<div class="col-xs-7 col-sm-7 col-md-6"></div>');
+    var cartMediaList = $('<ul class="media-list"></ul>');
+    var cartMedia = $('<li class="media"></li>');
+    var cartMediaLeft = $('<div class="media-left"></div>');
+    var cartMediaImgLink = $('<a href="#"></a>');
+    var cartMediaImg = $('<img class="media-object cart-img" src="' + cartContents[i][0].image + '">');
+    var cartMediaBody = $('<div class="media-body"></div>');
+    var cartMediaHeadingLink = $('<a href="#"></a>');
+    var cartMediaHeading = $('<h4 class="media-heading inline">' + cartContents[i][0].name + '</h4>');
+    var cartMediaBy = $('<p class="cart-pad inline">By ' + cartContents[i][0].by + '</p>');
+    var cartOptions = $('<div class="cart-options"></div>');
+    var cartOptionsDelLink = $('<a href="#"></a>');
+    var cartOptionsDel = $('<p class="inline">Delete</p>');
+    var cartOptionsSpacer = $('<p class="cart-pad inline">|</p>');
+    var cartOptionsSaveLink = $('<a href="#"></a>');
+    var cartOptionsSave = $('<p class="cart-pad inline">Save for later</p>');
+    var cartPriceCol = $('<div class="col-xs-1 col-sm-1 col-md-2"></div>');
+    var cartPrice = $('<h5 class="media-heading">' + cartContents[i][0].price + '</h5>');
+    var cartQtyCol = $('<div class="col-xs-2 col-sm-2 col-md-2"></div>');
+    var cartQtyForm = $('<div class="form-group cart-qty pull-right"></div>');
+    var cartQty = $('<select class="form-control qty"></select');
+    displayHelper(cartContents[i][0].stock, cartQty, 'cartQtyOption', 'option', cartContents[i][1]);
+    var cartMediaEndRow = $('<div class="row"></div>');
+    var cartMediaEndCol = $('<div class="col-xs-10 col-sm-10 col-md-10"></div>');
+    var cartMediaEndHr = $('<hr class="cart-hr">');
+    $('#view-cart').append(cartItems);
+    $(cartItems).append(cartMediaRow);
+    $(cartMediaRow).append(cartMediaCol);
+    $(cartMediaCol).append(cartMediaList);
+    $(cartMediaList).append(cartMedia);
+    $(cartMedia).append(cartMediaLeft);
+    $(cartMediaLeft).append(cartMediaImgLink);
+    $(cartMediaImgLink).append(cartMediaImg);
+    $(cartMedia).append(cartMediaBody);
+    $(cartMediaBody).append(cartMediaHeadingLink);
+    $(cartMediaHeadingLink).append(cartMediaHeading);
+    $(cartMediaBody).append(cartMediaBy);
+    $(cartMediaBody).append(cartOptions);
+    $(cartOptions).append(cartOptionsDelLink);
+    $(cartOptionsDelLink).append(cartOptionsDel);
+    $(cartOptions).append(cartOptionsSpacer);
+    $(cartOptions).append(cartOptionsSaveLink);
+    $(cartOptionsSaveLink).append(cartOptionsSave);
+    $(cartMediaRow).append(cartPriceCol);
+    $(cartPriceCol).append(cartPrice);
+    $(cartMediaRow).append(cartQtyCol);
+    $(cartQtyCol).append(cartQtyForm);
+    $(cartQtyForm).append(cartQty);
+    $(cartItems).append(cartMediaEndRow);
+    $(cartMediaEndRow).append(cartMediaEndCol);
+    $(cartMediaEndCol).append(cartMediaEndHr);
+    subtotal += cartContents[i][0].price * cartContents[i][1];
+  }
+  var cartSubtotalRow = $('<div class="row"></div>');
+  var cartSubtotalCol = $('<div class="col-xs-10 col-sm-10 col-md-10"></div>');
+  var cartSubtotalCount = $('<h4 class="pull-right inline subtotal-footer">Subtotal ' + subTotalPreview() + '</h4>');
+  var cartSubtotalPrice = $('<h4 class="pull-right subtotal-footer cart-price inline">' + '$' + calcSubtotal(cartContents).toFixed(2) + '</h4>');
+  $(cartItems).append(cartSubtotalRow);
+  $(cartSubtotalRow).append(cartSubtotalCol);
+  $(cartSubtotalCol).append(cartSubtotalPrice);
+  $(cartSubtotalCol).append(cartSubtotalCount);
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+//       UTILITY FUNCTIONS       ///////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+//Appending Item Description
+function displayHelper(data, parent, child, el, value) {
   if (typeof data === 'object') {
     var child = [];
     for (var i = 0; i < data.length; i++) {
@@ -180,8 +305,13 @@ function displayHelper(data, parent, child, el) {
     }
   } else if (typeof data === 'number') {
     for (var i = 1; i < data + 1; i++) {
-      child = $('<option>' + i + '</option>');
-      $(parent).append(child);
+      if (i !== value) {
+        child = $('<' + el + '>' + i + '</' + el + '>');
+        $(parent).append(child);
+      } else {
+        child = $('<' + el + ' selected="selected">' + i + '</' + el + '>');
+        $(parent).append(child);
+      }
     }
   }
 }
@@ -203,19 +333,45 @@ function truncate(string, amount) {
   }
 }
 
-//Cart SubTotal Preview Function
+//Cart SubTotal Preview
 function subTotalPreview() {
-  var numItems = cartContents.length;
-  var total = 0;
+  var numItems = 0;
   var subTotalMsg;
-  for (var i = 0; i < numItems; i++) {
-    total += cartContents[i].price;
+  for (var i = 0; i < cartContents.length; i++) {
+    numItems += cartContents[i][1];
   }
   if (numItems > 1) {
-    subTotalMsg = '(' + numItems + ' items): $' + total.toFixed(2);
+    subTotalMsg = '(' + numItems + ' items): ';
     return subTotalMsg;
   } else {
-    subTotalMsg = '(' + numItems + ' item): $' + total.toFixed(2);
+    subTotalMsg = '(' + numItems + ' item): ';
     return subTotalMsg;
   }
+}
+
+//Cart Quantity
+function cartQuantity(array, item, value) {
+  var quantity = value;
+  if (array.length > 0) {
+    for (var j = 0; j < array.length; j++) {
+      if (array[j][0] === item) {
+        array[j][1] += quantity;
+        return quantity;
+      }
+    }
+    array.push([item, quantity]);
+    return quantity;
+  } else {
+    array.push([item, quantity]);
+    return quantity;
+  }
+}
+
+//Cart Subtotal
+function calcSubtotal(arr) {
+  var sum = 0;
+  for (var i = 0; i < arr.length; i++) {
+    sum += arr[i][0].price * arr[i][1]
+  }
+  return sum;
 }

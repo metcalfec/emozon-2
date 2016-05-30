@@ -73,5 +73,34 @@
   width: 60px;
 }
 .cart-added-price {
+  display: inline;
   margin-top: 30px;
+}
+.cart-img {
+  width: 80px;
+}
+.cart-hr { margin-top: 3px; }
+.cart-title {
+  margin-top: 25px;
+  margin-bottom: 0;
+}
+.cart-title-main {
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+.cart-heading {
+  display: inline-block;
+}
+.cart-qty {
+  width: 50px;
+}
+.cart-options {
+  margin-top: 50px;
+}
+.inline { display: inline; }
+.cart-pad { padding-left: 20px; }
+.subtotal-footer { margin-top: -10px; }
+.cart-price {
+  padding-left: 10px;
+  color: red;
 }
