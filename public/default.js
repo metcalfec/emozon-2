@@ -73,9 +73,9 @@ $('#search-btn').on('click', function(event) {
 });
 
 //Display products event
-$('#results').on('click', '.product-title', function(event) {
+$('#results').on('click', '.thumbnail', function(event) {
   for (var i = 0; i < productsTemp.length; i++) {
-    if ($(this).text() === productsTemp[i].name) {
+    if ($(this).find('.product-title').text() === productsTemp[i].name) {
       showItem(productsTemp[i]);
     }
   }
