@@ -140,8 +140,22 @@ $('#view-cart').on('click', '.cart-options', function(e) {
     }
   }
   showCart();
-  $('#cart-count').text(cartCount())
+  $('#cart-count').text(cartCount());
 });
+
+//Change item quantity
+$('#view-cart').on('change', '.cart-qty', function() {
+  var itemToChange = $(this).closest('.row').find('.media-heading').first().text();
+  var changeQty = parseInt($(this).find('.qty').val());
+  for (var i = 0; i < cartContents.length; i++) {
+    if (cartContents[i][0].name === itemToChange) {
+      cartContents[i][1] = changeQty;
+    }
+  }
+  showCart();
+  $('#cart-count').text(cartCount());
+});
+
 //View items in cart
 $('#cartAddModal').on('click', '.btn-primary', function() {
   $('#view-cart').removeClass('hide');
