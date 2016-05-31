@@ -60,6 +60,7 @@ var productsTemp = [
 ]
 
 var cartContents = [];
+var saveForLater = [];
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -130,13 +131,21 @@ $('#product').on('click', '.add-to-cart', function() {
   $('#cart-count').text(cartCount());
 });
 
-//Delete item from cart
-$('#view-cart').on('click', '.cart-options', function(e) {
+//Cart options
+$('#view-cart').on('click', '.inline', function(e) {
   e.preventDefault();
-  var itemToDelete = $(this).closest('.media-body').find('.media-heading').text();
+  var click = $(this).text();
+  var theItem = $(this).closest('.media-body').find('.media-heading').text();
   for (var i = 0; i < cartContents.length; i++) {
-    if (cartContents[i][0].name === itemToDelete) {
-      cartContents.splice(i, 1);
+    if (cartContents[i][0].name === theItem) {
+      switch (click) {
+        case "Delete":
+          cartContents.splice(i, 1);
+          break;
+        case "Save for later":
+          saveForLater.push(cartContents.splice(i, 1));
+          break;
+      }
     }
   }
   showCart();
