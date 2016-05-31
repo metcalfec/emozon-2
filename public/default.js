@@ -85,6 +85,8 @@ $('#results').on('click', '.product-title', function(event) {
 $('.navbar-brand').on('click', function() {
   $('#results').empty();
   $('#product').empty();
+  $('#view-cart').find('.cart-items').empty();
+  $('#view-cart').find('.cart-head').addClass('hide');
   $('#carousel-ads').show();
 });
 
@@ -125,16 +127,21 @@ $('#product').on('click', '.add-to-cart', function() {
   $(addedMediaBody).append(addedMediaPrice);
   $(addedMediaBody).append(addedMediaPriceText);
   $('#cartAddModal').modal('show');
-  var cartCount = function() {
-    var count = 0;
-    for (var x = 0; x < cartContents.length; x ++) {
-      count += cartContents[x][1];
-    }
-    return count;
-  }
-  $('#cart-count').text(cartCount()).show( "bounce", 500);
+  $('#cart-count').text(cartCount());
 });
 
+//Delete item from cart
+$('#view-cart').on('click', '.cart-options', function(e) {
+  e.preventDefault();
+  var itemToDelete = $(this).closest('.media-body').find('.media-heading').text();
+  for (var i = 0; i < cartContents.length; i++) {
+    if (cartContents[i][0].name === itemToDelete) {
+      cartContents.splice(i, 1);
+    }
+  }
+  showCart();
+  $('#cart-count').text(cartCount())
+});
 //View items in cart
 $('#cartAddModal').on('click', '.btn-primary', function() {
   $('#view-cart').removeClass('hide');
@@ -374,4 +381,13 @@ function calcSubtotal(arr) {
     sum += arr[i][0].price * arr[i][1]
   }
   return sum;
+}
+
+//Cart count
+function cartCount() {
+  var count = 0;
+  for (var x = 0; x < cartContents.length; x ++) {
+    count += cartContents[x][1];
+  }
+  return count;
 }
