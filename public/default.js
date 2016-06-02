@@ -89,6 +89,7 @@ $('.navbar-brand').on('click', function() {
   $('#view-cart').find('.cart-items').empty();
   $('#view-cart').find('.cart-head').addClass('hide');
   $('#carousel-ads').show();
+  $('#view-cart').find('.empty-cart').hide();
 });
 
 //Add product to cart event
@@ -135,21 +136,48 @@ $('#product').on('click', '.add-to-cart', function() {
 $('#view-cart').on('click', '.inline', function(e) {
   e.preventDefault();
   var click = $(this).text();
-  var theItem = $(this).closest('.media-body').find('.media-heading').text();
+  var findItem = $(this).closest('.media-body').find('.media-heading').text();
   for (var i = 0; i < cartContents.length; i++) {
-    if (cartContents[i][0].name === theItem) {
+    if (cartContents[i][0].name === findItem) {
       switch (click) {
         case "Delete":
           cartContents.splice(i, 1);
           break;
         case "Save for later":
-          saveForLater.push(cartContents.splice(i, 1));
+          if (saveForLater.indexOf(cartContents[i][0]) === -1) {
+            var saveItem = cartContents.splice(i, 1)
+            saveForLater.push(saveItem[0][0]);
+          } else {
+            cartContents.splice(i, 1);
+          }
           break;
       }
     }
   }
   showCart();
   $('#cart-count').text(cartCount());
+});
+
+//Add/Remove from list
+$('#product').on('click', '.add-remove-link', function() {
+  var click = $(this).text();
+  var findItem = $(this).closest('#product').find('.media-heading').text();
+  for (var i = 0; i < productsTemp.length; i++) {
+    if (productsTemp[i].name === findItem) {
+      switch (click) {
+        case "Add to list":
+          saveForLater.push(productsTemp[i]);
+          $('#product').empty();
+          showItem(productsTemp[i]);
+          break;
+        case "Remove from list":
+          saveForLater.splice(productsTemp[i], 1);
+          $('#product').empty();
+          showItem(productsTemp[i]);
+          break;
+      }
+    }
+  }
 });
 
 //Change item quantity
@@ -165,10 +193,70 @@ $('#view-cart').on('change', '.cart-qty', function() {
   $('#cart-count').text(cartCount());
 });
 
-//View items in cart
+//Proceed to cart
 $('#cartAddModal').on('click', '.btn-primary', function() {
   $('#view-cart').removeClass('hide');
   showCart();
+});
+
+//View cart
+$('#cart').on('click', function() {
+  $('#view-cart').removeClass('hide');
+  $('#product').empty();
+  $('#results').empty();
+  $('#carousel-ads').hide();
+  $('#view-cart').find('.cart-items').empty();
+  $('#view-cart').find('.cart-head').addClass('hide');
+  showCart();
+});
+
+//Show saved items
+$('.navbar').on('click', 'a', function() {
+  if ($(this).text() === "Saved For Later") {
+    $('#my-list').popover({
+      html: 'true',
+      content : function() {
+        var content = $('<div></div>');
+        if (saveForLater.length === 0) {
+          $(content).append('<p class="empty-list">No Saved Items</p>');
+        } else {
+          for (var i = 0; i < saveForLater.length; i++) {
+            var savedLink = $('<a class="my-list-link" href="#"></a>');
+            var savedMedia = $('<div class="media"></div>');
+            var savedMediaLeft = $('<div class="media-left"></div>');
+            var savedMediaObject = $('<img class="media-object cart-added-img" src="' + saveForLater[i].image + '">');
+            var savedMediaBody = $('<div class="media-body"></div>');
+            var savedMediaHeading = $('<div class="media-heading">' + truncate(saveForLater[i].name, 40) + '</div>');
+            $(content).append(savedLink);
+            $(savedLink).append(savedMedia);
+            $(savedMedia).append(savedMediaLeft);
+            $(savedMediaLeft).append(savedMediaObject);
+            $(savedMedia).append(savedMediaBody);
+            $(savedMediaBody).append(savedMediaHeading);
+            if (i !== saveForLater.length - 1) {
+              $(content).append('<hr>');
+            }
+          }
+        }
+        return content;
+      }
+    });
+    $('#my-list').popover('show');
+  }
+});
+
+//View saved item product page
+$(document).on('click', '.popover-content', function() {
+  for (var i = 0; i < productsTemp.length; i++) {
+    if ($(this).find('.media-heading').text() === truncate(productsTemp[i].name, 40)) {
+      $('#product').empty();
+      $('#results').empty();
+      $('#carousel-ads').hide();
+      $('#view-cart').find('.cart-items').empty();
+      $('#view-cart').find('.cart-head').addClass('hide');
+      showItem(productsTemp[i]);
+    }
+  }
 });
 
 
@@ -183,10 +271,11 @@ function findItem(item) {
   $('#carousel-ads').hide();
   $('#view-cart').find('.cart-items').empty();
   $('#view-cart').find('.cart-head').addClass('hide');
+  $('#view-cart').find('.empty-cart').hide();
   for (var i = 0; i < productsTemp.length; i++) {
     for (var j = 0; j < productsTemp[i].keywords.length; j++) {
       if (productsTemp[i].keywords[j] === item.toLowerCase()) {
-        var resultCol = $('<div class="col-md-3 product-col"></div>');
+        var resultCol = $('<div class="col-xs-3 col-sm-3 col-md-3 product-col"></div>');
         var resultThumb = $('<a  class="thumbnail" href="#"></a>');
         var resultImg = $('<img class="product-img" src="' + productsTemp[i].image + '">')
         var resultTitleDiv = $('<div>')
@@ -208,6 +297,7 @@ function showItem(object) {
   $('#results').empty();
   $('#view-cart').find('.cart-items').empty();
   $('#view-cart').find('.cart-head').addClass('hide');
+  $('#view-cart').find('.empty-cart').hide();
   var prodMediaCol = $('<div class="col-xs-10 col-sm-10 col-md-10"></div>');
   var prodMedia = $('<div class="media"></div>');
   var prodMediaLeft = $('<div class="media-left"></div>');
@@ -223,6 +313,8 @@ function showItem(object) {
   var prodQtyText = $('<div class="form-control-static">Qty:</div>');
   var prodQty = $('<select class="form-control qty"></select');
   var prodAdd = $('<button class="btn btn-warning add-to-cart">Add to Cart</button>');
+  var prodAddRemoveLink = $('<a href="#"></a>')
+  var prodAddRemoveList = $('<p class="add-remove-link">Add to list</p>');
   $('#product').append(prodMediaCol);
   $(prodMediaCol).append(prodMedia);
   $(prodMedia).append(prodMediaLeft);
@@ -237,6 +329,13 @@ function showItem(object) {
   $(prodQtyGroup).append(prodQtyText);
   $(prodQtyGroup).append(prodQty);
   $(prodAddCol).append(prodAdd);
+  $(prodAddCol).append(prodAddRemoveLink);
+  $(prodAddRemoveLink).append(prodAddRemoveList);
+  for (var i = 0; i < saveForLater.length; i++) {
+    if (object === saveForLater[i]) {
+      $('#product').find('.add-remove-link').text("Remove from list");
+    }
+  }
   if (object.description.length === 1) {
     displayHelper(object.description, prodMediaBody, 'prodMediaAboutP', 'p');
   } else {
@@ -252,63 +351,70 @@ function showCart() {
   $('#product').empty();
   $('#view-cart').find('.cart-items').empty();
   $('#view-cart').find('.hide').removeClass('hide');
+  $('#view-cart').find('.empty-cart').hide();
   var subtotal = 0;
-  for (var i = 0; i < cartContents.length; i++) {
-    var link = $('<a href="#"></a>');
-    var cartItems = $('<div class="cart-items"></div>');
-    var cartMediaRow = $('<div class="row"></div>');
-    var cartMediaCol = $('<div class="col-xs-7 col-sm-7 col-md-6"></div>');
-    var cartMediaList = $('<ul class="media-list"></ul>');
-    var cartMedia = $('<li class="media"></li>');
-    var cartMediaLeft = $('<div class="media-left"></div>');
-    var cartMediaImgLink = $('<a href="#"></a>');
-    var cartMediaImg = $('<img class="media-object cart-img" src="' + cartContents[i][0].image + '">');
-    var cartMediaBody = $('<div class="media-body"></div>');
-    var cartMediaHeadingLink = $('<a href="#"></a>');
-    var cartMediaHeading = $('<h4 class="media-heading inline">' + cartContents[i][0].name + '</h4>');
-    var cartMediaBy = $('<p class="cart-pad inline">By ' + cartContents[i][0].by + '</p>');
-    var cartOptions = $('<div class="cart-options"></div>');
-    var cartOptionsDelLink = $('<a href="#"></a>');
-    var cartOptionsDel = $('<p class="inline">Delete</p>');
-    var cartOptionsSpacer = $('<p class="cart-pad inline">|</p>');
-    var cartOptionsSaveLink = $('<a href="#"></a>');
-    var cartOptionsSave = $('<p class="cart-pad inline">Save for later</p>');
-    var cartPriceCol = $('<div class="col-xs-1 col-sm-1 col-md-2"></div>');
-    var cartPrice = $('<h5 class="media-heading">' + cartContents[i][0].price + '</h5>');
-    var cartQtyCol = $('<div class="col-xs-2 col-sm-2 col-md-2"></div>');
-    var cartQtyForm = $('<div class="form-group cart-qty pull-right"></div>');
-    var cartQty = $('<select class="form-control qty"></select');
-    displayHelper(cartContents[i][0].stock, cartQty, 'cartQtyOption', 'option', cartContents[i][1]);
-    var cartMediaEndRow = $('<div class="row"></div>');
-    var cartMediaEndCol = $('<div class="col-xs-10 col-sm-10 col-md-10"></div>');
-    var cartMediaEndHr = $('<hr class="cart-hr">');
-    $('#view-cart').append(cartItems);
-    $(cartItems).append(cartMediaRow);
-    $(cartMediaRow).append(cartMediaCol);
-    $(cartMediaCol).append(cartMediaList);
-    $(cartMediaList).append(cartMedia);
-    $(cartMedia).append(cartMediaLeft);
-    $(cartMediaLeft).append(cartMediaImgLink);
-    $(cartMediaImgLink).append(cartMediaImg);
-    $(cartMedia).append(cartMediaBody);
-    $(cartMediaBody).append(cartMediaHeadingLink);
-    $(cartMediaHeadingLink).append(cartMediaHeading);
-    $(cartMediaBody).append(cartMediaBy);
-    $(cartMediaBody).append(cartOptions);
-    $(cartOptions).append(cartOptionsDelLink);
-    $(cartOptionsDelLink).append(cartOptionsDel);
-    $(cartOptions).append(cartOptionsSpacer);
-    $(cartOptions).append(cartOptionsSaveLink);
-    $(cartOptionsSaveLink).append(cartOptionsSave);
-    $(cartMediaRow).append(cartPriceCol);
-    $(cartPriceCol).append(cartPrice);
-    $(cartMediaRow).append(cartQtyCol);
-    $(cartQtyCol).append(cartQtyForm);
-    $(cartQtyForm).append(cartQty);
-    $(cartItems).append(cartMediaEndRow);
-    $(cartMediaEndRow).append(cartMediaEndCol);
-    $(cartMediaEndCol).append(cartMediaEndHr);
-    subtotal += cartContents[i][0].price * cartContents[i][1];
+  if (cartContents.length === 0) {
+    var noItems = $('<h2 class="empty-cart">Add something to your shopping cart</h2>');
+    $('#view-cart').append(noItems);
+  } else {
+    $('#view-cart').find('.empty-cart').addClass('hide');
+    for (var i = 0; i < cartContents.length; i++) {
+      var link = $('<a href="#"></a>');
+      var cartItems = $('<div class="cart-items"></div>');
+      var cartMediaRow = $('<div class="row"></div>');
+      var cartMediaCol = $('<div class="col-xs-7 col-sm-7 col-md-6"></div>');
+      var cartMediaList = $('<ul class="media-list"></ul>');
+      var cartMedia = $('<li class="media"></li>');
+      var cartMediaLeft = $('<div class="media-left"></div>');
+      var cartMediaImgLink = $('<a href="#"></a>');
+      var cartMediaImg = $('<img class="media-object cart-img" src="' + cartContents[i][0].image + '">');
+      var cartMediaBody = $('<div class="media-body"></div>');
+      var cartMediaHeadingLink = $('<a href="#"></a>');
+      var cartMediaHeading = $('<h4 class="media-heading inline">' + cartContents[i][0].name + '</h4>');
+      var cartMediaBy = $('<p class="cart-pad inline">By ' + cartContents[i][0].by + '</p>');
+      var cartOptions = $('<div class="cart-options"></div>');
+      var cartOptionsDelLink = $('<a href="#"></a>');
+      var cartOptionsDel = $('<p class="inline">Delete</p>');
+      var cartOptionsSpacer = $('<p class="cart-pad inline">|</p>');
+      var cartOptionsSaveLink = $('<a href="#"></a>');
+      var cartOptionsSave = $('<p class="cart-pad inline">Save for later</p>');
+      var cartPriceCol = $('<div class="col-xs-1 col-sm-1 col-md-2"></div>');
+      var cartPrice = $('<h5 class="media-heading">' + cartContents[i][0].price + '</h5>');
+      var cartQtyCol = $('<div class="col-xs-2 col-sm-2 col-md-2"></div>');
+      var cartQtyForm = $('<div class="form-group cart-qty pull-right"></div>');
+      var cartQty = $('<select class="form-control qty"></select');
+      displayHelper(cartContents[i][0].stock, cartQty, 'cartQtyOption', 'option', cartContents[i][1]);
+      var cartMediaEndRow = $('<div class="row"></div>');
+      var cartMediaEndCol = $('<div class="col-xs-10 col-sm-10 col-md-10"></div>');
+      var cartMediaEndHr = $('<hr class="cart-hr">');
+      $('#view-cart').append(cartItems);
+      $(cartItems).append(cartMediaRow);
+      $(cartMediaRow).append(cartMediaCol);
+      $(cartMediaCol).append(cartMediaList);
+      $(cartMediaList).append(cartMedia);
+      $(cartMedia).append(cartMediaLeft);
+      $(cartMediaLeft).append(cartMediaImgLink);
+      $(cartMediaImgLink).append(cartMediaImg);
+      $(cartMedia).append(cartMediaBody);
+      $(cartMediaBody).append(cartMediaHeadingLink);
+      $(cartMediaHeadingLink).append(cartMediaHeading);
+      $(cartMediaBody).append(cartMediaBy);
+      $(cartMediaBody).append(cartOptions);
+      $(cartOptions).append(cartOptionsDelLink);
+      $(cartOptionsDelLink).append(cartOptionsDel);
+      $(cartOptions).append(cartOptionsSpacer);
+      $(cartOptions).append(cartOptionsSaveLink);
+      $(cartOptionsSaveLink).append(cartOptionsSave);
+      $(cartMediaRow).append(cartPriceCol);
+      $(cartPriceCol).append(cartPrice);
+      $(cartMediaRow).append(cartQtyCol);
+      $(cartQtyCol).append(cartQtyForm);
+      $(cartQtyForm).append(cartQty);
+      $(cartItems).append(cartMediaEndRow);
+      $(cartMediaEndRow).append(cartMediaEndCol);
+      $(cartMediaEndCol).append(cartMediaEndHr);
+      subtotal += cartContents[i][0].price * cartContents[i][1];
+    }
   }
   var cartSubtotalRow = $('<div class="row"></div>');
   var cartSubtotalCol = $('<div class="col-xs-10 col-sm-10 col-md-10"></div>');
