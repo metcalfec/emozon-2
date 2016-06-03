@@ -56,6 +56,37 @@ var productsTemp = [
     price: 277.99,
     stock: 30,
     keywords: ["tv", "television"]
+  },
+  {
+    name: "TCL 48FS3750 48-Inch 1080p Roku Smart LED TV (2016 Model)",
+    by: "TCL",
+    image: "http://ecx.images-amazon.com/images/I/81bRl88tE3L._SL1500_.jpg",
+    description: [
+      "Refresh Rate: 60Hz (Native), 120Hz Clear Motion Index (Effective)",
+      "Backlight: LED (Full Array)",
+      "Smart Functionality: Yes - Roku TV Streaming Platform",
+      "Dimensions (W x H x D): TV without stand: 42.9\" x 24.5\" x 3.2\", TV with stand: 42.9\" x 27\" x 9.1\"",
+      "Inputs: 3 HDMI, 1 USB, RF, Composite, Headphone Jack, Optical Audio Out",
+      "Accessories Included: Remote w/ batteries, detachable power cord"
+    ],
+    price: 431.21,
+    stock: 100,
+    keywords: ["tv", "television"]
+  },
+  {
+    name: "Samsung UN32J4000 32-Inch 720p LED TV (2015 Model)",
+    by: "Samsung",
+    image: "http://ecx.images-amazon.com/images/I/91AZu70gX7L._SL1500_.jpg",
+    description: [
+      "Refresh Rate: 60CMR (Effective)",
+      "Backlight: LED",
+      "Smart Functionality: No",
+      "Dimensions (W x H x D): TV w/ stand: 29.3\" x 18.2\" x 5.9\", TV w/o stand: 29.3\" x 17.1\" x 2.7\"",
+      "Inputs: 2 HDMI, 1 USB. Please refer the User Manual before use."
+    ],
+    price: 188.11,
+    stock: 100,
+    keywords: ["tv", "television"]
   }
 ]
 
