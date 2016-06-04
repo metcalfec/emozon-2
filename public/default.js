@@ -94,6 +94,7 @@ var cartContents = [];
 var saveForLater = [];
 var recommended = [productsTemp[2], productsTemp[3], productsTemp[4], productsTemp[5]];
 var viewed = [];
+var spotlight = [productsTemp[3]];
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -114,15 +115,47 @@ $(document).ready(function() {
       $(recommendedHRCol).append('<hr>');
     }
   }
-})
-
-$(window).scroll(function () {
-  var scrollTop = $(window).scrollTop();
-  var height = $(window).height();
-  $('.white-top').css({
-    'opacity': ((scrollTop) / height + .25)
+  $(window).on('scroll', function() {
+    var scrollTop = $(window).scrollTop();
+    var height = $(window).height();
+    $('.white-top').css({
+      'opacity': ((scrollTop) / height + .25)
+    });
+  });
+  var prodMediaCol = $('<div class="spotlight-deal col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10"></div>');
+  var prodMedia = $('<div class="media"></div>');
+  var prodMediaLeft = $('<div class="media-left"></div>');
+  var prodMediaImg = $('<img class="product-img" src="' + spotlight[0].image + '">');
+  var prodMediaBody = $('<div class="media-body"></div>');
+  var prodMediaHeading = $('<h3 class="media-heading">' + spotlight[0].name + '</h3>');
+  var prodMediaPrice = $('<p>Price: <span class="media-price">$' + spotlight[0].price + '</span></p>');
+  var prodMediaAboutUL = $('<ul class="media-ul"></ul>');
+  $('#landing').find('.white-bot').append(prodMediaCol);
+  $(prodMediaCol).append(prodMedia);
+  $(prodMedia).append(prodMediaLeft);
+  $(prodMediaLeft).append(prodMediaImg);
+  $(prodMedia).append(prodMediaBody);
+  $(prodMediaBody).append(prodMediaHeading);
+  $(prodMediaBody).append(prodMediaPrice);
+  if (spotlight[0].description.length === 1) {
+    displayHelper(spotlight[0].description, prodMediaBody, 'prodMediaAboutP', 'p');
+  } else {
+    displayHelper(spotlight[0].description, prodMediaAboutUL, 'prodMediaAboutLi', 'li');
+    $(prodMediaBody).append(prodMediaAboutUL);
+  }
+  $(window).on('scroll', function() {
+    if (document.body.scrollTop > 1300) {
+      console.log('NOW' + document.body.scrollTop)
+      $('#landing').find('.spotlight-deal').slideDown(1000);
+    } else {
+      $('#landing').find('.spotlight-deal').slideUp(1000);
+    }
   });
 });
+
+
+
+
 
 //Search for products event
 $('#search-btn').on('click', function(event) {
