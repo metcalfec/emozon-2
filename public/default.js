@@ -56,40 +56,115 @@ var productsTemp = [
     price: 277.99,
     stock: 30,
     keywords: ["tv", "television"]
+  },
+  {
+    name: "TCL 48FS3750 48-Inch 1080p Roku Smart LED TV (2016 Model)",
+    by: "TCL",
+    image: "http://ecx.images-amazon.com/images/I/81bRl88tE3L._SL1500_.jpg",
+    description: [
+      "Refresh Rate: 60Hz (Native), 120Hz Clear Motion Index (Effective)",
+      "Backlight: LED (Full Array)",
+      "Smart Functionality: Yes - Roku TV Streaming Platform",
+      "Dimensions (W x H x D): TV without stand: 42.9\" x 24.5\" x 3.2\", TV with stand: 42.9\" x 27\" x 9.1\"",
+      "Inputs: 3 HDMI, 1 USB, RF, Composite, Headphone Jack, Optical Audio Out",
+      "Accessories Included: Remote w/ batteries, detachable power cord"
+    ],
+    price: 431.21,
+    stock: 100,
+    keywords: ["tv", "television"]
+  },
+  {
+    name: "Samsung UN32J4000 32-Inch 720p LED TV (2015 Model)",
+    by: "Samsung",
+    image: "http://ecx.images-amazon.com/images/I/91AZu70gX7L._SL1500_.jpg",
+    description: [
+      "Refresh Rate: 60CMR (Effective)",
+      "Backlight: LED",
+      "Smart Functionality: No",
+      "Dimensions (W x H x D): TV w/ stand: 29.3\" x 18.2\" x 5.9\", TV w/o stand: 29.3\" x 17.1\" x 2.7\"",
+      "Inputs: 2 HDMI, 1 USB. Please refer the User Manual before use."
+    ],
+    price: 188.11,
+    stock: 100,
+    keywords: ["tv", "television"]
   }
 ]
 
 var cartContents = [];
 var saveForLater = [];
+var recommended = [productsTemp[2], productsTemp[3], productsTemp[4], productsTemp[5]];
+var viewed = [];
 
 
 ////////////////////////////////////////////////////////////////////////////////
 //       EVENTS       //////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
+$(document).ready(function() {
+  for (var i = 0; i < recommended.length; i++) {
+    var recommendedCol = $('<div class="col-xs-3 col-sm-3 col-md-3"></div>');
+    var recommendedLink = $('<a href="#"></a>');
+    var recommendedImg = $('<img class="landing-image" src="' + recommended[i].image + '">');
+    $('#landing').find('.suggestions').append(recommendedCol);
+    $(recommendedCol).append(recommendedLink);
+    $(recommendedLink).append(recommendedImg);
+    if (i === recommended.length - 1) {
+      var recommendedHRCol = $('<div class="col-md-12"></div>');
+      $('#landing').find('.suggestions').append(recommendedHRCol);
+      $(recommendedHRCol).append('<hr>');
+    }
+  }
+})
+
+$(window).scroll(function () {
+  var scrollTop = $(window).scrollTop();
+  var height = $(window).height();
+  $('.white-top').css({
+    'opacity': ((scrollTop) / height + .25)
+  });
+});
+
 //Search for products event
 $('#search-btn').on('click', function(event) {
   event.preventDefault();
   findItem($('#search-txt').val());
+
 });
 
 //Display products event
-$('#results').on('click', '.thumbnail', function(event) {
+$('#results').on('click', '.thumbnail', function() {
   for (var i = 0; i < productsTemp.length; i++) {
     if ($(this).find('.product-title').text() === productsTemp[i].name) {
       showItem(productsTemp[i]);
+      if (viewed.indexOf(productsTemp[i]) === -1) {
+        viewed.splice(0, 0, productsTemp[i]);
+      }
     }
   }
 })
 
 //Home button event
 $('.navbar-brand').on('click', function() {
+  $('#landing').removeClass('hide');
   $('#results').empty();
   $('#product').empty();
   $('#view-cart').find('.cart-items').empty();
   $('#view-cart').find('.cart-head').addClass('hide');
-  $('#carousel-ads').show();
-  $('#view-cart').find('.empty-cart').hide();
+  if (viewed.length === 5) {
+    viewed.pop();
+  }
+  $('#landing').find('.viewed').empty();
+  if (viewed.length > 0) {
+    $('#landing').find('.no-items').addClass('hide');
+  }
+  for (var i = 0; i < viewed.length; i++) {
+    var viewedCol = $('<div class="col-xs-3 col-sm-3 col-md-3"></div>');
+    var viewedLink = $('<a href="#"></a>');
+    var viewedImg = $('<img class="landing-image" src="' + viewed[i].image + '">');
+    $('#landing').find('.viewed').append(viewedCol);
+    $(viewedCol).append(viewedLink);
+    $(viewedLink).append(viewedImg);
+  }
 });
 
 //Add product to cart event
@@ -136,9 +211,9 @@ $('#product').on('click', '.add-to-cart', function() {
 $('#view-cart').on('click', '.inline', function(e) {
   e.preventDefault();
   var click = $(this).text();
-  var findItem = $(this).closest('.media-body').find('.media-heading').text();
+  var selectItem = $(this).closest('.media-body').find('.media-heading').text();
   for (var i = 0; i < cartContents.length; i++) {
-    if (cartContents[i][0].name === findItem) {
+    if (cartContents[i][0].name === selectItem) {
       switch (click) {
         case "Delete":
           cartContents.splice(i, 1);
@@ -161,9 +236,9 @@ $('#view-cart').on('click', '.inline', function(e) {
 //Add/Remove from list
 $('#product').on('click', '.add-remove-link', function() {
   var click = $(this).text();
-  var findItem = $(this).closest('#product').find('.media-heading').text();
+  var selectItem = $(this).closest('#product').find('.media-heading').text();
   for (var i = 0; i < productsTemp.length; i++) {
-    if (productsTemp[i].name === findItem) {
+    if (productsTemp[i].name === selectItem) {
       switch (click) {
         case "Add to list":
           saveForLater.push(productsTemp[i]);
@@ -201,12 +276,6 @@ $('#cartAddModal').on('click', '.btn-primary', function() {
 
 //View cart
 $('#cart').on('click', function() {
-  $('#view-cart').removeClass('hide');
-  $('#product').empty();
-  $('#results').empty();
-  $('#carousel-ads').hide();
-  $('#view-cart').find('.cart-items').empty();
-  $('#view-cart').find('.cart-head').addClass('hide');
   showCart();
 });
 
@@ -251,7 +320,6 @@ $(document).on('click', '.popover-content', function() {
     if ($(this).find('.media-heading').text() === truncate(productsTemp[i].name, 40)) {
       $('#product').empty();
       $('#results').empty();
-      $('#carousel-ads').hide();
       $('#view-cart').find('.cart-items').empty();
       $('#view-cart').find('.cart-head').addClass('hide');
       showItem(productsTemp[i]);
@@ -266,21 +334,22 @@ $(document).on('click', '.popover-content', function() {
 
 //Display search results
 function findItem(item) {
-  $('#product').empty();
+  $('#landing').addClass('hide');
   $('#results').empty();
-  $('#carousel-ads').hide();
+  $('#product').empty();
   $('#view-cart').find('.cart-items').empty();
   $('#view-cart').find('.cart-head').addClass('hide');
-  $('#view-cart').find('.empty-cart').hide();
   for (var i = 0; i < productsTemp.length; i++) {
     for (var j = 0; j < productsTemp[i].keywords.length; j++) {
       if (productsTemp[i].keywords[j] === item.toLowerCase()) {
+        var resultDiv = $('<div class="cover-up"></div>');
         var resultCol = $('<div class="col-xs-3 col-sm-3 col-md-3 product-col"></div>');
         var resultThumb = $('<a  class="thumbnail" href="#"></a>');
         var resultImg = $('<img class="product-img" src="' + productsTemp[i].image + '">')
         var resultTitleDiv = $('<div>')
         var resultTitle = $('<h5 class="product-title">' + productsTemp[i].name + '</h5>')
         var resultPrice = $('<p class="product-price">$' + productsTemp[i].price + '</p>')
+        $('body').append(resultDiv);
         $('#results').append(resultCol);
         $(resultCol).append(resultThumb);
         $(resultThumb).append(resultImg);
@@ -294,10 +363,11 @@ function findItem(item) {
 
 //Display product detail
 function showItem(object) {
+  $('#landing').addClass('hide');
   $('#results').empty();
+  $('#product').empty();
   $('#view-cart').find('.cart-items').empty();
   $('#view-cart').find('.cart-head').addClass('hide');
-  $('#view-cart').find('.empty-cart').hide();
   var prodMediaCol = $('<div class="col-xs-10 col-sm-10 col-md-10"></div>');
   var prodMedia = $('<div class="media"></div>');
   var prodMediaLeft = $('<div class="media-left"></div>');
@@ -347,17 +417,18 @@ function showItem(object) {
 
 //Display cart contents
 function showCart() {
+  $('#landing').addClass('hide');
   $('#results').empty();
   $('#product').empty();
   $('#view-cart').find('.cart-items').empty();
-  $('#view-cart').find('.hide').removeClass('hide');
-  $('#view-cart').find('.empty-cart').hide();
+  $('#view-cart').find('.cart-head').removeClass('hide');
   var subtotal = 0;
   if (cartContents.length === 0) {
-    var noItems = $('<h2 class="empty-cart">Add something to your shopping cart</h2>');
-    $('#view-cart').append(noItems);
+    var noItemsCol = $('<div class="col-md-12"></div>');
+    var noItems = $('<h2 class="no-items">Add something to your shopping cart</h2>');
+    $('#view-cart').find('.cart-head').append(noItemsCol);
+    $(noItemsCol).append(noItems);
   } else {
-    $('#view-cart').find('.empty-cart').addClass('hide');
     for (var i = 0; i < cartContents.length; i++) {
       var link = $('<a href="#"></a>');
       var cartItems = $('<div class="cart-items"></div>');
