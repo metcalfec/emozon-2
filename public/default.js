@@ -119,7 +119,7 @@ $(document).ready(function() {
     var scrollTop = $(window).scrollTop();
     var height = $(window).height();
     $('.white-top').css({
-      'opacity': ((scrollTop) / height + .25)
+      'opacity': ((scrollTop) / height)
     });
   });
   var prodMediaCol = $('<div class="spotlight-deal col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10"></div>');
@@ -152,10 +152,6 @@ $(document).ready(function() {
     }
   });
 });
-
-
-
-
 
 //Search for products event
 $('#search-btn').on('click', function(event) {
