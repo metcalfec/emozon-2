@@ -120,8 +120,12 @@ $(document).ready(function() {
     $('.white-top').css({
       'opacity': (scrollTop / 500)
     });
+    $('.scroll-down').css({
+      'opacity': ((200 - scrollTop) / 200)
+    });
   });
-  var prodMediaCol = $('<div class="spotlight-deal col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10"></div>');
+
+  var prodMediaCol = $('<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10"></div>');
   var prodMedia = $('<div class="media"></div>');
   var prodMediaLeft = $('<div class="media-left"></div>');
   var prodMediaImg = $('<img class="product-img" src="' + spotlight[0].image + '">');
@@ -129,7 +133,7 @@ $(document).ready(function() {
   var prodMediaHeading = $('<h3 class="media-heading">' + spotlight[0].name + '</h3>');
   var prodMediaPrice = $('<p>Price: <span class="media-price">$' + spotlight[0].price + '</span></p>');
   var prodMediaAboutUL = $('<ul class="media-ul"></ul>');
-  $('#landing').find('.white-bot').append(prodMediaCol);
+  $('#landing').find('.spotlight-deal').append(prodMediaCol);
   $(prodMediaCol).append(prodMedia);
   $(prodMedia).append(prodMediaLeft);
   $(prodMediaLeft).append(prodMediaImg);
@@ -143,8 +147,7 @@ $(document).ready(function() {
     $(prodMediaBody).append(prodMediaAboutUL);
   }
   $(window).on('scroll', function() {
-    if (document.body.scrollTop > 1300) {
-      console.log('NOW' + document.body.scrollTop)
+    if ($(window).scrollTop() > 1500) {
       $('#landing').find('.spotlight-deal').slideDown(1000);
     } else {
       $('#landing').find('.spotlight-deal').slideUp(1000);
@@ -174,16 +177,16 @@ $('#results').on('click', '.thumbnail', function() {
 //Home button event
 $('.navbar-brand').on('click', function() {
   $('#landing').removeClass('hide');
-  $('#results').empty();
-  $('#product').empty();
-  $('#view-cart').find('.cart-items').empty();
-  $('#view-cart').find('.cart-head').addClass('hide');
-  if (viewed.length === 5) {
-    viewed.pop();
-  }
+  $('#cover-up').addClass('hide');
+  $('#results').find('.row').empty();
+  $('#product').find('.row').empty();
+  $('#view-cart').find('.row').empty();
   $('#landing').find('.viewed').empty();
   if (viewed.length > 0) {
     $('#landing').find('.no-items').addClass('hide');
+    if (viewed.length === 5) {
+      viewed.pop();
+    }
   }
   for (var i = 0; i < viewed.length; i++) {
     var viewedCol = $('<div class="col-xs-3 col-sm-3 col-md-3"></div>');
@@ -270,12 +273,12 @@ $('#product').on('click', '.add-remove-link', function() {
       switch (click) {
         case "Add to list":
           saveForLater.push(productsTemp[i]);
-          $('#product').empty();
+          $('#product').find('.row').empty();
           showItem(productsTemp[i]);
           break;
         case "Remove from list":
           saveForLater.splice(productsTemp[i], 1);
-          $('#product').empty();
+          $('#product').find('.row').empty();
           showItem(productsTemp[i]);
           break;
       }
@@ -283,9 +286,9 @@ $('#product').on('click', '.add-remove-link', function() {
   }
 });
 
-//Change item quantity
+//Change item quantity in cart
 $('#view-cart').on('change', '.cart-qty', function() {
-  var itemToChange = $(this).closest('.row').find('.media-heading').first().text();
+  var itemToChange = $(this).closest('.item-row').find('.media-heading').first().text();
   var changeQty = parseInt($(this).find('.qty').val());
   for (var i = 0; i < cartContents.length; i++) {
     if (cartContents[i][0].name === itemToChange) {
@@ -298,7 +301,6 @@ $('#view-cart').on('change', '.cart-qty', function() {
 
 //Proceed to cart
 $('#cartAddModal').on('click', '.btn-primary', function() {
-  $('#view-cart').removeClass('hide');
   showCart();
 });
 
@@ -346,10 +348,6 @@ $('.navbar').on('click', 'a', function() {
 $(document).on('click', '.popover-content', function() {
   for (var i = 0; i < productsTemp.length; i++) {
     if ($(this).find('.media-heading').text() === truncate(productsTemp[i].name, 40)) {
-      $('#product').empty();
-      $('#results').empty();
-      $('#view-cart').find('.cart-items').empty();
-      $('#view-cart').find('.cart-head').addClass('hide');
       showItem(productsTemp[i]);
     }
   }
@@ -363,22 +361,20 @@ $(document).on('click', '.popover-content', function() {
 //Display search results
 function findItem(item) {
   $('#landing').addClass('hide');
-  $('#results').empty();
-  $('#product').empty();
-  $('#view-cart').find('.cart-items').empty();
-  $('#view-cart').find('.cart-head').addClass('hide');
+  $('#cover-up').removeClass('hide');
+  $('#results').find('.row').empty();
+  $('#product').find('.row').empty();
+  $('#view-cart').find('.row').empty();
   for (var i = 0; i < productsTemp.length; i++) {
     for (var j = 0; j < productsTemp[i].keywords.length; j++) {
       if (productsTemp[i].keywords[j] === item.toLowerCase()) {
-        var resultDiv = $('<div class="cover-up"></div>');
         var resultCol = $('<div class="col-xs-3 col-sm-3 col-md-3 product-col"></div>');
         var resultThumb = $('<a  class="thumbnail" href="#"></a>');
         var resultImg = $('<img class="product-img" src="' + productsTemp[i].image + '">')
         var resultTitleDiv = $('<div>')
         var resultTitle = $('<h5 class="product-title">' + productsTemp[i].name + '</h5>')
         var resultPrice = $('<p class="product-price">$' + productsTemp[i].price + '</p>')
-        $('body').append(resultDiv);
-        $('#results').append(resultCol);
+        $('#results').find('.row').append(resultCol);
         $(resultCol).append(resultThumb);
         $(resultThumb).append(resultImg);
         $(resultThumb).append(resultTitleDiv);
@@ -392,10 +388,10 @@ function findItem(item) {
 //Display product detail
 function showItem(object) {
   $('#landing').addClass('hide');
-  $('#results').empty();
-  $('#product').empty();
-  $('#view-cart').find('.cart-items').empty();
-  $('#view-cart').find('.cart-head').addClass('hide');
+  $('#cover-up').removeClass('hide');
+  $('#results').find('.row').empty();
+  $('#product').find('.row').empty();
+  $('#view-cart').find('.row').empty();
   var prodMediaCol = $('<div class="col-xs-10 col-sm-10 col-md-10"></div>');
   var prodMedia = $('<div class="media"></div>');
   var prodMediaLeft = $('<div class="media-left"></div>');
@@ -413,7 +409,7 @@ function showItem(object) {
   var prodAdd = $('<button class="btn btn-warning add-to-cart">Add to Cart</button>');
   var prodAddRemoveLink = $('<a href="#"></a>')
   var prodAddRemoveList = $('<p class="add-remove-link">Add to list</p>');
-  $('#product').append(prodMediaCol);
+  $('#product').find('.row').append(prodMediaCol);
   $(prodMediaCol).append(prodMedia);
   $(prodMedia).append(prodMediaLeft);
   $(prodMediaLeft).append(prodMediaImg);
@@ -421,7 +417,7 @@ function showItem(object) {
   $(prodMediaBody).append(prodMediaHeading);
   $(prodMediaBody).append(prodHR);
   $(prodMediaBody).append(prodMediaPrice);
-  $('#product').append(prodAddCol);
+  $('#product').find('.row').append(prodAddCol);
   $(prodAddCol).append(prodQtyForm);
   $(prodQtyForm).append(prodQtyGroup);
   $(prodQtyGroup).append(prodQtyText);
@@ -446,21 +442,42 @@ function showItem(object) {
 //Display cart contents
 function showCart() {
   $('#landing').addClass('hide');
-  $('#results').empty();
-  $('#product').empty();
-  $('#view-cart').find('.cart-items').empty();
-  $('#view-cart').find('.cart-head').removeClass('hide');
+  $('#cover-up').removeClass('hide');
+  $('#results').find('.row').empty();
+  $('#product').find('.row').empty();
+  $('#view-cart').find('.row').empty();
   var subtotal = 0;
+  /*  Shopping cart headers  */
+  var cartHeadNameCol = $('<div class="col-xs-7 col-sm-7 col-md-6"></div>');
+  var cartHeadName = $('<h3 class="cart-title-main">Shopping Cart</h3>');
+  var cartHeadPriceCol = $('<div class="col-xs-1 col-sm-1 col-md-2">');
+  var cartHeadPrice = $('<p class="cart-title">Price</p>');
+  var cartHeadQtyCol = $('<div class="col-xs-2 col-sm-2 col-md-2">');
+  var cartHeadQty = $('<p class="pull-right cart-title">Quantity</p>');
+  var cartHeadHrCol = $('<div class="col-xs-10 col-sm-10 col-md-10">');
+  var cartHeadHr = $('<hr class="cart-hr">');
+  $('#view-cart').find('.row').append(cartHeadNameCol);
+  $(cartHeadNameCol).append(cartHeadName);
+  $('#view-cart').find('.row').append(cartHeadPriceCol);
+  $(cartHeadPriceCol).append(cartHeadPrice);
+  $('#view-cart').find('.row').append(cartHeadQtyCol);
+  $(cartHeadQtyCol).append(cartHeadQty);
+  $('#view-cart').find('.row').append(cartHeadHrCol);
+  $(cartHeadHrCol).append(cartHeadHr);
+  /*  If you view cart and there's no items, it gives you special message  */
   if (cartContents.length === 0) {
     var noItemsCol = $('<div class="col-md-12"></div>');
     var noItems = $('<h2 class="no-items">Add something to your shopping cart</h2>');
-    $('#view-cart').find('.cart-head').append(noItemsCol);
+    var noItemsHrCol = $('<div class="col-xs-10 col-sm-10 col-md-10"></div>');
+    var noItemsHr = $('<hr class="cart-hr">');
+    $('#view-cart').find('.row').append(noItemsCol);
     $(noItemsCol).append(noItems);
+    $('#view-cart').find('.row').append(noItemsHrCol);
+    $(noItemsHrCol).append(noItemsHr);
+    /*  Otherwise loop through cart and display all items  */
   } else {
     for (var i = 0; i < cartContents.length; i++) {
-      var link = $('<a href="#"></a>');
-      var cartItems = $('<div class="cart-items"></div>');
-      var cartMediaRow = $('<div class="row"></div>');
+      var cartMediaParent = $('<div class="item-row"></div>');
       var cartMediaCol = $('<div class="col-xs-7 col-sm-7 col-md-6"></div>');
       var cartMediaList = $('<ul class="media-list"></ul>');
       var cartMedia = $('<li class="media"></li>');
@@ -483,12 +500,10 @@ function showCart() {
       var cartQtyForm = $('<div class="form-group cart-qty pull-right"></div>');
       var cartQty = $('<select class="form-control qty"></select');
       displayHelper(cartContents[i][0].stock, cartQty, 'cartQtyOption', 'option', cartContents[i][1]);
-      var cartMediaEndRow = $('<div class="row"></div>');
       var cartMediaEndCol = $('<div class="col-xs-10 col-sm-10 col-md-10"></div>');
       var cartMediaEndHr = $('<hr class="cart-hr">');
-      $('#view-cart').append(cartItems);
-      $(cartItems).append(cartMediaRow);
-      $(cartMediaRow).append(cartMediaCol);
+      $('#view-cart').find('.row').append(cartMediaParent);
+      $(cartMediaParent).append(cartMediaCol);
       $(cartMediaCol).append(cartMediaList);
       $(cartMediaList).append(cartMedia);
       $(cartMedia).append(cartMediaLeft);
@@ -504,22 +519,22 @@ function showCart() {
       $(cartOptions).append(cartOptionsSpacer);
       $(cartOptions).append(cartOptionsSaveLink);
       $(cartOptionsSaveLink).append(cartOptionsSave);
-      $(cartMediaRow).append(cartPriceCol);
+      $(cartMediaParent).append(cartPriceCol);
       $(cartPriceCol).append(cartPrice);
-      $(cartMediaRow).append(cartQtyCol);
+      $(cartMediaParent).append(cartQtyCol);
       $(cartQtyCol).append(cartQtyForm);
       $(cartQtyForm).append(cartQty);
-      $(cartItems).append(cartMediaEndRow);
-      $(cartMediaEndRow).append(cartMediaEndCol);
+      $(cartMediaParent).append(cartMediaEndCol);
       $(cartMediaEndCol).append(cartMediaEndHr);
       subtotal += cartContents[i][0].price * cartContents[i][1];
     }
   }
+  /*  Cart subtotal display  */
   var cartSubtotalRow = $('<div class="row"></div>');
   var cartSubtotalCol = $('<div class="col-xs-10 col-sm-10 col-md-10"></div>');
   var cartSubtotalCount = $('<h4 class="pull-right inline subtotal-footer">Subtotal ' + subTotalPreview() + '</h4>');
   var cartSubtotalPrice = $('<h4 class="pull-right subtotal-footer cart-price inline">' + '$' + calcSubtotal(cartContents).toFixed(2) + '</h4>');
-  $(cartItems).append(cartSubtotalRow);
+  $('#view-cart').find('.row').append(cartSubtotalRow);
   $(cartSubtotalRow).append(cartSubtotalCol);
   $(cartSubtotalCol).append(cartSubtotalPrice);
   $(cartSubtotalCol).append(cartSubtotalCount);
