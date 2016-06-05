@@ -144,7 +144,7 @@ body  {
   display: inline-block;
 }
 .cart-qty {
-  width: 80px;
+  width: 75px;
 }
 .cart-options {
   margin-top: 50px;
@@ -232,9 +232,14 @@ body  {
   margin-left: -37.5%;
   color: #fff;
 }
+@media screen and (min-height: 700px) {
+    .scroll-down {
+        margin-top: 500px;
+    }
+}
 @media screen and (min-height: 900px) {
     .scroll-down {
-        margin-top: 620px;
+        margin-top: 670px;
     }
 }
 footer {
