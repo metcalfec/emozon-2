@@ -234,17 +234,17 @@ body  {
 }
 @media screen and (min-height: 768px) {
     .scroll-down {
-        margin-top: 520px;
+        margin-top: 550px;
     }
 }
 @media screen and (min-height: 900px) {
     .scroll-down {
-        margin-top: 620px;
+        margin-top: 650px;
     }
 }
 @media screen and (min-height: 1024px) {
     .scroll-down {
-        margin-top: 720px;
+        margin-top: 750px;
     }
 }
 footer {
