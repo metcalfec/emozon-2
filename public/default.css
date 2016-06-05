@@ -232,19 +232,19 @@ body  {
   margin-left: -37.5%;
   color: #fff;
 }
-@media screen and (min-height: 700px) {
+@media screen and (min-height: 768px) {
     .scroll-down {
-        margin-top: 510px;
-    }
-}
-@media screen and (min-height: 800px) {
-    .scroll-down {
-        margin-top: 610px;
+        margin-top: 520px;
     }
 }
 @media screen and (min-height: 900px) {
     .scroll-down {
-        margin-top: 700px;
+        margin-top: 620px;
+    }
+}
+@media screen and (min-height: 1024px) {
+    .scroll-down {
+        margin-top: 720px;
     }
 }
 footer {
