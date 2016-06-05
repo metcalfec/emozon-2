@@ -228,9 +228,14 @@ body  {
   position: fixed;
   width: 75%;
   left: 50%;
-  margin-top: 34%;
+  margin-top: 420px;
   margin-left: -37.5%;
   color: #fff;
+}
+@media screen and (min-height: 900px) {
+    .scroll-down {
+        margin-top: 800px;
+    }
 }
 footer {
   height: 130px;
