@@ -115,6 +115,15 @@ $(document).ready(function() {
       $(recommendedHRCol).append('<hr>');
     }
   }
+  $('.white-top').on('click', 'a', function(e) {
+    e.preventDefault();
+    var product = $(this).closest('.col-md-3').find('.landing-image').attr('src');
+    for (var i = 0; i < productsTemp.length; i++) {
+      if (product === productsTemp[i].image) {
+        showItem(productsTemp[i]);
+      }
+    }
+  });
   $(window).on('scroll', function() {
     var scrollTop = $(window).scrollTop();
     $('.white-top').css({
@@ -126,6 +135,7 @@ $(document).ready(function() {
   });
 
   var prodMediaCol = $('<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10"></div>');
+  var prodMediaLink = $('<a class="spotlight-link" href="#"></a>')
   var prodMedia = $('<div class="media"></div>');
   var prodMediaLeft = $('<div class="media-left"></div>');
   var prodMediaImg = $('<img class="product-img" src="' + spotlight[0].image + '">');
@@ -134,7 +144,8 @@ $(document).ready(function() {
   var prodMediaPrice = $('<p>Price: <span class="media-price">$' + spotlight[0].price + '</span></p>');
   var prodMediaAboutUL = $('<ul class="media-ul"></ul>');
   $('#landing').find('.spotlight-deal').append(prodMediaCol);
-  $(prodMediaCol).append(prodMedia);
+  $(prodMediaCol).append(prodMediaLink);
+  $(prodMediaLink).append(prodMedia);
   $(prodMedia).append(prodMediaLeft);
   $(prodMediaLeft).append(prodMediaImg);
   $(prodMedia).append(prodMediaBody);
@@ -151,6 +162,15 @@ $(document).ready(function() {
       $('#landing').find('.spotlight-deal').slideDown(1000);
     } else {
       $('#landing').find('.spotlight-deal').slideUp(1000);
+    }
+  });
+  $('.white-bot').on('click', function(e) {
+    e.preventDefault();
+    var product = $(this).find('.media-heading').text();
+    for (var i = 0; i < productsTemp.length; i++) {
+      if (product === productsTemp[i].name) {
+        showItem(productsTemp[i]);
+      }
     }
   });
 });
@@ -297,6 +317,16 @@ $('#view-cart').on('change', '.cart-qty', function() {
   }
   showCart();
   $('#cart-count').text(cartCount());
+});
+
+//View product detail from cart
+$(document).on('click', 'a', function() {
+  var product = $(this).closest('.media-list').find('.media-heading').text();
+  for (var i = 0; i < productsTemp.length; i++) {
+    if (product === productsTemp[i].name) {
+      showItem(productsTemp[i]);
+    }
+  }
 });
 
 //Proceed to cart

@@ -1,8 +1,8 @@
 body  {
-    background-image: url('http://blog.1worldsync.com/wp-content/uploads/2014/03/shopping-bags1.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
+  background-image: url('http://blog.1worldsync.com/wp-content/uploads/2014/03/shopping-bags1.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 .white-top {
   position: relative;
@@ -41,131 +41,138 @@ body  {
   border: 0;
 }
 .item {
-    height: 400px;
+  height: 400px;
 }
 #search-bar {
-    width: 600px;
+  width: 600px;
 }
 #cart {
-    color: black;
+  color: black;
 }
 #carousel-ads {
-    margin-top: -45px;
+  margin-top: -45px;
 }
 #cart-count {
-    font-family: sans-serif;
-    font-size: 14px;
-    font-weight: bolder;
-    margin-top: -33px;
-    margin-left: 5px;
-    color: white;
-    text-align: center;
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: bolder;
+  margin-top: -33px;
+  margin-left: 5px;
+  color: white;
+  text-align: center;
 }
 .thumbnail {
-    padding: 20px;
-    border: solid 1px transparent;
+  padding: 20px;
+  border: solid 1px transparent;
 }
 .thumbnail:hover {
-    border-color: #ddd !important;
-    text-decoration: none;
+  border-color: #ddd !important;
+  text-decoration: none;
+}
+.spotlight-link {
+  color: #000;
+}
+.spotlight-link:hover {
+  text-decoration: none;
+  color: #000;
 }
 .product-price {
-    font-size: 20px;
-    color: red;
+  font-size: 20px;
+  color: red;
 }
 .col-md-3:nth-child(4n+1) {
-    clear: left;
+  clear: left;
 }
 .product-img {
-    width: 350px;
+  width: 350px;
 }
 .media-body {
-    padding-left: 20px;
-    padding-right: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 .media-price {
-    font-size: 20px;
-    color: red;
-    padding-left: 5px;
+  font-size: 20px;
+  color: red;
+  padding-left: 5px;
 }
 .add-to-cart {
-    margin-top: 50px;
-    padding-left: 15%;
-    padding-right: 15%;
-    white-space: normal;
+  margin-top: 50px;
+  padding-left: 15%;
+  padding-right: 15%;
+  white-space: normal;
 }
 .quantity {
-    display: inline-block;
-    margin-top: 40px;
-    margin-left: auto;
-    margin-right: auto;
+  display: inline-block;
+  margin-top: 40px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .media-ul {
-    padding-top: 30px;
-    padding-left: 15px;
+  padding-top: 30px;
+  padding-left: 15px;
 }
 .add-col {
-    border: 3px solid #e7e5e5;
-    border-radius: 5px;
-    height: 250px;
+  border: 3px solid #e7e5e5;
+  border-radius: 5px;
+  height: 250px;
 }
 .qty {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 .cart-added-img {
-    width: 60px;
+  width: 60px;
 }
 .cart-added-price {
-    display: inline;
-    margin-top: 30px;
+  display: inline;
+  margin-top: 30px;
 }
 .cart-img {
-    width: 80px;
+  width: 80px;
 }
 .cart-hr {
-    margin-top: 3px;
+  margin-top: 3px;
 }
 .cart-title {
-    margin-top: 25px;
-    margin-bottom: 0;
+  margin-top: 25px;
+  margin-bottom: 0;
 }
 .cart-title-main {
-    margin-top: 5px;
-    margin-bottom: 0;
+  margin-top: 5px;
+  margin-bottom: 0;
 }
 .cart-heading {
-    display: inline-block;
+  display: inline-block;
 }
 .cart-qty {
-    width: 50px;
+  width: 60px;
 }
 .cart-options {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 .inline {
-    display: inline;
+  display: inline;
 }
 .cart-pad {
-    padding-left: 20px;
+  padding-left: 20px;
 }
 .subtotal-footer {
-    margin-top: -10px;
+  margin-top: -10px;
 }
 .cart-price {
-    padding-left: 10px;
-    color: red;
+  padding-left: 10px;
+  color: red;
 }
 .carousel-inner img {
-    margin: auto;
+  margin: auto;
 }
 .popover {
-    max-width: 25%;
+  max-width: 25%;
 }
 .add-remove-link {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 .empty-list {
-    margin-top: 15px;
+  margin-top: 15px;
 }
 .no-items {
   margin-bottom: 40px;
@@ -183,6 +190,7 @@ body  {
   margin-bottom: 10px;
 }
 #need-it {
+  margin-top: 1%;
   font-size: 50px;
   font-family: Georgia;
   text-align: center;
@@ -223,4 +231,14 @@ body  {
   margin-top: 34%;
   margin-left: -37.5%;
   color: #fff;
+}
+footer {
+  height: 130px;
+  background-color: #e7e5e5;
+}
+.footer-txt {
+  padding-top: 80px;
+  color: #585757;
+  font-size: 16px;
+  text-align: center;
 }
