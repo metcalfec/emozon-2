@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="default.css">
+  <link rel="stylesheet" href="css/default.css">
   <title>Emozon 2.0</title>
 </head>
 <body>
@@ -16,12 +16,12 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">emozon</a>
+        <a href="#" class="pull-left"><img id="logo" src="images/emozon-logo.png"></a>
       </div>
       <div class="collapse navbar-collapse" id="collapse-1">
         <form class="navbar-form navbar-left">
           <div id="search-bar" class="input-group">
-            <input id="search-txt" type="text" class="form-control" placeholder="WIP...Search for book or tv">
+            <input id="search-txt" type="text" class="form-control" placeholder="tvs, books, iphones...">
             <span class="input-group-btn">
               <button id="search-btn" type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
             </span>
@@ -73,7 +73,7 @@
             <p class="landing-opt">Recommendations for you</p>
             <div class="suggestions"></div>
           </div>
-          <div class="col-md-12">
+          <div class="col-md-12 recommended-items">
             <p class="landing-opt">Recently viewed items</p>
             <div class="viewed"></div>
             <h2 class="no-items text-center">Start exploring Emozon today</h2>
@@ -82,11 +82,27 @@
       </div>
     </div>
     <div class="white-mid">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-2 col-xs-offset-3 col-sm-2 col-sm-offset-3 col-md-2 col-md-offset-3">
+            <a href="#"><img id="icon-tv" class="icons" src="images/black-white-metro-tv-icon.png"></a>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2">
+            <a href="#"><img id="icon-book" class="icons" src="images/black-white-metro-book-icon.png"></a>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2">
+            <a href="#"><img id="icon-iphone" class="icons" src="images/black-white-metro-iphone-icon.png"></a>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-12">
+            <p class="icons-text text-center">tvs | books | iphones</p>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="white-bot">
       <div class="container">
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-xs-12 col-sm-12 col-md-12 landing-spotlight">
             <p class="landing-opt">Todays product spotlight</p>
             <div class="spotlight-deal"></div>
           </div>
@@ -111,12 +127,16 @@
     </div>
   </div>
   <footer>
-    <p class="footer-txt">Chris Metcalfe | github.com/metcalfec></p>
+    <p class="footer-txt">
+      <img id="footer-logo" src="images/emozon-logo.png"><br>
+      Chris Metcalfe | github.com/metcalfec>
+    </p>
   </footer>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <script src="default.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
