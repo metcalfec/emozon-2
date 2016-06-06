@@ -9,7 +9,9 @@ var spotlight = [productsTemp[1]];
 //       EVENTS       //////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
+//Landing Page
 $(document).ready(function() {
+  /* Display recommended items */
   for (var i = 0; i < recommended.length; i++) {
     var recommendedCol = $('<div class="col-xs-3 col-sm-3 col-md-3"></div>');
     var recommendedLink = $('<a href="#"></a>');
@@ -23,6 +25,7 @@ $(document).ready(function() {
       $(recommendedHRCol).append('<hr>');
     }
   }
+
   $('.white-top').on('click', 'a', function() {
     var product = $(this).closest('.col-md-3').find('.landing-image').attr('src');
     for (var i = 0; i < productsTemp.length; i++) {
@@ -34,7 +37,7 @@ $(document).ready(function() {
       }
     }
   });
-
+  /* Fade in top landing div */
   $(window).on('scroll', function() {
     var scrollTop = $(window).scrollTop();
     $('.white-top').css({
@@ -77,13 +80,13 @@ $(document).ready(function() {
       $('#landing').find('.spotlight-deal').slideUp(1000);
     }
   });
-
+  /* Ease in categories */
   $(window).on('scroll', function() {
     if ($(window).scrollTop() > 1200) {
-      $('#landing').find('#icon-tv').closest('div').animate({ top: '300' }, 300, 'easeOutCubic', function() {
-        $('#landing').find('#icon-book').closest('div').animate({ top: '300' }, 300, 'easeOutCubic', function() {
-          $('#landing').find('#icon-iphone').closest('div').animate({ top: '300' }, 300, 'easeOutCubic', function() {
-            $('#landing').find('.icons-text').closest('div').animate({ top: '-500' }, 1500, 'easeOutCubic');
+      $('#landing').find('#icon-tv').closest('div').animate({ top: '230' }, 300, 'easeOutCubic', function() {
+        $('#landing').find('#icon-book').closest('div').animate({ top: '230' }, 300, 'easeOutCubic', function() {
+          $('#landing').find('#icon-iphone').closest('div').animate({ top: '230' }, 300, 'easeOutCubic', function() {
+            $('#landing').find('.icons-text').closest('div').animate({ top: '-430' }, 1500, 'easeOutCubic');
           });
         });
       });
@@ -146,7 +149,7 @@ $('#logo').on('click', function() {
       viewed.pop();
     }
   }
-  /*Append recently viewed items to landing page*/
+  /* Append recently viewed items to landing page */
   for (var i = 0; i < viewed.length; i++) {
     var viewedCol = $('<div class="col-xs-3 col-sm-3 col-md-3"></div>');
     var viewedLink = $('<a href="#"></a>');
@@ -295,7 +298,7 @@ $('.navbar').on('click', 'a', function() {
             var savedMediaLeft = $('<div class="media-left"></div>');
             var savedMediaObject = $('<img class="media-object cart-added-img" src="' + saveForLater[i].image + '">');
             var savedMediaBody = $('<div class="media-body"></div>');
-            var savedMediaHeading = $('<div class="media-heading">' + truncate(saveForLater[i].name, 40) + '</div>');
+            var savedMediaHeading = $('<div class="media-heading">' + truncate(saveForLater[i].name, 20) + '</div>');
             $(content).append(savedLink);
             $(savedLink).append(savedMedia);
             $(savedMedia).append(savedMediaLeft);
@@ -331,23 +334,31 @@ $(document).on('click', '.popover-content', function() {
 //Display search results
 function findItem(item) {
   clearAll('search');
+  var hits = 0;
   for (var i = 0; i < productsTemp.length; i++) {
     for (var j = 0; j < productsTemp[i].keywords.length; j++) {
       if (productsTemp[i].keywords[j] === item.toLowerCase()) {
         var resultCol = $('<div class="col-xs-3 col-sm-3 col-md-3"></div>');
         var resultThumb = $('<a  class="thumbnail" href="#"></a>');
-        var resultImg = $('<img src="' + productsTemp[i].image + '">')
-        var resultTitleDiv = $('<div>')
-        var resultTitle = $('<h5 class="product-title">' + productsTemp[i].name + '</h5>')
-        var resultPrice = $('<p class="product-price">$' + productsTemp[i].price + '</p>')
+        var resultImg = $('<img src="' + productsTemp[i].image + '">');
+        var resultTitleDiv = $('<div>');
+        var resultTitle = $('<h5 class="product-title">' + productsTemp[i].name + '</h5>');
+        var resultPrice = $('<p class="product-price">$' + productsTemp[i].price + '</p>');
         $('#results').find('.row').append(resultCol);
         $(resultCol).append(resultThumb);
         $(resultThumb).append(resultImg);
         $(resultThumb).append(resultTitleDiv);
         $(resultTitleDiv).append(resultTitle);
         $(resultTitleDiv).append(resultPrice);
+        hits++;
       }
     }
+  }
+  if (hits === 0) {
+    clearAll('home');
+    window.scroll(0, 1400), setTimeout(function() {
+      $('#landing').find('.icons-text').effect('shake', { times: 2 }, 1500);
+    }, 1200);;
   }
 }
 

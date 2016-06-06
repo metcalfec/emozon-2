@@ -277,6 +277,7 @@ footer {
 .landing-spotlight {
   margin-top: -120px;
 }
-.recommended-items {
-  margin-top: -15px;
+.rec-viewed {
+  font-size: 22px;
+  color: #585757;
 }
