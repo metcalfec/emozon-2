@@ -320,7 +320,7 @@ $('.navbar').on('click', 'a', function() {
 //View saved item product page
 $(document).on('click', '.popover-content', function() {
   for (var i = 0; i < productsTemp.length; i++) {
-    if ($(this).find('.media-heading').text() === truncate(productsTemp[i].name, 40)) {
+    if ($(this).find('.media-heading').text() === truncate(productsTemp[i].name, 20)) {
       showItem(productsTemp[i]);
     }
   }
@@ -358,7 +358,7 @@ function findItem(item) {
     clearAll('home');
     window.scroll(0, 1400), setTimeout(function() {
       $('#landing').find('.icons-text').effect('shake', { times: 2 }, 1500);
-    }, 1200);;
+    }, 120);;
   }
 }
 
