@@ -170,7 +170,7 @@ body  {
   margin: auto;
 }
 .popover {
-  max-width: 25%;
+  max-width: 40%;
 }
 .add-remove-link {
   margin-top: 10px;
@@ -280,4 +280,7 @@ footer {
 .rec-viewed {
   font-size: 22px;
   color: #585757;
+}
+.list-remove {
+  margin-left: 3px;
 }
