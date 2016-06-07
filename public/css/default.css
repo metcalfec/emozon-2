@@ -217,7 +217,7 @@ body  {
 }
 .spotlight-deal {
   margin-top: 50px;
-  display: none;
+  /*display: none;*/
 }
 .scroll-down {
   position: fixed;
@@ -275,6 +275,7 @@ footer {
   margin-top: 400px;
 }
 .landing-spotlight {
+  display: none;
   margin-top: -120px;
 }
 .rec-viewed {

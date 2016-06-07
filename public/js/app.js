@@ -74,7 +74,7 @@ $(document).ready(function() {
     $(prodMediaBody).append(prodMediaAboutUL);
   }
   $(window).on('scroll', function() {
-    var deal = $('#landing').find('.spotlight-deal');
+    var deal = $('#landing').find('.landing-spotlight');
     if ($(window).scrollTop() > 1500) {
       deal.slideDown(1000);
     } else {
@@ -296,6 +296,7 @@ $('.navbar').on('click', 'a', function() {
           for (var i = 0; i < saveForLater.length; i++) {
             var savedMedia = $('<div class="media"></div>');
             var savedMediaLeft = $('<div class="media-left"></div>');
+            var savedMediaImgLink = $('<a href="#" data-list="item"></a>');
             var savedMediaObject = $('<img class="media-object cart-added-img" src="' + saveForLater[i].image + '">');
             var savedMediaBody = $('<div class="media-body"></div>');
             var savedMediaLink = $('<a href="#" data-list="item"></a>');
@@ -304,7 +305,8 @@ $('.navbar').on('click', 'a', function() {
             var savedCart = $('<a class="btn btn-default btn-xs list-remove pull-right" data-list="cart">Add to Cart</a>');
             $(content).append(savedMedia);
             $(savedMedia).append(savedMediaLeft);
-            $(savedMediaLeft).append(savedMediaObject);
+            $(savedMediaLeft).append(savedMediaImgLink);
+            $(savedMediaImgLink).append(savedMediaObject);
             $(savedMedia).append(savedMediaBody);
             $(savedMediaBody).append(savedMediaLink);
             $(savedMediaLink).append(savedMediaHeading);
@@ -325,16 +327,25 @@ $('.navbar').on('click', 'a', function() {
 //View saved item product page
 $(document).on('click', 'a', function() {
   var listDelegation = $(this).data('list');
-  if (listDelegation === 'delete') {
-    console.log('DEL');
-  } else if (listDelegation === 'cart') {
-    console.log('CART');
-  } else if (listDelegation === 'item') {
-    console.log('ITEM');
-  }
   for (var i = 0; i < productsTemp.length; i++) {
-    if ($(this).find('.media-heading').text() === truncate(productsTemp[i].name, 40)) {
-      showItem(productsTemp[i]);
+    if ($(this).closest('.media').find('.media-heading').text() === truncate(productsTemp[i].name, 40)) {
+      var product = productsTemp[i];
+      var index = saveForLater.indexOf(product);
+      var productPage = $('#product').find('.media-heading').text();
+      if (listDelegation === 'delete') {
+        saveForLater.splice(index, 1);
+        /* If user is on product page, update 'add/remove from list' option */
+        if (typeof productPage [0] !== 'undefined' && productPage === product.name) {
+          showItem(product);
+        }
+      } else if (listDelegation === 'cart') {
+        cartContents.push([product, 1]);
+        $('#cart-count').text(cartCount());
+        saveForLater.splice(index, 1);
+        showCart();
+      } else if (listDelegation === 'item') {
+        showItem(product);
+      }
     }
   }
 });
