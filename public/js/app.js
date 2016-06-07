@@ -1,5 +1,6 @@
 var cartContents = [];
 var saveForLater = [];
+var orderHistory = [];
 var recommended = [productsTemp[0], productsTemp[1], productsTemp[2], productsTemp[3]];
 var viewed = [];
 var spotlight = [productsTemp[1]];
@@ -321,6 +322,18 @@ $('.navbar').on('click', 'a', function() {
       }
     });
     $('#my-list').popover('show');
+  } else if ($(this).text() === "Order History") {
+    $('#my-orders').popover({
+      html: 'true',
+      content : function() {
+        var content = $('<div></div>');
+        if (orderHistory.length === 0) {
+          $(content).append('<p class="empty-list">No orders placed</p>');
+        }
+        return content;
+      }
+    });
+    $('#my-orders').popover('show');
   }
 });
 
