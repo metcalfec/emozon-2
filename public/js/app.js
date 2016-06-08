@@ -289,6 +289,9 @@ $('.navbar').on('click', 'a', function() {
   if ($(this).text() === "Saved For Later") {
     $('#my-list').popover({
       html: 'true',
+      delay: {
+       show: '500'
+      },
       content : function() {
         var content = $('<div></div>');
         if (saveForLater.length === 0) {
@@ -325,6 +328,9 @@ $('.navbar').on('click', 'a', function() {
   } else if ($(this).text() === "Order History") {
     $('#my-orders').popover({
       html: 'true',
+      delay: {
+       show: '500'
+      },
       content : function() {
         var content = $('<div></div>');
         if (orderHistory.length === 0) {
