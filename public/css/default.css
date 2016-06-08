@@ -285,3 +285,7 @@ footer {
 .list-remove {
   margin-left: 3px;
 }
+.viewed {
+  position: relative;
+  z-index: 4;
+}
