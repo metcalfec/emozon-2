@@ -112,5 +112,107 @@ var productsTemp = [
     price: 213.99,
     stock: 100,
     keywords: ["iphone", "iphones", "phone", "apple"]
+  },
+  {
+    name: "Apple iPhone 5 A1428 Factory Unlocked Cellphone, 16GB, Black",
+    by: "Apple",
+    image: "http://ecx.images-amazon.com/images/I/61lYvsBbTQL._SL1048_.jpg",
+    description: [
+      "GSM Factory Unlocked: Device is unlocked for use on any GSM network, please contact your service provider prior to purchasing to ensure full compatibility. GSM providers include AT&T & T-Mobile",
+      "Features: Wi-Fi, Bluetooth, Built-in rechargeable lithium-ion battery. Talk time: Up to 8 hours on 3G. Display: 4-inch (diagonal) widescreen Multi-Touch display",
+      "A6 chip, iCloud, 8.0MP iSight camera, All-new EarPods and improved audio,  iOS version may very",
+      "In the package: iPhone 5 16GB, USB Cable, Wall Charger, EarPods with Remote and Mic, Documentation"
+    ],
+    price: 270.99,
+    stock: 100,
+    keywords: ["iphone", "iphones", "phone", "apple"]
+  },
+  {
+    name: "Apple iPhone SE Unlocked Phone 16 GB Retail Packaging - Space Gray",
+    by: "Apple",
+    image: "http://ecx.images-amazon.com/images/I/61l3G55J0sL._SL1392_.jpg",
+    description: [
+      "Retina display; 4inch (diagonal) LEDbacklit widescreen MultiTouch display",
+      "12megapixel iSight camera with 1.22µ pixels; f/2.2 aperture; Hybrid IR filter; Panorama (up to 63 megapixels)",
+      "4K video recording (3840 by 2160) at 30 fps; Slomo video support for 1080p at 120 fps and 720p at 240 fps; Take 8-megapixel still photos while recording 4K video",
+      "FaceTime HD Camera: 1.2megapixel photos; f/2.4 aperture; Improved local tone mapping; Retina Flash; Talk time: Up to 14 hours on 3G",
+      "Fingerprint sensor built into the Home button; A9 chip with 64bit architecture; Embedded M9 motion coprocessor"
+    ],
+    price: 499.99,
+    stock: 100,
+    keywords: ["iphone", "iphones", "phone", "apple"]
+  },
+  {
+    name: "Apple iPhone 4 (MD439LL/A) - 8GB Smartphone - Black - Verizon (Certified Refurbished)",
+    by: "Apple",
+    image: "http://ecx.images-amazon.com/images/I/818yAEMJC6L._SL1500_.jpg",
+    description: [
+      "This Certified Refurbished product is factory refurbished, shows limited or no wear, and includes all relevant accessories plus a 90-day warranty",
+      "8GB internal storage - 1 GHz Cortex-A8 CPU - 512 MB RAM",
+      "iOS 4 - upgradable",
+      "5MP camera - 2592 x 1936 pixels, autofocus, LED flash",
+      "Corning Gorilla Glass, oleophobic coating"
+    ],
+    price: 59.99,
+    stock: 100,
+    keywords: ["iphone", "iphones", "phone", "apple"]
+  },
+  {
+    name: "Apple iPhone 5 Unlocked Cellphone, 16GB, Black",
+    by: "Apple",
+    image: "http://ecx.images-amazon.com/images/I/715rr6uRY0L._SL1500_.jpg",
+    description: [
+      "GSM Factory Unlocked: Device is unlocked for use on any GSM network, please contact your service provider prior to purchasing to ensure full compatibility. GSM providers include AT&T & T-Mobile",
+      "Features: Wi-Fi, Bluetooth, Built-in rechargeable lithium-ion battery. Talk time: Up to 8 hours on 3G. Display: 4-inch (diagonal) widescreen Multi-Touch display",
+      "A6 chip, iCloud, 8.0MP iSight camera, All-new EarPods and improved audio,  iOS version may very",
+      "In the package: iPhone 5 16GB, USB Cable, Wall Charger, EarPods with Remote and Mic, Documentation"
+    ],
+    price: 250.99,
+    stock: 100,
+    keywords: ["iphone", "iphones", "phone", "apple"]
+  },
+  {
+    name: "Apple iPhone 5 16GB - Unlocked - White (Certified Refurbished)",
+    by: "Apple",
+    image: "http://ecx.images-amazon.com/images/I/71mGm56-EjL._SL1500_.jpg",
+    description: [
+      "Camera: Primary - 8 MP iSight camera, 1080p HD Video / Secondary - 1.2MP FaceTime Camera",
+      "Unlocked cell phones are compatible with GSM carriers like AT&T and T-Mobile as well as with GSM SIM cards (e.g. H20, Straight Talk, and select prepaid carriers). Unlocked cell phones will not work with CDMA Carriers like Sprint, Verizon, Boost or Virgin.",
+      "iOS 6, Apple A6 Processor, 16GB Memory",
+      "4.0 inch Retina LED-backlit IPS LCD capacitive touchscreen display",
+      "This Certified Refurbished product is factory refurbished, shows limited or no wear, and includes all relevant accessories plus a 90-day warranty"
+    ],
+    price: 179.99,
+    stock: 100,
+    keywords: ["iphone", "iphones", "phone", "apple"]
+  },
+  {
+    name: "Apple iPhone 6 a1549 16GB Space Gray Unlocked",
+    by: "Apple",
+    image: "http://ecx.images-amazon.com/images/I/61eihG04VZL._SL1000_.jpg",
+    description: [
+      "4.7-inch touchscreen display with a resolution of 750 pixels by 1334 pixels at a PPI of 326 pixels per inch",
+      "Powered by Apple A8 processor",
+      "8-megapixel primary camera on the rear and a 1.2-megapixel front shooter for selfies",
+      "16GB of internal storage cannot be expanded",
+      "Includes A/C Adapter & Lightning Cable"
+    ],
+    price: 559.95,
+    stock: 100,
+    keywords: ["iphone", "iphones", "phone", "apple"]
+  },
+  {
+    name: "Apple iPhone 4 Verizon Cellphone, 16GB, White",
+    by: "Apple",
+    image: "http://ecx.images-amazon.com/images/I/41ua5HiV45L.jpg",
+    description: [
+      "8GB internal storage - 1 GHz Cortex-A8 CPU - 512 MB RAM",
+      "iOS 4 - upgradable",
+      "5MP camera - 2592 x 1936 pixels, autofocus, LED flash",
+      "Corning Gorilla Glass, oleophobic coating"
+    ],
+    price: 92.99,
+    stock: 100,
+    keywords: ["iphone", "iphones", "phone", "apple"]
   }
 ]
