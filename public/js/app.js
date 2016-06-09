@@ -285,7 +285,8 @@ $('#cart').on('click', function() {
 });
 
 //Show saved items
-$('.navbar').on('click', 'a', function() {
+$('.navbar').on('click', 'a', function(e) {
+  e.preventDefault();
   if ($(this).text() === "Saved For Later") {
     $('#my-list').popover({
       html: 'true',
@@ -510,7 +511,7 @@ function showCart() {
       var cartOptionsSaveLink = $('<a href="#"></a>');
       var cartOptionsSave = $('<p class="cart-pad inline">Save for later</p>');
       var cartPriceCol = $('<div class="col-xs-1 col-sm-1 col-md-2"></div>');
-      var cartPrice = $('<h5 class="media-heading">' + cartContents[i][0].price + '</h5>');
+      var cartPrice = $('<h5 class="media-heading">$' + cartContents[i][0].price + '</h5>');
       var cartQtyCol = $('<div class="col-xs-2 col-sm-2 col-md-2"></div>');
       var cartQtyForm = $('<div class="form-group cart-qty pull-right"></div>');
       var cartQty = $('<select class="form-control qty"></select');
