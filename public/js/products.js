@@ -2,7 +2,12 @@ var productsTemp = [
   {
     name: "Sony KDL32R300C 32-Inch 720p LED TV (2015 Model)",
     by: "Sony",
-    image: "http://ecx.images-amazon.com/images/I/81RstnIX0iL._SL1500_.jpg",
+    image: [
+      "http://ecx.images-amazon.com/images/I/81RstnIX0iL._SL1500_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/61AAvIgZCIL._SL1500_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/619B7wrCsPL._SL1500_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/61y0kowGcVL._SL1500_.jpg"
+    ],
     description: [
       "Refresh Rate: 60Hz (Native); Motionflow XR120 (Effective)",
       "Backlight: LED (Direct-Lit)",

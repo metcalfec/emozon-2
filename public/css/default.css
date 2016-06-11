@@ -87,6 +87,30 @@ body  {
 .product-img {
   width: 350px;
 }
+.alt-img {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  margin-top: 12px;
+  margin-left: 12px;
+  margin-right: 12px;
+  border: solid 1px #e7e5e5;
+}
+.alt-img img {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  display: block;
+  top: 4px;
+  left: 4px;
+}
+.alt-img-wrapper {
+  text-align: center;
+  margin-left: 0 auto;
+  margin-top: 0 auto;
+}
 .thumbnail img {
   height: 150px;
 }
@@ -215,7 +239,7 @@ body  {
   height: 100%;
   z-index: 0;
 }
-.spotlight-deal {
+.spacer {
   margin-top: 50px;
   /*display: none;*/
 }
@@ -278,7 +302,7 @@ footer {
   display: none;
   margin-top: -120px;
 }
-.rec-viewed {
+.subtitle {
   font-size: 22px;
   color: #585757;
 }
