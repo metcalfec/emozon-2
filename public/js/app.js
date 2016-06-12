@@ -3,125 +3,143 @@ var saveForLater = [];
 var orderHistory = [];
 var recommended = [productsTemp[0], productsTemp[1], productsTemp[2], productsTemp[3]];
 var viewed = [];
-var spotlight = [productsTemp[1]];
+var spotlight = [productsTemp[9]];
 
 
 ////////////////////////////////////////////////////////////////////////////////
-//       EVENTS       //////////////////////////////////////////////////////////
+// Landing Page
 ////////////////////////////////////////////////////////////////////////////////
 
-//Landing Page
-$(document).ready(function() {
-  /* Display recommended items */
-  for (var i = 0; i < recommended.length; i++) {
-    var recommendedCol = $('<div class="col-xs-3 col-sm-3 col-md-3"></div>');
-    var recommendedLink = $('<a href="#"></a>');
-    var recommendedImg = $('<img class="landing-image" src="' + recommended[i].image[0] + '">');
-    $('#landing').find('.suggestions').append(recommendedCol);
-    $(recommendedCol).append(recommendedLink);
-    $(recommendedLink).append(recommendedImg);
-    if (i === recommended.length - 1) {
-      var recommendedHRCol = $('<div class="col-md-12"></div>');
-      $('#landing').find('.suggestions').append(recommendedHRCol);
-      $(recommendedHRCol).append('<hr>');
+// Append recommended items
+for (var i = 0; i < recommended.length; i++) {
+  var recommendedCol = $('<div class="col-xs-3 col-sm-3 col-md-3"></div>');
+  var recommendedThumb = $('<a  class="thumbnail" href="#"></a>');
+  var recommendedImg = $('<img class="landing-image" src="' + recommended[i].image[0] + '">');
+  $('#landing').find('.suggestions').append(recommendedCol);
+  $(recommendedCol).append(recommendedThumb);
+  $(recommendedThumb).append(recommendedImg);
+  //Append horizontal rule after last recommended product
+  if (i === recommended.length - 1) {
+    var recommendedHRCol = $('<div class="col-md-12"></div>');
+    $('#landing').find('.suggestions').append(recommendedHRCol);
+    $(recommendedHRCol).append('<hr>');
+  }
+}
+
+//Product navigation on click event
+$('.white-top').on('click', 'a', function() {
+  var product = $(this).closest('.col-md-3').find('.landing-image').attr('src');
+  for (var i = 0; i < productsTemp.length; i++) {
+    if (product === productsTemp[i].image[0]) {
+      showItem(productsTemp[i]);
+      //Check if product is in 'viewed' array and delete/insert it
+      var index = viewed.indexOf(productsTemp[i]);
+      if (index !== -1) {
+        viewed.splice(index, 1);
+      }
+      viewed.splice(0, 0, productsTemp[i]);
     }
   }
+});
 
-  $('.white-top').on('click', 'a', function() {
-    var product = $(this).closest('.col-md-3').find('.landing-image').attr('src');
-    for (var i = 0; i < productsTemp.length; i++) {
-      if (product === productsTemp[i].image[0]) {
-        showItem(productsTemp[i]);
-        if (viewed.indexOf(productsTemp[i]) === -1) {
-          viewed.splice(0, 0, productsTemp[i]);
-        }
-      }
-    }
+//Fade in top landing div based on scroll position
+$(window).on('scroll', function() {
+  var scrollTop = $(window).scrollTop();
+  $('.white-top').css({
+    'opacity': (scrollTop / 500)
   });
-  /* Fade in top landing div */
-  $(window).on('scroll', function() {
-    var scrollTop = $(window).scrollTop();
-    $('.white-top').css({
-      'opacity': (scrollTop / 500)
-    });
-    $('.scroll-down').css({
-      'opacity': ((200 - scrollTop) / 200)
-    });
-  });
-
-  var prodMediaCol = $('<div class="col-xs-12 col-sm-12 col-md-12"></div>');
-  var prodMedia = $('<div class="media"></div>');
-  var prodMediaLeft = $('<div class="media-left"></div>');
-  var prodMediaImgLink = $('<a class="spotlight-link" href="#"></a>');
-  var prodMediaImg = $('<img class="product-img" src="' + spotlight[0].image + '">');
-  var prodMediaBody = $('<div class="media-body"></div>');
-  var prodMediaHeadingLink = $('<a class="spotlight-link" href="#"></a>');
-  var prodMediaHeading = $('<h3 class="media-heading">' + spotlight[0].name + '</h3>');
-  var prodMediaPrice = $('<p>Price: <span class="media-price">$' + spotlight[0].price + '</span></p>');
-  var prodMediaAboutUL = $('<ul class="media-ul"></ul>');
-  $('#landing').find('.spacer').append(prodMediaCol);
-  $(prodMediaCol).append(prodMedia);
-  $(prodMedia).append(prodMediaLeft);
-  $(prodMediaLeft).append(prodMediaImgLink);
-  $(prodMediaImgLink).append(prodMediaImg);
-  $(prodMedia).append(prodMediaBody);
-  $(prodMediaBody).append(prodMediaHeadingLink);
-  $(prodMediaHeadingLink).append(prodMediaHeading);
-  $(prodMediaBody).append(prodMediaPrice);
-  if (spotlight[0].description.length === 1) {
-    displayHelper(spotlight[0].description, prodMediaBody, 'prodMediaAboutP', 'p');
-  } else {
-    displayHelper(spotlight[0].description, prodMediaAboutUL, 'prodMediaAboutLi', 'li');
-    $(prodMediaBody).append(prodMediaAboutUL);
-  }
-  $(window).on('scroll', function() {
-    var deal = $('#landing').find('.landing-spotlight');
-    if ($(window).scrollTop() > 1500) {
-      deal.slideDown(1000);
-    } else {
-      deal.slideUp(1000);
-    }
-  });
-  /* Ease in categories */
-  $(window).on('scroll', function() {
-    if ($(window).scrollTop() > 1200) {
-      $('#landing').find('#icon-tv').closest('div').animate({ top: '230' }, 300, 'easeOutCubic', function() {
-        $('#landing').find('#icon-book').closest('div').animate({ top: '230' }, 300, 'easeOutCubic', function() {
-          $('#landing').find('#icon-iphone').closest('div').animate({ top: '230' }, 300, 'easeOutCubic', function() {
-            $('#landing').find('.icons-text').closest('div').animate({ top: '-430' }, 1500, 'easeOutCubic');
-          });
-        });
-      });
-    }
-  });
-
-  $('.white-mid').on('click', 'a', function() {
-    var icon = $(this).find('img').attr('src');
-    if (icon === 'images/black-white-metro-tv-icon.png') {
-      findItem('tv');
-    } else if (icon === 'images/black-white-metro-book-icon.png') {
-      findItem('book');
-    } else {
-      findItem('iphone');
-    }
-  });
-
-  $('.white-mid').on('mouseenter', 'a', function() {
-    $(this).find('img').toggleClass('icon-rollover');
-  });
-  $('.white-mid').on('mouseleave', 'a', function() {
-    $(this).find('img').toggleClass('icon-rollover');
-  });
-
-  $('.white-bot').on('click', function() {
-    var product = $(this).find('.media-heading').text();
-    for (var i = 0; i < productsTemp.length; i++) {
-      if (product === productsTemp[i].name) {
-        showItem(productsTemp[i]);
-      }
-    }
+  $('.scroll-down').css({
+    'opacity': ((200 - scrollTop) / 200)
   });
 });
+
+//Product spotlight section
+var spotlightMediaCol = $('<div class="col-xs-12 col-sm-12 col-md-12"></div>');
+var spotlightMedia = $('<div class="media"></div>');
+var spotlightMediaLeft = $('<div class="media-left"></div>');
+var spotlightMediaImgLink = $('<a class="spotlight-link" href="#"></a>');
+var spotlightImgWrapper = $('<div class="product-img-wrapper"></div>');
+var spotlightImg = $('<img class="product-img" src="' + spotlight[0].image + '">');
+var spotlightMediaBody = $('<div class="media-body"></div>');
+var spotlightMediaHeadingLink = $('<a class="spotlight-link" href="#"></a>');
+var spotlightMediaHeading = $('<h3 class="media-heading">' + spotlight[0].name + '</h3>');
+var spotlightMediaPrice = $('<p>Price: <span class="media-price">$' + spotlight[0].price + '</span></p>');
+var spotlightMediaAboutUL = $('<ul class="media-ul"></ul>');
+$('#landing').find('.spacer').append(spotlightMediaCol);
+$(spotlightMediaCol).append(spotlightMedia);
+$(spotlightMedia).append(spotlightMediaLeft);
+$(spotlightMediaLeft).append(spotlightMediaImgLink);
+$(spotlightMediaImgLink).append(spotlightImgWrapper);
+$(spotlightImgWrapper).append(spotlightImg);
+$(spotlightMedia).append(spotlightMediaBody);
+$(spotlightMediaBody).append(spotlightMediaHeadingLink);
+$(spotlightMediaHeadingLink).append(spotlightMediaHeading);
+$(spotlightMediaBody).append(spotlightMediaPrice);
+if (spotlight[0].description.length === 1) {
+  displayHelper(spotlight[0].description, spotlightMediaBody, 'spotlightMediaAboutP', 'p');
+} else {
+  displayHelper(spotlight[0].description, spotlightMediaAboutUL, 'spotlightMediaAboutLi', 'li');
+  $(spotlightMediaBody).append(spotlightMediaAboutUL);
+}
+
+//Fade in spotlight product based on scroll position
+$(window).on('scroll', function() {
+  var deal = $('#landing').find('.landing-spotlight');
+  if ($(window).scrollTop() > 1500) {
+    deal.slideDown(1000);
+  } else {
+    deal.slideUp(1000);
+  }
+});
+
+$('#landing, #results').on('mouseenter', '.thumbnail', function() {
+  $(this).find('img').stop().animate({ 'margin-top': '-5px' }, 300);
+});
+$('#landing, #results').on('mouseleave', '.thumbnail', function() {
+  $(this).find('img').stop().animate({ 'margin-top': '0px' }, 300);
+});
+
+
+/* Ease in categories */
+$(window).on('scroll', function() {
+  if ($(window).scrollTop() > 1200) {
+    $('#landing').find('#icon-tv').closest('div').animate({ top: '230' }, 300, 'easeOutCubic', function() {
+      $('#landing').find('#icon-book').closest('div').animate({ top: '230' }, 300, 'easeOutCubic', function() {
+        $('#landing').find('#icon-iphone').closest('div').animate({ top: '230' }, 300, 'easeOutCubic', function() {
+          $('#landing').find('.icons-text').closest('div').animate({ top: '-430' }, 1500, 'easeOutCubic');
+        });
+      });
+    });
+  }
+});
+
+$('.white-mid').on('click', 'a', function() {
+  var icon = $(this).find('img').attr('src');
+  if (icon === 'images/black-white-metro-tv-icon.png') {
+    findItem('tv');
+  } else if (icon === 'images/black-white-metro-book-icon.png') {
+    findItem('book');
+  } else {
+    findItem('iphone');
+  }
+});
+
+$('.white-mid').on('mouseenter', 'a', function() {
+  $(this).find('img').toggleClass('icon-rollover');
+});
+$('.white-mid').on('mouseleave', 'a', function() {
+  $(this).find('img').toggleClass('icon-rollover');
+});
+
+$('.white-bot').on('click', function() {
+  var product = $(this).find('.media-heading').text();
+  for (var i = 0; i < productsTemp.length; i++) {
+    if (product === productsTemp[i].name) {
+      showItem(productsTemp[i]);
+    }
+  }
+});
+
 
 //Search for products event
 $('#search-btn').on('click', function(event) {
@@ -256,6 +274,11 @@ $('#product').on('click', '.add-remove-link', function() {
 $('#product').on('mouseenter', '.alt-img', function() {
   var imgAlt = $(this).find('img').attr('src');
   $(this).closest('.media-left').find('.product-img').attr('src', imgAlt);
+  $(this).css({'border': 'solid 2px #f2da4b'});
+});
+
+$('#product').on('mouseleave', '.alt-img', function() {
+  $(this).css({'border': 'solid 1px #e7e5e5'});
 });
 
 //Change item quantity in cart
@@ -425,6 +448,7 @@ function showItem(object) {
   var prodMediaCol = $('<div class="col-xs-10 col-sm-10 col-md-10"></div>');
   var prodMedia = $('<div class="media"></div>');
   var prodMediaLeft = $('<div class="media-left"></div>');
+  var prodImgWrapper = $('<div class="product-img-wrapper"></div>');
   var prodMediaImg = $('<img class="product-img" src="' + object.image[0] + '">');
   var prodAltImgWrapper = $('<div class="alt-img-wrapper"></div>');
   var prodMediaBody = $('<div class="media-body"></div>');
@@ -447,7 +471,8 @@ function showItem(object) {
   $('#product').find('.row').append(prodMediaCol);
   $(prodMediaCol).append(prodMedia);
   $(prodMedia).append(prodMediaLeft);
-  $(prodMediaLeft).append(prodMediaImg);
+  $(prodMediaLeft).append(prodImgWrapper);
+  $(prodImgWrapper).append(prodMediaImg);
   $(prodMediaLeft).append(prodAltImgWrapper);
   $(prodMedia).append(prodMediaBody);
   $(prodMediaBody).append(prodMediaHeading);
