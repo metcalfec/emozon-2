@@ -44,7 +44,12 @@ var productsTemp = [
   {
     name: "TCL 48FS3750 48-Inch 1080p Roku Smart LED TV (2016 Model)",
     by: "TCL",
-    image: "http://ecx.images-amazon.com/images/I/81bRl88tE3L._SL1500_.jpg",
+    image: [
+      "http://ecx.images-amazon.com/images/I/81bRl88tE3L._SL1500_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/71CpyufYAOL._SL1500_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/91AimoxReRL._SL1500_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/71FlJW17VJL._SL1500_.jpg"
+    ],
     description: [
       "Refresh Rate: 60Hz (Native), 120Hz Clear Motion Index (Effective)",
       "Backlight: LED (Full Array)",
@@ -60,7 +65,12 @@ var productsTemp = [
   {
     name: "Samsung UN32J4000 32-Inch 720p LED TV (2015 Model)",
     by: "Samsung",
-    image: "http://ecx.images-amazon.com/images/I/91AZu70gX7L._SL1500_.jpg",
+    image: [
+      "http://ecx.images-amazon.com/images/I/91AZu70gX7L._SL1500_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/61HzwvtW-CL._SL1500_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/71bMxAnPHoL._SL1500_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/91pqf1ggxzL._SL1500_.jpg"
+    ],
     description: [
       "Refresh Rate: 60CMR (Effective)",
       "Backlight: LED",
@@ -75,7 +85,10 @@ var productsTemp = [
   {
     name: "Eloquent JavaScript: A Modern Introduction to Programming",
     by: "Marijn Haverbeke",
-    image: "http://ecx.images-amazon.com/images/I/51zFTdNilAL._SX377_BO1,204,203,200_.jpg",
+    image: [
+      "http://ecx.images-amazon.com/images/I/51zFTdNilAL._SX377_BO1,204,203,200_.jpg",
+      "http://ecx.images-amazon.com/images/I/713IAT6ORAL.jpg"
+    ],
     price: 21.57,
     stock: 100,
     description: [
@@ -90,7 +103,10 @@ var productsTemp = [
   {
     name: "JavaScript: The Definitive Guide: Activate Your Web Pages (Definitive Guides)",
     by: "David Flanagan",
-    image: "http://ecx.images-amazon.com/images/I/51WD-F3GobL.jpg",
+    image: [
+      "http://ecx.images-amazon.com/images/I/51WD-F3GobL.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/51e72HP1qpL.jpg"
+    ],
     price: 33.89,
     stock: 100,
     description: [
@@ -101,7 +117,10 @@ var productsTemp = [
   {
     name: "JavaScript and JQuery: Interactive Front-End Web Development",
     by: "Jon Duckett",
-    image: "http://ecx.images-amazon.com/images/I/41fqWJ%2Br4gL._SX400_BO1,204,203,200_.jpg",
+    image: [
+      "http://ecx.images-amazon.com/images/I/41fqWJ%2Br4gL._SX400_BO1,204,203,200_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/41dSKZjFDaL.jpg"
+    ],
     price: 27.27,
     stock: 100,
     description: [

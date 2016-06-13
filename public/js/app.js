@@ -7,10 +7,10 @@ var spotlight = [productsTemp[9]];
 
 
 ////////////////////////////////////////////////////////////////////////////////
-// Landing Page
+// EVENTS
 ////////////////////////////////////////////////////////////////////////////////
 
-// Append recommended items
+// Append 'recommended' products
 for (var i = 0; i < recommended.length; i++) {
   var recommendedCol = $('<div class="col-xs-3 col-sm-3 col-md-3"></div>');
   var recommendedThumb = $('<a  class="thumbnail" href="#"></a>');
@@ -27,10 +27,11 @@ for (var i = 0; i < recommended.length; i++) {
 }
 
 //Product navigation on click event
-$('.white-top').on('click', 'a', function() {
-  var product = $(this).closest('.col-md-3').find('.landing-image').attr('src');
+$('#landing, #results').on('click', 'a', function() {
+  var productImg = $(this).closest('div').find('img').attr('src'),
+      productTxt = $(this).find('.media-heading').text();
   for (var i = 0; i < productsTemp.length; i++) {
-    if (product === productsTemp[i].image[0]) {
+    if (productImg === productsTemp[i].image[0] || productTxt === productsTemp[i].name) {
       showItem(productsTemp[i]);
       //Check if product is in 'viewed' array and delete/insert it
       var index = viewed.indexOf(productsTemp[i]);
@@ -45,12 +46,51 @@ $('.white-top').on('click', 'a', function() {
 //Fade in top landing div based on scroll position
 $(window).on('scroll', function() {
   var scrollTop = $(window).scrollTop();
-  $('.white-top').css({
-    'opacity': (scrollTop / 500)
-  });
-  $('.scroll-down').css({
-    'opacity': ((200 - scrollTop) / 200)
-  });
+  $('.wrapper-top').css({ 'opacity': (scrollTop / 500) });
+  $('.scroll-down').css({ 'opacity': ((200 - scrollTop) / 200) });
+});
+
+//Fade in categories based on scroll position
+$(window).on('scroll', function() {
+  if ($(window).scrollTop() > 1200) {
+    $('#landing').find('#icon-tv').closest('div').animate({ top: '230' }, 300, 'easeOutCubic', function() {
+      $('#landing').find('#icon-book').closest('div').animate({ top: '230' }, 300, 'easeOutCubic', function() {
+        $('#landing').find('#icon-iphone').closest('div').animate({ top: '230' }, 300, 'easeOutCubic', function() {
+          $('#landing').find('.icons-text').closest('div').animate({ top: '-430' }, 1500, 'easeOutCubic');
+        });
+      });
+    });
+  }
+});
+
+//Fade in spotlight product based on scroll position
+$(window).on('scroll', function() {
+  var deal = $('#landing').find('.landing-spotlight');
+  if ($(window).scrollTop() > 1500) {
+    deal.slideDown(1000);
+  } else {
+    deal.slideUp(1000);
+  }
+});
+
+//Click event on categories
+$('.wrapper-mid').on('click', 'a', function() {
+  var icon = $(this).find('img').attr('src');
+  if (icon === 'images/black-white-metro-tv-icon.png') {
+    findItem('tv');
+  } else if (icon === 'images/black-white-metro-book-icon.png') {
+    findItem('book');
+  } else {
+    findItem('iphone');
+  }
+});
+
+//Hover effect on categories
+$('.wrapper-mid').on('mouseenter', 'a', function() {
+  $(this).find('img').toggleClass('icon-rollover');
+});
+$('.wrapper-mid').on('mouseleave', 'a', function() {
+  $(this).find('img').toggleClass('icon-rollover');
 });
 
 //Product spotlight section
@@ -59,7 +99,7 @@ var spotlightMedia = $('<div class="media"></div>');
 var spotlightMediaLeft = $('<div class="media-left"></div>');
 var spotlightMediaImgLink = $('<a class="spotlight-link" href="#"></a>');
 var spotlightImgWrapper = $('<div class="product-img-wrapper"></div>');
-var spotlightImg = $('<img class="product-img" src="' + spotlight[0].image + '">');
+var spotlightImg = $('<img class="product-img" src="' + spotlight[0].image[0] + '">');
 var spotlightMediaBody = $('<div class="media-body"></div>');
 var spotlightMediaHeadingLink = $('<a class="spotlight-link" href="#"></a>');
 var spotlightMediaHeading = $('<h3 class="media-heading">' + spotlight[0].name + '</h3>');
@@ -82,65 +122,6 @@ if (spotlight[0].description.length === 1) {
   $(spotlightMediaBody).append(spotlightMediaAboutUL);
 }
 
-//Fade in spotlight product based on scroll position
-$(window).on('scroll', function() {
-  var deal = $('#landing').find('.landing-spotlight');
-  if ($(window).scrollTop() > 1500) {
-    deal.slideDown(1000);
-  } else {
-    deal.slideUp(1000);
-  }
-});
-
-$('#landing, #results').on('mouseenter', '.thumbnail', function() {
-  $(this).find('img').stop().animate({ 'margin-top': '-5px' }, 300);
-});
-$('#landing, #results').on('mouseleave', '.thumbnail', function() {
-  $(this).find('img').stop().animate({ 'margin-top': '0px' }, 300);
-});
-
-
-/* Ease in categories */
-$(window).on('scroll', function() {
-  if ($(window).scrollTop() > 1200) {
-    $('#landing').find('#icon-tv').closest('div').animate({ top: '230' }, 300, 'easeOutCubic', function() {
-      $('#landing').find('#icon-book').closest('div').animate({ top: '230' }, 300, 'easeOutCubic', function() {
-        $('#landing').find('#icon-iphone').closest('div').animate({ top: '230' }, 300, 'easeOutCubic', function() {
-          $('#landing').find('.icons-text').closest('div').animate({ top: '-430' }, 1500, 'easeOutCubic');
-        });
-      });
-    });
-  }
-});
-
-$('.white-mid').on('click', 'a', function() {
-  var icon = $(this).find('img').attr('src');
-  if (icon === 'images/black-white-metro-tv-icon.png') {
-    findItem('tv');
-  } else if (icon === 'images/black-white-metro-book-icon.png') {
-    findItem('book');
-  } else {
-    findItem('iphone');
-  }
-});
-
-$('.white-mid').on('mouseenter', 'a', function() {
-  $(this).find('img').toggleClass('icon-rollover');
-});
-$('.white-mid').on('mouseleave', 'a', function() {
-  $(this).find('img').toggleClass('icon-rollover');
-});
-
-$('.white-bot').on('click', function() {
-  var product = $(this).find('.media-heading').text();
-  for (var i = 0; i < productsTemp.length; i++) {
-    if (product === productsTemp[i].name) {
-      showItem(productsTemp[i]);
-    }
-  }
-});
-
-
 //Search for products event
 $('#search-btn').on('click', function(event) {
   event.preventDefault();
@@ -148,35 +129,33 @@ $('#search-btn').on('click', function(event) {
 
 });
 
-//Display products event
-$('#results').on('click', '.thumbnail', function() {
-  for (var i = 0; i < productsTemp.length; i++) {
-    if ($(this).find('.product-title').text() === productsTemp[i].name) {
-      showItem(productsTemp[i]);
-      if (viewed.indexOf(productsTemp[i]) === -1) {
-        viewed.splice(0, 0, productsTemp[i]);
-      }
-    }
-  }
+
+
+//Hover effect on products
+$('#landing, #results').on('mouseenter', '.thumbnail', function() {
+  $(this).find('img').stop().animate({ 'margin-top': '-5px' }, 300);
+});
+$('#landing, #results').on('mouseleave', '.thumbnail', function() {
+  $(this).find('img').stop().animate({ 'margin-top': '0px' }, 300);
 });
 
 //Home button event
 $('#logo').on('click', function() {
   clearAll('home');
   if (viewed.length > 0) {
-    $('#landing').find('.no-items').addClass('hide');
+    $('#landing').find('h2').addClass('hide');
     if (viewed.length === 5) {
       viewed.pop();
     }
   }
-  /* Append recently viewed items to landing page */
+  // Append 'viewed' products
   for (var i = 0; i < viewed.length; i++) {
     var viewedCol = $('<div class="col-xs-3 col-sm-3 col-md-3"></div>');
-    var viewedLink = $('<a href="#"></a>');
-    var viewedImg = $('<img class="landing-image" src="' + viewed[i].image + '">');
+    var viewedThumb = $('<a  class="thumbnail" href="#"></a>');
+    var viewedImg = $('<img class="landing-image" src="' + viewed[i].image[0] + '">');
     $('#landing').find('.viewed').append(viewedCol);
-    $(viewedCol).append(viewedLink);
-    $(viewedLink).append(viewedImg);
+    $(viewedCol).append(viewedThumb);
+    $(viewedThumb).append(viewedImg);
   }
 });
 
@@ -417,7 +396,7 @@ function findItem(item) {
       if (productsTemp[i].keywords[j] === item.toLowerCase()) {
         var resultCol = $('<div class="col-xs-3 col-sm-3 col-md-3"></div>');
         var resultThumb = $('<a  class="thumbnail" href="#"></a>');
-        var resultImg = $('<img src="' + productsTemp[i].image + '">');
+        var resultImg = $('<img src="' + productsTemp[i].image[0] + '">');
         var resultTitleDiv = $('<div>');
         var resultTitle = $('<h5 class="product-title">' + productsTemp[i].name + '</h5>');
         var resultPrice = $('<p class="product-price">$' + productsTemp[i].price + '</p>');
