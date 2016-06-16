@@ -238,7 +238,7 @@ $('#cart').on('click', function() {
   showCart();
 });
 
-//Display saved items popover
+//Display saved items/order history popovers
 $('.navbar').on('click', 'a', function(e) {
   e.preventDefault();
   if ($(this).text() === "Saved For Later") {
@@ -313,7 +313,8 @@ $(document).on('click', 'a', function() {
           showItem(product);
         }
       } else if (listDelegation === 'cart') {
-        cartContents.push([product, 1]);
+        //Add product to cart. If already in cart, update quantity
+        cartQuantity(cartContents, product, 1);
         $('#cart-count').text(cartCount());
         saveForLater.splice(index, 1);
         showCart();
@@ -333,13 +334,13 @@ for (var i = 0; i < recommended.length; i++) {
   var recommendedCol = $('<div class="col-xs-3 col-sm-3 col-md-3"></div>');
   var recommendedThumb = $('<a  class="thumbnail" href="#"></a>');
   var recommendedImg = $('<img class="landing-image" src="' + recommended[i].image[0] + '">');
-  $('#landing').find('.suggestions').append(recommendedCol);
+  $('#landing').find('.recommendations').append(recommendedCol);
   $(recommendedCol).append(recommendedThumb);
   $(recommendedThumb).append(recommendedImg);
   //Append horizontal rule after last recommended product
   if (i === recommended.length - 1) {
     var recommendedHRCol = $('<div class="col-md-12"></div>');
-    $('#landing').find('.suggestions').append(recommendedHRCol);
+    $('#landing').find('.recommendations').append(recommendedHRCol);
     $(recommendedHRCol).append('<hr>');
   }
 }
@@ -410,6 +411,7 @@ function findItem(item) {
 //Append product detail
 function showItem(object) {
   clearAll('product');
+  var prodRow = $('#product').find('.row');
   var prodMediaCol = $('<div class="col-xs-10 col-sm-10 col-md-10"></div>');
   var prodMedia = $('<div class="media"></div>');
   var prodMediaLeft = $('<div class="media-left"></div>');
@@ -432,8 +434,8 @@ function showItem(object) {
   var prodSimilarHRCol = $('<div class="col-xs-12 col-sm-12 col-md-12 spacer"></div>');
   var prodSimilarHR = $('<hr>');
   var prodSimilarCol = $('<div class="col-xs-12 col-sm-12 col-md-12"></div>');
-  var prodSimilarSubtitle = $('<p class="subtitle">Similar Products</p>');
-  $('#product').find('.row').append(prodMediaCol);
+  var prodSimilarHeader = $('<p class="section-header">Similar Products</p>');
+  prodRow.append(prodMediaCol);
   $(prodMediaCol).append(prodMedia);
   $(prodMedia).append(prodMediaLeft);
   $(prodMediaLeft).append(prodImgWrapper);
@@ -443,7 +445,7 @@ function showItem(object) {
   $(prodMediaBody).append(prodMediaHeading);
   $(prodMediaBody).append(prodHR);
   $(prodMediaBody).append(prodMediaPrice);
-  $('#product').find('.row').append(prodAddCol);
+  prodRow.append(prodAddCol);
   $(prodAddCol).append(prodQtyForm);
   $(prodQtyForm).append(prodQtyGroup);
   $(prodQtyGroup).append(prodQtyText);
@@ -451,10 +453,11 @@ function showItem(object) {
   $(prodAddCol).append(prodAdd);
   $(prodAddCol).append(prodAddRemoveLink);
   $(prodAddRemoveLink).append(prodAddRemoveList);
-  $('#product').find('.row').append(prodSimilarHRCol);
+  prodRow.append(prodSimilarHRCol);
   $(prodSimilarHRCol).append(prodSimilarHR);
-  $('#product').find('.row').append(prodSimilarCol);
-  $(prodSimilarCol).append(prodSimilarSubtitle);
+  prodRow.append(prodSimilarCol);
+  $(prodSimilarCol).append(prodSimilarHeader);
+  recommendedItems(recommended, prodRow);
   for (var i = 0; i < saveForLater.length; i++) {
     if (object === saveForLater[i]) {
       $('#product').find('.add-remove-link').text("Remove from list");
@@ -572,6 +575,22 @@ function showCart() {
   $(cartSubtotalCol).append(cartSubtotalCount);
 }
 
+function recommendedItems(array, parent) {
+  for (var i = 0; i < array.length; i++) {
+    var recommendedCol = $('<div class="col-xs-3 col-sm-3 col-md-3"></div>');
+    var recommendedThumb = $('<a  class="thumbnail" href="#"></a>');
+    var recommendedImg = $('<img class="landing-image" src="' + array[i].image[0] + '">');
+    parent.append(recommendedCol);
+    $(recommendedCol).append(recommendedThumb);
+    $(recommendedThumb).append(recommendedImg);
+    //Append horizontal rule after last recommended product
+    if (i === array.length - 1) {
+      var recommendedHRCol = $('<div class="col-md-12"></div>');
+      parent.append(recommendedHRCol);
+      $(recommendedHRCol).append('<hr>');
+    }
+  }
+}
 ////////////////////////////////////////////////////////////////////////////////
 //UTILITY FUNCTIONS
 ////////////////////////////////////////////////////////////////////////////////
@@ -653,10 +672,10 @@ function cartQuantity(array, item, value) {
 }
 
 //Cart Subtotal
-function calcSubtotal(arr) {
+function calcSubtotal(array) {
   var sum = 0;
-  for (var i = 0; i < arr.length; i++) {
-    sum += arr[i][0].price * arr[i][1]
+  for (var i = 0; i < array.length; i++) {
+    sum += array[i][0].price * array[i][1]
   }
   return sum;
 }
