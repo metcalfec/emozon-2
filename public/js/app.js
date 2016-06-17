@@ -10,7 +10,7 @@ var spotlight = [productsTemp[9]];
 ////////////////////////////////////////////////////////////////////////////////
 
 //Product navigation on click event
-$('#landing, #results').on('click', 'a', function() {
+$('#landing, #results, #product').on('click', 'a', function() {
   var productImg = $(this).closest('div').find('img').attr('src'),
       productTxt = $(this).find('.media-heading').text();
   for (var i = 0; i < productsTemp.length; i++) {
