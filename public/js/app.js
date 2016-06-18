@@ -77,10 +77,10 @@ $('.wrapper-mid').on('mouseleave', 'a', function() {
 });
 
 //Hover effect on products
-$('#landing, #results').on('mouseenter', '.thumbnail', function() {
+$('#landing, #results, #product').on('mouseenter', '.thumbnail', function() {
   $(this).find('img').stop().animate({ 'margin-top': '-5px' }, 300);
 });
-$('#landing, #results').on('mouseleave', '.thumbnail', function() {
+$('#landing, #results, #product').on('mouseleave', '.thumbnail', function() {
   $(this).find('img').stop().animate({ 'margin-top': '0px' }, 300);
 });
 
@@ -379,8 +379,8 @@ function findItem(item) {
   clearAll('search');
   var hits = 0;
   for (var i = 0; i < productsTemp.length; i++) {
-    for (var j = 0; j < productsTemp[i].keywords.length; j++) {
-      if (productsTemp[i].keywords[j] === item.toLowerCase()) {
+    for (var j = 0; j < productsTemp[i].tags.length; j++) {
+      if (productsTemp[i].tags[j] === item.toLowerCase()) {
         var resultCol = $('<div class="col-xs-3 col-sm-3 col-md-3"></div>');
         var resultThumb = $('<a  class="thumbnail" href="#"></a>');
         var resultImg = $('<img src="' + productsTemp[i].image[0] + '">');
@@ -409,19 +409,19 @@ function findItem(item) {
 }
 
 //Append product detail
-function showItem(object) {
+function showItem(item) {
   clearAll('product');
   var prodRow = $('#product').find('.row');
   var prodMediaCol = $('<div class="col-xs-10 col-sm-10 col-md-10"></div>');
   var prodMedia = $('<div class="media"></div>');
   var prodMediaLeft = $('<div class="media-left"></div>');
   var prodImgWrapper = $('<div class="product-img-wrapper"></div>');
-  var prodMediaImg = $('<img class="product-img" src="' + object.image[0] + '">');
+  var prodMediaImg = $('<img class="product-img" src="' + item.image[0] + '">');
   var prodAltImgWrapper = $('<div class="alt-img-wrapper"></div>');
   var prodMediaBody = $('<div class="media-body"></div>');
-  var prodMediaHeading = $('<h3 class="media-heading">' + object.name + '</h3>');
+  var prodMediaHeading = $('<h3 class="media-heading">' + item.name + '</h3>');
   var prodHR = $('<hr>');
-  var prodMediaPrice = $('<p>Price: <span class="media-price">$' + object.price + '</span></p>');
+  var prodMediaPrice = $('<p>Price: <span class="media-price">$' + item.price + '</span></p>');
   var prodMediaAboutUL = $('<ul class="media-ul"></ul>');
   var prodAddCol = $('<div class="col-xs-2 col-sm-2 col-md-2 add-col text-center"></div>');
   var prodQtyForm = $('<form class="form-inline"></form>');
@@ -457,22 +457,24 @@ function showItem(object) {
   $(prodSimilarHRCol).append(prodSimilarHR);
   prodRow.append(prodSimilarCol);
   $(prodSimilarCol).append(prodSimilarHeader);
-  recommendedItems(recommended, prodRow);
+  var similar = findRelated(item);
+  appendSection(similar, prodRow);
+  // recommendedItems(recommended, prodRow);
   for (var i = 0; i < saveForLater.length; i++) {
-    if (object === saveForLater[i]) {
+    if (item === saveForLater[i]) {
       $('#product').find('.add-remove-link').text("Remove from list");
     }
   }
-  if (object.description.length === 1) {
-    displayHelper(object.description, prodMediaBody, 'prodMediaAboutP', 'p');
+  if (item.description.length === 1) {
+    displayHelper(item.description, prodMediaBody, 'prodMediaAboutP', 'p');
   } else {
-    displayHelper(object.description, prodMediaAboutUL, 'prodMediaAboutLi', 'li');
+    displayHelper(item.description, prodMediaAboutUL, 'prodMediaAboutLi', 'li');
     $(prodMediaBody).append(prodMediaAboutUL);
   }
-  displayHelper(object.stock, prodQty, 'prodQtyOption', 'option', 1);
-  for (var x = 0; x < object.image.length; x++) {
+  displayHelper(item.stock, prodQty, 'prodQtyOption', 'option', 1);
+  for (var x = 0; x < item.image.length; x++) {
     var prodAltImgHolder = $('<div class="alt-img"></div>');
-    var prodAltImg = $('<img src="' + object.image[x] + '">');
+    var prodAltImg = $('<img src="' + item.image[x] + '">');
     $(prodAltImgWrapper).append(prodAltImgHolder);
     $(prodAltImgHolder).append(prodAltImg);
   }
@@ -575,25 +577,37 @@ function showCart() {
   $(cartSubtotalCol).append(cartSubtotalCount);
 }
 
-function recommendedItems(array, parent) {
-  for (var i = 0; i < array.length; i++) {
-    var recommendedCol = $('<div class="col-xs-3 col-sm-3 col-md-3"></div>');
-    var recommendedThumb = $('<a  class="thumbnail" href="#"></a>');
-    var recommendedImg = $('<img class="landing-image" src="' + array[i].image[0] + '">');
-    parent.append(recommendedCol);
-    $(recommendedCol).append(recommendedThumb);
-    $(recommendedThumb).append(recommendedImg);
-    //Append horizontal rule after last recommended product
-    if (i === array.length - 1) {
-      var recommendedHRCol = $('<div class="col-md-12"></div>');
-      parent.append(recommendedHRCol);
-      $(recommendedHRCol).append('<hr>');
-    }
-  }
-}
 ////////////////////////////////////////////////////////////////////////////////
 //UTILITY FUNCTIONS
 ////////////////////////////////////////////////////////////////////////////////
+
+function appendSection(array, parent) {
+  for (var i = 0, x = 4; i < x; i++) {
+    var column = $('<div class="col-xs-3 col-sm-3 col-md-3"></div>');
+    var thumb = $('<a  class="thumbnail" href="#"></a>');
+    var image = $('<img class="landing-image" src="' + array[i].image[0] + '">');
+    parent.append(column);
+    $(column).append(thumb);
+    $(thumb).append(image);
+    //Append horizontal rule after last item
+    if (i === 3) {
+      var columnHR = $('<div class="col-md-12"></div>');
+      parent.append(columnHR);
+      $(columnHR).append('<hr>');
+    }
+  }
+}
+
+function findRelated(item) {
+  var category = item.tags[0],
+      related = [];
+  for (var i = 0, x = productsTemp.length; i < x; i++) {
+    if (productsTemp[i].tags.indexOf(category) !== -1 && related.indexOf(productsTemp[i]) === -1 && item !== productsTemp[i]) {
+      related.push(productsTemp[i]);
+    }
+  }
+  return related;
+}
 
 //Appending Item Description
 function displayHelper(data, parent, child, el, value) {
@@ -694,7 +708,8 @@ function clearAll(destination) {
   $('#results').find('.row').empty();
   $('#product').find('.row').empty();
   $('#view-cart').find('.row').empty();
-  if (destination === 'search' || destination === 'product' || destination === 'cart'){
+  $(window).scrollTop(0);
+  if (destination !== 'home'){
     $('#landing').addClass('hide');
     $('footer').addClass('hide');
     $('#cover-up').removeClass('hide');
@@ -705,3 +720,18 @@ function clearAll(destination) {
     $('#landing').find('.viewed').empty();
   }
 }
+//
+// function findSimilar(item) {
+//   recommended = [];
+//   var category = item.tags[0];
+//   for (var i = 0, x = productsTemp.length; i < x; i++) {
+//     // for (var j = 0, y = productsTemp[i].tags.length; j < y; j++) {
+//       if (productsTemp[i].tags.indexOf(category) !== -1 && recommended.indexOf(productsTemp[i]) === -1 && item !== productsTemp[i]) {
+//         recommended.push(productsTemp[i]);
+//       }
+//     // }
+//   }
+//   while (recommended.length > 4) {
+//     recommended.pop();
+//   }
+// }

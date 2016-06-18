@@ -18,7 +18,7 @@ var productsTemp = [
     ],
     price: 149.99,
     stock: 100,
-    keywords: ["tv", "tvs", "television"]
+    tags: ["tv", "tvs", "television"]
   },
   {
     name: "Samsung UN40H5003 40-Inch (39.5-Inch Measured Diagonally)1080p LED TV (2014 Model)",
@@ -39,7 +39,7 @@ var productsTemp = [
     ],
     price: 277.99,
     stock: 30,
-    keywords: ["tv", "tvs", "television"]
+    tags: ["tv", "tvs", "television"]
   },
   {
     name: "TCL 48FS3750 48-Inch 1080p Roku Smart LED TV (2016 Model)",
@@ -60,7 +60,7 @@ var productsTemp = [
     ],
     price: 431.21,
     stock: 100,
-    keywords: ["tv", "tvs", "television"]
+    tags: ["tv", "tvs", "television"]
   },
   {
     name: "Samsung UN32J4000 32-Inch 720p LED TV (2015 Model)",
@@ -80,7 +80,7 @@ var productsTemp = [
     ],
     price: 188.11,
     stock: 100,
-    keywords: ["tv", "tvs", "television"]
+    tags: ["tv", "tvs", "television"]
   },
   {
     name: "Eloquent JavaScript: A Modern Introduction to Programming",
@@ -98,7 +98,7 @@ var productsTemp = [
       "How to use the DOM effectively to interact with browsers",
       "How to harness Node.js to build servers and utilities"
     ],
-    keywords: ["book", "books", "javascript"]
+    tags: ["book", "books", "javascript"]
   },
   {
     name: "JavaScript: The Definitive Guide: Activate Your Web Pages (Definitive Guides)",
@@ -112,7 +112,7 @@ var productsTemp = [
     description: [
       "Since 1996, JavaScript: The Definitive Guide has been the bible for JavaScript programmers—a programmer's guide and comprehensive reference to the core language and to the client-side JavaScript APIs defined by web browsers. The 6th edition covers HTML5 and ECMAScript 5. Many chapters have been completely rewritten to bring them in line with today's best web development practices. New chapters in this edition document jQuery and server side JavaScript. It's recommended for experienced programmers who want to learn the programming language of the Web, and for current JavaScript programmers who want to master it."
     ],
-    keywords: ["book", "books", "javascript"]
+    tags: ["book", "books", "javascript"]
   },
   {
     name: "JavaScript and JQuery: Interactive Front-End Web Development",
@@ -126,7 +126,7 @@ var productsTemp = [
     description: [
       "In JavaScript & jQuery renowned author Jon Duckett discards the traditional programming book template and approaches writing code in a more relevant, less intimidating way. Full-color and packed with instructional graphics and photos, his books have gained a loyal following by illustrating programming in a way both instructive for newcomers and invaluable for seasoned coders."
     ],
-    keywords: ["book", "books", "javascript"]
+    tags: ["book", "books", "javascript"]
   },
   {
     name: "Apple iPhone 5S Silver 16GB Unlocked GSM Smartphone",
@@ -145,7 +145,7 @@ var productsTemp = [
     ],
     price: 213.99,
     stock: 100,
-    keywords: ["iphone", "iphones", "phone", "apple"]
+    tags: ["iphone", "iphones", "phone", "apple"]
   },
   {
     name: "Apple iPhone 5 A1428 Factory Unlocked Cellphone, 16GB, Black",
@@ -164,7 +164,7 @@ var productsTemp = [
     ],
     price: 270.99,
     stock: 100,
-    keywords: ["iphone", "iphones", "phone", "apple"]
+    tags: ["iphone", "iphones", "phone", "apple"]
   },
   {
     name: "Apple iPhone SE Unlocked Phone 16 GB Retail Packaging - Space Gray",
@@ -184,7 +184,7 @@ var productsTemp = [
     ],
     price: 499.99,
     stock: 100,
-    keywords: ["iphone", "iphones", "phone", "apple"]
+    tags: ["iphone", "iphones", "phone", "apple"]
   },
   {
     name: "Apple iPhone 4 (MD439LL/A) - 8GB Smartphone - Black - Verizon (Certified Refurbished)",
@@ -204,7 +204,7 @@ var productsTemp = [
     ],
     price: 59.99,
     stock: 100,
-    keywords: ["iphone", "iphones", "phone", "apple"]
+    tags: ["iphone", "iphones", "phone", "apple"]
   },
   {
     name: "Apple iPhone 5 Unlocked Cellphone, 16GB, Black",
@@ -223,7 +223,7 @@ var productsTemp = [
     ],
     price: 250.99,
     stock: 100,
-    keywords: ["iphone", "iphones", "phone", "apple"]
+    tags: ["iphone", "iphones", "phone", "apple"]
   },
   {
     name: "Apple iPhone 5 16GB - Unlocked - White (Certified Refurbished)",
@@ -243,7 +243,7 @@ var productsTemp = [
     ],
     price: 179.99,
     stock: 100,
-    keywords: ["iphone", "iphones", "phone", "apple"]
+    tags: ["iphone", "iphones", "phone", "apple"]
   },
   {
     name: "Apple iPhone 6 a1549 16GB Space Gray Unlocked",
@@ -263,7 +263,7 @@ var productsTemp = [
     ],
     price: 559.95,
     stock: 100,
-    keywords: ["iphone", "iphones", "phone", "apple"]
+    tags: ["iphone", "iphones", "phone", "apple"]
   },
   {
     name: "Apple iPhone 4 Verizon 16GB Cellphone White",
@@ -282,6 +282,6 @@ var productsTemp = [
     ],
     price: 92.99,
     stock: 100,
-    keywords: ["iphone", "iphones", "phone", "apple"]
+    tags: ["iphone", "iphones", "phone", "apple"]
   }
 ]
