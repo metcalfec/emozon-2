@@ -111,14 +111,6 @@ $('#logo').on('click', function() {
   }
   // Append 'viewed' products
   appendSection(viewed, $('#landing').find('.viewed'));
-  // for (var i = 0; i < viewed.length; i++) {
-  //   var viewedCol = $('<div class="col-xs-3 col-sm-3 col-md-3"></div>');
-  //   var viewedThumb = $('<a  class="thumbnail" href="#"></a>');
-  //   var viewedImg = $('<img class="landing-image" src="' + viewed[i].image[0] + '">');
-  //   $('#landing').find('.viewed').append(viewedCol);
-  //   $(viewedCol).append(viewedThumb);
-  //   $(viewedThumb).append(viewedImg);
-  // }
 });
 
 //Add product to cart with modal prompt
