@@ -64,13 +64,13 @@ body  {
   color: white;
   text-align: center;
 }
-#landing .thumbnail {
-  height: 180px;
+#results .thumbnail {
+  height: 280px;
   padding: 20px;
   border: solid 1px transparent;
 }
 .thumbnail {
-  height: 280px;
+  height: 180px;
   padding: 20px;
   border: solid 1px transparent;
 }

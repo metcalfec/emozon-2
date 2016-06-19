@@ -3,7 +3,6 @@ var saveForLater = [];
 var orderHistory = [];
 var recommended = [productsTemp[0], productsTemp[1], productsTemp[2], productsTemp[3]];
 var viewed = [];
-var spotlight = [productsTemp[9]];
 
 ////////////////////////////////////////////////////////////////////////////////
 // EVENTS
@@ -111,14 +110,15 @@ $('#logo').on('click', function() {
     }
   }
   // Append 'viewed' products
-  for (var i = 0; i < viewed.length; i++) {
-    var viewedCol = $('<div class="col-xs-3 col-sm-3 col-md-3"></div>');
-    var viewedThumb = $('<a  class="thumbnail" href="#"></a>');
-    var viewedImg = $('<img class="landing-image" src="' + viewed[i].image[0] + '">');
-    $('#landing').find('.viewed').append(viewedCol);
-    $(viewedCol).append(viewedThumb);
-    $(viewedThumb).append(viewedImg);
-  }
+  appendSection(viewed, $('#landing').find('.viewed'));
+  // for (var i = 0; i < viewed.length; i++) {
+  //   var viewedCol = $('<div class="col-xs-3 col-sm-3 col-md-3"></div>');
+  //   var viewedThumb = $('<a  class="thumbnail" href="#"></a>');
+  //   var viewedImg = $('<img class="landing-image" src="' + viewed[i].image[0] + '">');
+  //   $('#landing').find('.viewed').append(viewedCol);
+  //   $(viewedCol).append(viewedThumb);
+  //   $(viewedThumb).append(viewedImg);
+  // }
 });
 
 //Add product to cart with modal prompt
@@ -346,6 +346,7 @@ for (var i = 0; i < recommended.length; i++) {
 }
 
 //'Spotlight' section on landing
+var spotlight = [productsTemp[Math.floor(Math.random()*productsTemp.length)]];
 var spotlightMediaCol = $('<div class="col-xs-12 col-sm-12 col-md-12"></div>');
 var spotlightMedia = $('<div class="media"></div>');
 var spotlightMediaLeft = $('<div class="media-left"></div>');
@@ -582,20 +583,25 @@ function showCart() {
 ////////////////////////////////////////////////////////////////////////////////
 
 function appendSection(array, parent) {
-  for (var i = 0, x = 4; i < x; i++) {
+  var i = 0,
+      x = array.length;
+  do {
     var column = $('<div class="col-xs-3 col-sm-3 col-md-3"></div>');
     var thumb = $('<a  class="thumbnail" href="#"></a>');
     var image = $('<img class="landing-image" src="' + array[i].image[0] + '">');
     parent.append(column);
     $(column).append(thumb);
     $(thumb).append(image);
-    //Append horizontal rule after last item
+    // Append horizontal rule after last item
     if (i === 3) {
       var columnHR = $('<div class="col-md-12"></div>');
       parent.append(columnHR);
       $(columnHR).append('<hr>');
     }
+    i++;
   }
+  // Only append up to 4 items
+  while (i < x && i < 4);
 }
 
 function findRelated(item) {

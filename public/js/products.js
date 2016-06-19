@@ -1,4 +1,5 @@
 var productsTemp = [
+  // Televisions
   {
     name: "Sony KDL32R300C 32-Inch 720p LED TV (2015 Model)",
     by: "Sony",
@@ -76,12 +77,96 @@ var productsTemp = [
       "Backlight: LED",
       "Smart Functionality: No",
       "Dimensions (W x H x D): TV w/ stand: 29.3\" x 18.2\" x 5.9\", TV w/o stand: 29.3\" x 17.1\" x 2.7\"",
-      "Inputs: 2 HDMI, 1 USB. Please refer the User Manual before use."
+      "Inputs: 2 HDMI, 1 USB. Please refer the User Manual before use"
     ],
     price: 188.11,
     stock: 100,
     tags: ["tv", "tvs", "television"]
   },
+  {
+    name: "Sony KDL48R510C 48-Inch (47.6\" Measured Diagonally) 1080p Smart LED TV (2015 Model)",
+    by: "Sony",
+    image: [
+      "https://images-na.ssl-images-amazon.com/images/I/91vhy%2BxGgOL._SL1500_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/81CoUk3KoGL._SL1500_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/81%2BpcFVrg8L._SL1500_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/410oHNZEyRL._SL1200_.jpg"
+    ],
+    description: [
+      "Refresh Rate: 60Hz (Native); Motionflow XR 120 (Effective)",
+      "Backlight: LED (Edge-Lit)",
+      "Smart Functionality: Yes",
+      "Dimensions (W x H x D): TV without stand: 42.9\" x 21.1\" x 2.6\", TV with stand: 42.9\" x 26.5\" x 8.0\"",
+      "Inputs: 2 HDMI, 2 USB",
+      "Accessories Included: Remote, Table Top Stand"
+    ],
+    price: 459.99,
+    stock: 100,
+    tags: ["tv", "tvs", "television"]
+  },
+  {
+    name: "Sony KDL48W600B 48-Inch 1080p Smart LED TV (2014 Model)",
+    by: "Sony",
+    image: [
+      "https://images-na.ssl-images-amazon.com/images/I/81E71yfF9iL._SL1500_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/61XCnDp6g9L._SL1500_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/511dvWvRhAL._SL1500_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/41X9EEQZKdL.jpg"
+    ],
+    description: [
+      "Refresh Rate: 60Hz (Native); Motionflow XR 240 (Effective)",
+      "Backlight: LED (Edge-Lit)",
+      "Smart Functionality: Yes",
+      "Dimensions (W x H x D): TV without stand: 42.9\" x 25.5\" x 3.6\", TV with stand: 42.9\" x 26.6\" x 7.3\"",
+      "Inputs: 4 HDMI, 2 USB",
+      "Accessories Included: Remote, Table Top Stand, Wall Mount Bracket (adaptor)",
+      "Refresh Rate: 60Hz (Native)"
+    ],
+    price: 449.99,
+    stock: 10,
+    tags: ["tv", "tvs", "television"]
+  },
+  {
+    name: "Sony XBR43X830C 43-Inch 4K Ultra HD Smart LED TV (2015 Model)",
+    by: "Sony",
+    image: [
+      "https://images-na.ssl-images-amazon.com/images/I/71FVmtdTpgL._SL1500_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/51acYKkA5eL._SL1000_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/41bqijjZ7sL._SL1200_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/81V%2BJY4jCTL._SL1500_.jpg"
+    ],
+    description: [
+      "Refresh Rate: 120Hz (Native); Motionflow XR 960 (Effective)",
+      "Backlight: LED (Edge-Lit)",
+      "Smart Functionality: Yes",
+      "Dimensions (W x H x D): TV without stand: 37.9\" x 22.4\" x 2.4\", TV with stand: 37.9\" x 23.9\" x 7.5\"",
+      "Inputs: 4 HDMI (HDCP 2.2), 3 USB"
+    ],
+    price: 699.99,
+    stock: 10,
+    tags: ["tv", "tvs", "television"]
+  },
+  {
+    name: "TCL 48FD2700 48-Inch 1080p LED TV (2015 Model)",
+    by: "TCL",
+    image: [
+      "https://images-na.ssl-images-amazon.com/images/I/81XzTMCoKBL._SL1500_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/8152Zoqh56L._SL1500_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/71CpyufYAOL._SL1500_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/A1--4gknicL._SL1500_.jpg"
+    ],
+    description: [
+      "Effective Refresh Rate: 120Hz, Native Refresh Rate: 60Hz",
+      "Backlight: LED (Full Array). Smart Functionality: No",
+      "Dimensions (W x H x D): TV without stand: 42.9\" x 24.9\" x 3.2\", TV with stand: 42.9\" x 27\" x 9.1\"",
+      "Inputs: 2 HDMI, 1 USB, RF, Composite & Component (shared), Digital Audio Out (coaxial)",
+      "Accessories Included: Remote w/ batteries, detachable power cord"
+    ],
+    price: 319.99,
+    stock: 10,
+    tags: ["tv", "tvs", "television"]
+  },
+  // Books
   {
     name: "Eloquent JavaScript: A Modern Introduction to Programming",
     by: "Marijn Haverbeke",
@@ -128,6 +213,7 @@ var productsTemp = [
     ],
     tags: ["book", "books", "javascript"]
   },
+  // iPhones
   {
     name: "Apple iPhone 5S Silver 16GB Unlocked GSM Smartphone",
     by: "Apple",
