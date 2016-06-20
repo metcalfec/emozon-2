@@ -413,6 +413,8 @@ function showItem(item) {
   var prodAltImgWrapper = $('<div class="alt-img-wrapper"></div>');
   var prodMediaBody = $('<div class="media-body"></div>');
   var prodMediaHeading = $('<h3 class="media-heading">' + item.name + '</h3>');
+  var starCount = starReview(item);
+
   var prodHR = $('<hr>');
   var prodMediaPrice = $('<p>Price: <span class="media-price">$' + item.price + '</span></p>');
   var prodMediaAboutUL = $('<ul class="media-ul"></ul>');
@@ -436,6 +438,11 @@ function showItem(item) {
   $(prodMediaLeft).append(prodAltImgWrapper);
   $(prodMedia).append(prodMediaBody);
   $(prodMediaBody).append(prodMediaHeading);
+  var prodStar = [];
+  for (var i = 0; i < starCount; i++) {
+    prodStar[i] = $('<span><i class="fa fa-star"></i></span>');
+    $(prodMediaBody).append(prodStar[i]);
+  }
   $(prodMediaBody).append(prodHR);
   $(prodMediaBody).append(prodMediaPrice);
   prodRow.append(prodAddCol);
@@ -573,6 +580,16 @@ function showCart() {
 ////////////////////////////////////////////////////////////////////////////////
 //UTILITY FUNCTIONS
 ////////////////////////////////////////////////////////////////////////////////
+
+function starReview(item) {
+  var starRank,
+      count = 0;
+  for (var i = 0, x = item.review.length; i < x; i++) {
+    count += item.review[i].star;
+  }
+  starRank = count / item.review.length;
+  return starRank;
+}
 
 function appendSection(array, parent) {
   var i = 0,

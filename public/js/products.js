@@ -19,6 +19,18 @@ var productsTemp = [
     ],
     price: 149.99,
     stock: 100,
+    review: [
+      {
+        star: 3,
+        name: "Bob Green",
+        comment: "Ludus mucius definitiones ei vix, eu solum ridens vulputate mei. Vis veniam lobortis inimicus ne, eros blandit expetenda ut vim, nullam laoreet epicurei usu an. Ea bonorum assueverit ullamcorper quo, ut utroque phaedrum pri, ne mel case accusam propriae. Ne ius vero modus maiorum. An eos nemore doctus patrioque, eum legere definitionem cu."
+      },
+      {
+        star: 5,
+        name: "Ted Bell",
+        comment: "Discere prodesset ea mea, stet albucius ut qui, qui te posse error. Usu ad lorem complectitur, augue scribentur ei vel, te alterum epicuri duo. Et vix nihil affert numquam. Sed id commodo nostrum necessitatibus, cum ut prima convenire. Qui an doctus intellegat percipitur, sed ridens noster cu. Cum ei nisl semper putant. Nulla utamur sententiae vel in."
+      }
+    ],
     tags: ["tv", "tvs", "television"]
   },
   {
