@@ -26,9 +26,14 @@ var productsTemp = [
         comment: "Ludus mucius definitiones ei vix, eu solum ridens vulputate mei. Vis veniam lobortis inimicus ne, eros blandit expetenda ut vim, nullam laoreet epicurei usu an. Ea bonorum assueverit ullamcorper quo, ut utroque phaedrum pri, ne mel case accusam propriae. Ne ius vero modus maiorum. An eos nemore doctus patrioque, eum legere definitionem cu."
       },
       {
-        star: 5,
+        star: 4,
         name: "Ted Bell",
         comment: "Discere prodesset ea mea, stet albucius ut qui, qui te posse error. Usu ad lorem complectitur, augue scribentur ei vel, te alterum epicuri duo. Et vix nihil affert numquam. Sed id commodo nostrum necessitatibus, cum ut prima convenire. Qui an doctus intellegat percipitur, sed ridens noster cu. Cum ei nisl semper putant. Nulla utamur sententiae vel in."
+      },
+      {
+        star: 1,
+        name: "Don Parsley",
+        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
       }
     ],
     tags: ["tv", "tvs", "television"]
@@ -52,6 +57,23 @@ var productsTemp = [
     ],
     price: 277.99,
     stock: 30,
+    review: [
+      {
+        star: 2,
+        name: "Margaret Gray",
+        comment: "Ludus mucius definitiones ei vix, eu solum ridens vulputate mei. Vis veniam lobortis inimicus ne, eros blandit expetenda ut vim, nullam laoreet epicurei usu an. Ea bonorum assueverit ullamcorper quo, ut utroque phaedrum pri, ne mel case accusam propriae. Ne ius vero modus maiorum. An eos nemore doctus patrioque, eum legere definitionem cu."
+      },
+      {
+        star: 3,
+        name: "Lloyd Bonafide",
+        comment: "Discere prodesset ea mea, stet albucius ut qui, qui te posse error. Usu ad lorem complectitur, augue scribentur ei vel, te alterum epicuri duo. Et vix nihil affert numquam. Sed id commodo nostrum necessitatibus, cum ut prima convenire. Qui an doctus intellegat percipitur, sed ridens noster cu. Cum ei nisl semper putant. Nulla utamur sententiae vel in."
+      },
+      {
+        star: 4,
+        name: "Jay Santos",
+        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      }
+    ],
     tags: ["tv", "tvs", "television"]
   },
   {
@@ -73,6 +95,23 @@ var productsTemp = [
     ],
     price: 431.21,
     stock: 100,
+    review: [
+      {
+        star: 5,
+        name: "Doug Dannger",
+        comment: "Ludus mucius definitiones ei vix, eu solum ridens vulputate mei. Vis veniam lobortis inimicus ne, eros blandit expetenda ut vim, nullam laoreet epicurei usu an. Ea bonorum assueverit ullamcorper quo, ut utroque phaedrum pri, ne mel case accusam propriae. Ne ius vero modus maiorum. An eos nemore doctus patrioque, eum legere definitionem cu."
+      },
+      {
+        star: 5,
+        name: "Chris Norton",
+        comment: "Discere prodesset ea mea, stet albucius ut qui, qui te posse error. Usu ad lorem complectitur, augue scribentur ei vel, te alterum epicuri duo. Et vix nihil affert numquam. Sed id commodo nostrum necessitatibus, cum ut prima convenire. Qui an doctus intellegat percipitur, sed ridens noster cu. Cum ei nisl semper putant. Nulla utamur sententiae vel in."
+      },
+      {
+        star: 3,
+        name: "R.C Collins",
+        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      }
+    ],
     tags: ["tv", "tvs", "television"]
   },
   {

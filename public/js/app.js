@@ -413,7 +413,6 @@ function showItem(item) {
   var prodAltImgWrapper = $('<div class="alt-img-wrapper"></div>');
   var prodMediaBody = $('<div class="media-body"></div>');
   var prodMediaHeading = $('<h3 class="media-heading">' + item.name + '</h3>');
-  var starCount = starReview(item);
 
   var prodHR = $('<hr>');
   var prodMediaPrice = $('<p>Price: <span class="media-price">$' + item.price + '</span></p>');
@@ -438,11 +437,9 @@ function showItem(item) {
   $(prodMediaLeft).append(prodAltImgWrapper);
   $(prodMedia).append(prodMediaBody);
   $(prodMediaBody).append(prodMediaHeading);
-  var prodStar = [];
-  for (var i = 0; i < starCount; i++) {
-    prodStar[i] = $('<span><i class="fa fa-star"></i></span>');
-    $(prodMediaBody).append(prodStar[i]);
-  }
+
+  starRank(item, prodMediaBody)
+
   $(prodMediaBody).append(prodHR);
   $(prodMediaBody).append(prodMediaPrice);
   prodRow.append(prodAddCol);
@@ -581,20 +578,42 @@ function showCart() {
 //UTILITY FUNCTIONS
 ////////////////////////////////////////////////////////////////////////////////
 
-function starReview(item) {
-  var starRank,
-      count = 0;
+// Customer review star ranking
+function starRank(item, parent) {
+  var starAvg,
+      total = 0,
+      starFull,
+      starHalf,
+      starEmpty,
+      prodStarFull = [],
+      prodStarEmpty = [],
+      prodStarHalf = [];
   for (var i = 0, x = item.review.length; i < x; i++) {
-    count += item.review[i].star;
+    total += item.review[i].star;
   }
-  starRank = count / item.review.length;
-  return starRank;
+  // Set star values
+  starAvg = total / x;
+  starFull = Math.floor(starAvg);
+  starEmpty = 5 - (Math.ceil(starAvg));
+  starHalf = 5 - (starEmpty + starFull);
+  // Append stars to Dom
+  for (var i = 0; i < starFull; i++) {
+    prodStarFull[i] = $('<span><i class="fa fa-star"></i></span>');
+    $(parent).append(prodStarFull[i]);
+  }
+  if (starHalf > 0) {
+    $(parent).append($('<span><i class="fa fa-star-half-o"></i></span>'));
+  }
+  for (var i = 0; i < starEmpty; i++) {
+    prodStarEmpty[i] = $('<span><i class="fa fa-star-o"></i></span>');
+    $(parent).append(prodStarEmpty[i]);
+  }
 }
 
 function appendSection(array, parent) {
   var i = 0,
       x = array.length;
-  do {
+  for (i; i < x && i < 4; i++) {
     var column = $('<div class="col-xs-3 col-sm-3 col-md-3"></div>');
     var thumb = $('<a  class="thumbnail" href="#"></a>');
     var image = $('<img class="landing-image" src="' + array[i].image[0] + '">');
@@ -607,10 +626,7 @@ function appendSection(array, parent) {
       parent.append(columnHR);
       $(columnHR).append('<hr>');
     }
-    i++;
   }
-  // Only append up to 4 items
-  while (i < x && i < 4);
 }
 
 function findRelated(item) {
