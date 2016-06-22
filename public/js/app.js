@@ -173,6 +173,10 @@ $('#product').on('click', '.add-remove-link', function() {
   }
 });
 
+$('#product').on('click', '.review-count', function() {
+  $(window).scrollTop(500);
+})
+
 //Change cart quantity
 $('#view-cart').on('change', '.cart-qty', function() {
   var itemToChange = $(this).closest('.item-row').find('.media-heading').first().text();
@@ -413,7 +417,6 @@ function showItem(item) {
   var prodAltImgWrapper = $('<div class="alt-img-wrapper"></div>');
   var prodMediaBody = $('<div class="media-body"></div>');
   var prodMediaHeading = $('<h3 class="media-heading">' + item.name + '</h3>');
-
   var prodHR = $('<hr>');
   var prodMediaPrice = $('<p>Price: <span class="media-price">$' + item.price + '</span></p>');
   var prodMediaAboutUL = $('<ul class="media-ul"></ul>');
@@ -429,6 +432,8 @@ function showItem(item) {
   var prodSimilarHR = $('<hr>');
   var prodSimilarCol = $('<div class="col-xs-12 col-sm-12 col-md-12"></div>');
   var prodSimilarHeader = $('<p class="section-header">Similar Products</p>');
+  var prodReviewCol = $('<div class="col-xs-12 col-sm-12 col-md-12"></div>');
+  var prodReviewHeader = $('<p class="section-header">Customer Reviews</p>');
   prodRow.append(prodMediaCol);
   $(prodMediaCol).append(prodMedia);
   $(prodMedia).append(prodMediaLeft);
@@ -437,9 +442,7 @@ function showItem(item) {
   $(prodMediaLeft).append(prodAltImgWrapper);
   $(prodMedia).append(prodMediaBody);
   $(prodMediaBody).append(prodMediaHeading);
-
-  starRank(item, prodMediaBody)
-
+  starRank(item, prodMediaBody, "fa-1x", "customer reviews");
   $(prodMediaBody).append(prodHR);
   $(prodMediaBody).append(prodMediaPrice);
   prodRow.append(prodAddCol);
@@ -456,7 +459,9 @@ function showItem(item) {
   $(prodSimilarCol).append(prodSimilarHeader);
   var similar = findRelated(item);
   appendSection(similar, prodRow);
-  // recommendedItems(recommended, prodRow);
+  prodRow.append(prodReviewCol);
+  $(prodReviewCol).append(prodReviewHeader);
+  starRank(item, prodReviewCol, "fa-2x");
   for (var i = 0; i < saveForLater.length; i++) {
     if (item === saveForLater[i]) {
       $('#product').find('.add-remove-link').text("Remove from list");
@@ -579,7 +584,7 @@ function showCart() {
 ////////////////////////////////////////////////////////////////////////////////
 
 // Customer review star ranking
-function starRank(item, parent) {
+function starRank(item, parent, size, optionText) {
   var starAvg,
       total = 0,
       starFull,
@@ -598,15 +603,20 @@ function starRank(item, parent) {
   starHalf = 5 - (starEmpty + starFull);
   // Append stars to Dom
   for (var i = 0; i < starFull; i++) {
-    prodStarFull[i] = $('<span><i class="fa fa-star"></i></span>');
+    prodStarFull[i] = $('<span><i class="fa fa-star ' + size + '"></i></span>');
     $(parent).append(prodStarFull[i]);
   }
   if (starHalf > 0) {
-    $(parent).append($('<span><i class="fa fa-star-half-o"></i></span>'));
+    $(parent).append($('<span><i class="fa fa-star-half-o ' + size + '"></i></span>'));
   }
   for (var i = 0; i < starEmpty; i++) {
-    prodStarEmpty[i] = $('<span><i class="fa fa-star-o"></i></span>');
+    prodStarEmpty[i] = $('<span><i class="fa fa-star-o ' + size + '"></i></span>');
     $(parent).append(prodStarEmpty[i]);
+  }
+  if (optionText !== undefined) {
+    $(parent).append($('<p class="review-count">' + x + ' ' + optionText + '</p>'));
+  } else {
+    $(parent).append($('<p class="review-count">' + x + '</p>'));
   }
 }
 
@@ -622,7 +632,7 @@ function appendSection(array, parent) {
     $(thumb).append(image);
     // Append horizontal rule after last item
     if (i === 3) {
-      var columnHR = $('<div class="col-md-12"></div>');
+      var columnHR = $('<div class="col-md-12 spacer"></div>');
       parent.append(columnHR);
       $(columnHR).append('<hr>');
     }

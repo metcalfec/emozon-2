@@ -35,6 +35,15 @@ body  {
 #product {
   z-index: 1;
 }
+.review-count {
+  display: inline;
+  padding-left: 20px;
+}
+.review-count:last-child {
+  display: inline;
+  padding-left: 20px;
+  font-size: 18px;
+}
 .navbar {
   border-radius: 0;
   border: 0;
