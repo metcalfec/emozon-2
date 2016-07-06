@@ -19,6 +19,23 @@ var productsTemp = [
     ],
     price: 149.99,
     stock: 100,
+    review: [
+      {
+        star: 3,
+        name: "Bob Green",
+        comment: "Ludus mucius definitiones ei vix, eu solum ridens vulputate mei. Vis veniam lobortis inimicus ne, eros blandit expetenda ut vim, nullam laoreet epicurei usu an. Ea bonorum assueverit ullamcorper quo, ut utroque phaedrum pri, ne mel case accusam propriae. Ne ius vero modus maiorum. An eos nemore doctus patrioque, eum legere definitionem cu."
+      },
+      {
+        star: 4,
+        name: "Ted Bell",
+        comment: "Discere prodesset ea mea, stet albucius ut qui, qui te posse error. Usu ad lorem complectitur, augue scribentur ei vel, te alterum epicuri duo. Et vix nihil affert numquam. Sed id commodo nostrum necessitatibus, cum ut prima convenire. Qui an doctus intellegat percipitur, sed ridens noster cu. Cum ei nisl semper putant. Nulla utamur sententiae vel in."
+      },
+      {
+        star: 1,
+        name: "Don Parsley",
+        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      }
+    ],
     tags: ["tv", "tvs", "television"]
   },
   {
@@ -40,6 +57,23 @@ var productsTemp = [
     ],
     price: 277.99,
     stock: 30,
+    review: [
+      {
+        star: 2,
+        name: "Margaret Gray",
+        comment: "Ludus mucius definitiones ei vix, eu solum ridens vulputate mei. Vis veniam lobortis inimicus ne, eros blandit expetenda ut vim, nullam laoreet epicurei usu an. Ea bonorum assueverit ullamcorper quo, ut utroque phaedrum pri, ne mel case accusam propriae. Ne ius vero modus maiorum. An eos nemore doctus patrioque, eum legere definitionem cu."
+      },
+      {
+        star: 3,
+        name: "Lloyd Bonafide",
+        comment: "Discere prodesset ea mea, stet albucius ut qui, qui te posse error. Usu ad lorem complectitur, augue scribentur ei vel, te alterum epicuri duo. Et vix nihil affert numquam. Sed id commodo nostrum necessitatibus, cum ut prima convenire. Qui an doctus intellegat percipitur, sed ridens noster cu. Cum ei nisl semper putant. Nulla utamur sententiae vel in."
+      },
+      {
+        star: 4,
+        name: "Jay Santos",
+        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      }
+    ],
     tags: ["tv", "tvs", "television"]
   },
   {
@@ -61,6 +95,23 @@ var productsTemp = [
     ],
     price: 431.21,
     stock: 100,
+    review: [
+      {
+        star: 5,
+        name: "Doug Dannger",
+        comment: "Ludus mucius definitiones ei vix, eu solum ridens vulputate mei. Vis veniam lobortis inimicus ne, eros blandit expetenda ut vim, nullam laoreet epicurei usu an. Ea bonorum assueverit ullamcorper quo, ut utroque phaedrum pri, ne mel case accusam propriae. Ne ius vero modus maiorum. An eos nemore doctus patrioque, eum legere definitionem cu."
+      },
+      {
+        star: 5,
+        name: "Chris Norton",
+        comment: "Discere prodesset ea mea, stet albucius ut qui, qui te posse error. Usu ad lorem complectitur, augue scribentur ei vel, te alterum epicuri duo. Et vix nihil affert numquam. Sed id commodo nostrum necessitatibus, cum ut prima convenire. Qui an doctus intellegat percipitur, sed ridens noster cu. Cum ei nisl semper putant. Nulla utamur sententiae vel in."
+      },
+      {
+        star: 3,
+        name: "R.C Collins",
+        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      }
+    ],
     tags: ["tv", "tvs", "television"]
   },
   {
@@ -81,6 +132,23 @@ var productsTemp = [
     ],
     price: 188.11,
     stock: 100,
+    review: [
+      {
+        star: 2,
+        name: "Jim Sadler",
+        comment: "Ludus mucius definitiones ei vix, eu solum ridens vulputate mei. Vis veniam lobortis inimicus ne, eros blandit expetenda ut vim, nullam laoreet epicurei usu an. Ea bonorum assueverit ullamcorper quo, ut utroque phaedrum pri, ne mel case accusam propriae. Ne ius vero modus maiorum. An eos nemore doctus patrioque, eum legere definitionem cu."
+      },
+      {
+        star: 5,
+        name: "Bud Dickman",
+        comment: "Discere prodesset ea mea, stet albucius ut qui, qui te posse error. Usu ad lorem complectitur, augue scribentur ei vel, te alterum epicuri duo. Et vix nihil affert numquam. Sed id commodo nostrum necessitatibus, cum ut prima convenire. Qui an doctus intellegat percipitur, sed ridens noster cu. Cum ei nisl semper putant. Nulla utamur sententiae vel in."
+      },
+      {
+        star: 4,
+        name: "Bobbie Dooley",
+        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      }
+    ],
     tags: ["tv", "tvs", "television"]
   },
   {
@@ -102,6 +170,23 @@ var productsTemp = [
     ],
     price: 459.99,
     stock: 100,
+    review: [
+      {
+        star: 2,
+        name: "Justin McElroy",
+        comment: "Ludus mucius definitiones ei vix, eu solum ridens vulputate mei. Vis veniam lobortis inimicus ne, eros blandit expetenda ut vim, nullam laoreet epicurei usu an. Ea bonorum assueverit ullamcorper quo, ut utroque phaedrum pri, ne mel case accusam propriae. Ne ius vero modus maiorum. An eos nemore doctus patrioque, eum legere definitionem cu."
+      },
+      {
+        star: 4,
+        name: "Frank Gray",
+        comment: "Discere prodesset ea mea, stet albucius ut qui, qui te posse error. Usu ad lorem complectitur, augue scribentur ei vel, te alterum epicuri duo. Et vix nihil affert numquam. Sed id commodo nostrum necessitatibus, cum ut prima convenire. Qui an doctus intellegat percipitur, sed ridens noster cu. Cum ei nisl semper putant. Nulla utamur sententiae vel in."
+      },
+      {
+        star: 4,
+        name: "Bob Bakian",
+        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      }
+    ],
     tags: ["tv", "tvs", "television"]
   },
   {
@@ -123,7 +208,24 @@ var productsTemp = [
       "Refresh Rate: 60Hz (Native)"
     ],
     price: 449.99,
-    stock: 10,
+    stock: 30,
+    review: [
+      {
+        star: 5,
+        name: "Ted Bell",
+        comment: "Ludus mucius definitiones ei vix, eu solum ridens vulputate mei. Vis veniam lobortis inimicus ne, eros blandit expetenda ut vim, nullam laoreet epicurei usu an. Ea bonorum assueverit ullamcorper quo, ut utroque phaedrum pri, ne mel case accusam propriae. Ne ius vero modus maiorum. An eos nemore doctus patrioque, eum legere definitionem cu."
+      },
+      {
+        star: 5,
+        name: "Art Griego",
+        comment: "Discere prodesset ea mea, stet albucius ut qui, qui te posse error. Usu ad lorem complectitur, augue scribentur ei vel, te alterum epicuri duo. Et vix nihil affert numquam. Sed id commodo nostrum necessitatibus, cum ut prima convenire. Qui an doctus intellegat percipitur, sed ridens noster cu. Cum ei nisl semper putant. Nulla utamur sententiae vel in."
+      },
+      {
+        star: 4,
+        name: "Harvey Wireman",
+        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      }
+    ],
     tags: ["tv", "tvs", "television"]
   },
   {
@@ -144,6 +246,23 @@ var productsTemp = [
     ],
     price: 699.99,
     stock: 10,
+    review: [
+      {
+        star: 5,
+        name: "Jay Santos",
+        comment: "Ludus mucius definitiones ei vix, eu solum ridens vulputate mei. Vis veniam lobortis inimicus ne, eros blandit expetenda ut vim, nullam laoreet epicurei usu an. Ea bonorum assueverit ullamcorper quo, ut utroque phaedrum pri, ne mel case accusam propriae. Ne ius vero modus maiorum. An eos nemore doctus patrioque, eum legere definitionem cu."
+      },
+      {
+        star: 3,
+        name: "Margaret Gray",
+        comment: "Discere prodesset ea mea, stet albucius ut qui, qui te posse error. Usu ad lorem complectitur, augue scribentur ei vel, te alterum epicuri duo. Et vix nihil affert numquam. Sed id commodo nostrum necessitatibus, cum ut prima convenire. Qui an doctus intellegat percipitur, sed ridens noster cu. Cum ei nisl semper putant. Nulla utamur sententiae vel in."
+      },
+      {
+        star: 4,
+        name: "Bob Green",
+        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      }
+    ],
     tags: ["tv", "tvs", "television"]
   },
   {
@@ -164,6 +283,23 @@ var productsTemp = [
     ],
     price: 319.99,
     stock: 10,
+    review: [
+      {
+        star: 2,
+        name: "Steve Dooley",
+        comment: "Ludus mucius definitiones ei vix, eu solum ridens vulputate mei. Vis veniam lobortis inimicus ne, eros blandit expetenda ut vim, nullam laoreet epicurei usu an. Ea bonorum assueverit ullamcorper quo, ut utroque phaedrum pri, ne mel case accusam propriae. Ne ius vero modus maiorum. An eos nemore doctus patrioque, eum legere definitionem cu."
+      },
+      {
+        star: 3,
+        name: "R.C. Collins",
+        comment: "Discere prodesset ea mea, stet albucius ut qui, qui te posse error. Usu ad lorem complectitur, augue scribentur ei vel, te alterum epicuri duo. Et vix nihil affert numquam. Sed id commodo nostrum necessitatibus, cum ut prima convenire. Qui an doctus intellegat percipitur, sed ridens noster cu. Cum ei nisl semper putant. Nulla utamur sententiae vel in."
+      },
+      {
+        star: 1,
+        name: "Bob Bakian",
+        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      }
+    ],
     tags: ["tv", "tvs", "television"]
   },
   // Books
@@ -174,14 +310,31 @@ var productsTemp = [
       "http://ecx.images-amazon.com/images/I/51zFTdNilAL._SX377_BO1,204,203,200_.jpg",
       "http://ecx.images-amazon.com/images/I/713IAT6ORAL.jpg"
     ],
-    price: 21.57,
-    stock: 100,
     description: [
       "The essential elements of programming, including syntax, control, and data",
       "How to organize and clarify your code with object-oriented and functional programming techniques",
       "How to script the browser and make basic web applications",
       "How to use the DOM effectively to interact with browsers",
       "How to harness Node.js to build servers and utilities"
+    ],
+    price: 21.57,
+    stock: 100,
+    review: [
+      {
+        star: 5,
+        name: "Jay Santos",
+        comment: "Ludus mucius definitiones ei vix, eu solum ridens vulputate mei. Vis veniam lobortis inimicus ne, eros blandit expetenda ut vim, nullam laoreet epicurei usu an. Ea bonorum assueverit ullamcorper quo, ut utroque phaedrum pri, ne mel case accusam propriae. Ne ius vero modus maiorum. An eos nemore doctus patrioque, eum legere definitionem cu."
+      },
+      {
+        star: 3,
+        name: "Margaret Gray",
+        comment: "Discere prodesset ea mea, stet albucius ut qui, qui te posse error. Usu ad lorem complectitur, augue scribentur ei vel, te alterum epicuri duo. Et vix nihil affert numquam. Sed id commodo nostrum necessitatibus, cum ut prima convenire. Qui an doctus intellegat percipitur, sed ridens noster cu. Cum ei nisl semper putant. Nulla utamur sententiae vel in."
+      },
+      {
+        star: 4,
+        name: "Bob Green",
+        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      }
     ],
     tags: ["book", "books", "javascript"]
   },
@@ -192,10 +345,27 @@ var productsTemp = [
       "http://ecx.images-amazon.com/images/I/51WD-F3GobL.jpg",
       "https://images-na.ssl-images-amazon.com/images/I/51e72HP1qpL.jpg"
     ],
-    price: 33.89,
-    stock: 100,
     description: [
       "Since 1996, JavaScript: The Definitive Guide has been the bible for JavaScript programmers—a programmer's guide and comprehensive reference to the core language and to the client-side JavaScript APIs defined by web browsers. The 6th edition covers HTML5 and ECMAScript 5. Many chapters have been completely rewritten to bring them in line with today's best web development practices. New chapters in this edition document jQuery and server side JavaScript. It's recommended for experienced programmers who want to learn the programming language of the Web, and for current JavaScript programmers who want to master it."
+    ],
+    price: 33.89,
+    stock: 100,
+    review: [
+      {
+        star: 2,
+        name: "Jim Sadler",
+        comment: "Ludus mucius definitiones ei vix, eu solum ridens vulputate mei. Vis veniam lobortis inimicus ne, eros blandit expetenda ut vim, nullam laoreet epicurei usu an. Ea bonorum assueverit ullamcorper quo, ut utroque phaedrum pri, ne mel case accusam propriae. Ne ius vero modus maiorum. An eos nemore doctus patrioque, eum legere definitionem cu."
+      },
+      {
+        star: 5,
+        name: "Bud Dickman",
+        comment: "Discere prodesset ea mea, stet albucius ut qui, qui te posse error. Usu ad lorem complectitur, augue scribentur ei vel, te alterum epicuri duo. Et vix nihil affert numquam. Sed id commodo nostrum necessitatibus, cum ut prima convenire. Qui an doctus intellegat percipitur, sed ridens noster cu. Cum ei nisl semper putant. Nulla utamur sententiae vel in."
+      },
+      {
+        star: 4,
+        name: "Bobbie Dooley",
+        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      }
     ],
     tags: ["book", "books", "javascript"]
   },
@@ -206,10 +376,91 @@ var productsTemp = [
       "http://ecx.images-amazon.com/images/I/41fqWJ%2Br4gL._SX400_BO1,204,203,200_.jpg",
       "https://images-na.ssl-images-amazon.com/images/I/41dSKZjFDaL.jpg"
     ],
-    price: 27.27,
-    stock: 100,
     description: [
       "In JavaScript & jQuery renowned author Jon Duckett discards the traditional programming book template and approaches writing code in a more relevant, less intimidating way. Full-color and packed with instructional graphics and photos, his books have gained a loyal following by illustrating programming in a way both instructive for newcomers and invaluable for seasoned coders."
+    ],
+    price: 27.27,
+    stock: 100,
+    review: [
+      {
+        star: 2,
+        name: "Margaret Gray",
+        comment: "Ludus mucius definitiones ei vix, eu solum ridens vulputate mei. Vis veniam lobortis inimicus ne, eros blandit expetenda ut vim, nullam laoreet epicurei usu an. Ea bonorum assueverit ullamcorper quo, ut utroque phaedrum pri, ne mel case accusam propriae. Ne ius vero modus maiorum. An eos nemore doctus patrioque, eum legere definitionem cu."
+      },
+      {
+        star: 3,
+        name: "Lloyd Bonafide",
+        comment: "Discere prodesset ea mea, stet albucius ut qui, qui te posse error. Usu ad lorem complectitur, augue scribentur ei vel, te alterum epicuri duo. Et vix nihil affert numquam. Sed id commodo nostrum necessitatibus, cum ut prima convenire. Qui an doctus intellegat percipitur, sed ridens noster cu. Cum ei nisl semper putant. Nulla utamur sententiae vel in."
+      },
+      {
+        star: 4,
+        name: "Jay Santos",
+        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      }
+    ],
+    tags: ["book", "books", "javascript"]
+  },
+  {
+    name: "JavaScript: The Ultimate Beginner's Guide!",
+    by: "Andrew Johansen",
+    image: [
+      "https://images-na.ssl-images-amazon.com/images/I/41S5AVsXaiL.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/61MSHT6zxGL.jpg"
+    ],
+    description: [
+      "This book will help you become an effective JavaScript user. If you want to learn the basics of the JavaScript language quickly and easily, then you must get this book now. This book will explain important facts regarding the JavaScript language. It doesn’t contain any irrelevant information. Each page holds valuable lessons, instructions and examples. After reading this book, you’ll be familiar with objects, functions, variables, statements and other JavaScript elements."
+    ],
+    price: 12.99,
+    stock: 100,
+    review: [
+      {
+        star: 5,
+        name: "Don Parsley",
+        comment: "Ludus mucius definitiones ei vix, eu solum ridens vulputate mei. Vis veniam lobortis inimicus ne, eros blandit expetenda ut vim, nullam laoreet epicurei usu an. Ea bonorum assueverit ullamcorper quo, ut utroque phaedrum pri, ne mel case accusam propriae. Ne ius vero modus maiorum. An eos nemore doctus patrioque, eum legere definitionem cu."
+      },
+      {
+        star: 3,
+        name: "Steve Dooley",
+        comment: "Discere prodesset ea mea, stet albucius ut qui, qui te posse error. Usu ad lorem complectitur, augue scribentur ei vel, te alterum epicuri duo. Et vix nihil affert numquam. Sed id commodo nostrum necessitatibus, cum ut prima convenire. Qui an doctus intellegat percipitur, sed ridens noster cu. Cum ei nisl semper putant. Nulla utamur sententiae vel in."
+      },
+      {
+        star: 3,
+        name: "Doug Dannger",
+        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      }
+    ],
+    tags: ["book", "books", "javascript"]
+  },
+  {
+    name: "Mastering JavaScript",
+    by: "Ved Antani",
+    image: [
+      "https://images-na.ssl-images-amazon.com/images/I/51Zg2YsYWoL.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/51Jqym-F%2BJL.jpg"
+    ],
+    description: [
+      "Write powerful code with the high-level functions that JavaScript offers",
+      "Test and debug issues with JavaScript code using various modern mechanisms",
+      "Offers an expert's eye on the latest ES6 features and how these advanced tasks fit together in JavaScript as a whole"
+    ],
+    price: 44.99,
+    stock: 100,
+    review: [
+      {
+        star: 1,
+        name: "Justin McElroy",
+        comment: "Ludus mucius definitiones ei vix, eu solum ridens vulputate mei. Vis veniam lobortis inimicus ne, eros blandit expetenda ut vim, nullam laoreet epicurei usu an. Ea bonorum assueverit ullamcorper quo, ut utroque phaedrum pri, ne mel case accusam propriae. Ne ius vero modus maiorum. An eos nemore doctus patrioque, eum legere definitionem cu."
+      },
+      {
+        star: 5,
+        name: "Harvey Wireman",
+        comment: "Discere prodesset ea mea, stet albucius ut qui, qui te posse error. Usu ad lorem complectitur, augue scribentur ei vel, te alterum epicuri duo. Et vix nihil affert numquam. Sed id commodo nostrum necessitatibus, cum ut prima convenire. Qui an doctus intellegat percipitur, sed ridens noster cu. Cum ei nisl semper putant. Nulla utamur sententiae vel in."
+      },
+      {
+        star: 3,
+        name: "Bob Bakian",
+        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      }
     ],
     tags: ["book", "books", "javascript"]
   },

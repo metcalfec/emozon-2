@@ -28,7 +28,7 @@ $('#landing, #results, #product').on('click', 'a', function() {
 //Fade in top landing div based on scroll position
 $(window).on('scroll', function() {
   var scrollTop = $(window).scrollTop();
-  $('.wrapper-top').css({ 'opacity': (scrollTop / 500) });
+  $('.suggestions').css({ 'opacity': (scrollTop / 500) });
   $('.scroll-down').css({ 'opacity': ((200 - scrollTop) / 200) });
 });
 
@@ -47,8 +47,8 @@ $(window).on('scroll', function() {
 
 //Fade in spotlight product based on scroll position
 $(window).on('scroll', function() {
-  var deal = $('#landing').find('.landing-spotlight');
-  if ($(window).scrollTop() > 1500) {
+  var deal = $('#landing').find('.todays-item');
+  if ($(window).scrollTop() > 1600) {
     deal.slideDown(1000);
   } else {
     deal.slideUp(1000);
@@ -56,7 +56,7 @@ $(window).on('scroll', function() {
 });
 
 //Navigate products via category
-$('.wrapper-mid').on('click', 'a', function() {
+$('.categories').on('click', 'a', function() {
   var icon = $(this).find('img').attr('src');
   if (icon === 'images/black-white-metro-tv-icon.png') {
     findItem('tv');
@@ -67,20 +67,12 @@ $('.wrapper-mid').on('click', 'a', function() {
   }
 });
 
-//Hover effect on categories
-$('.wrapper-mid').on('mouseenter', 'a', function() {
-  $(this).find('img').toggleClass('icon-rollover');
-});
-$('.wrapper-mid').on('mouseleave', 'a', function() {
-  $(this).find('img').toggleClass('icon-rollover');
-});
-
 //Hover effect on products
 $('#landing, #results, #product').on('mouseenter', '.thumbnail', function() {
-  $(this).find('img').stop().animate({ 'margin-top': '-5px' }, 300);
+  $(this).stop().animate({ 'top': '-5px' }, 300);
 });
 $('#landing, #results, #product').on('mouseleave', '.thumbnail', function() {
-  $(this).find('img').stop().animate({ 'margin-top': '0px' }, 300);
+  $(this).stop().animate({ 'top': '0px' }, 300);
 });
 
 //Search for products
@@ -103,11 +95,8 @@ $('#product').on('mouseleave', '.alt-img', function() {
 //Navigate home
 $('#logo').on('click', function() {
   clearAll('home');
-  if (viewed.length > 0) {
-    $('#landing').find('h2').addClass('hide');
-    if (viewed.length === 5) {
-      viewed.pop();
-    }
+  if (viewed.length > 4) {
+    viewed.pop();
   }
   // Append 'viewed' products
   appendSection(viewed, $('#landing').find('.viewed'));
@@ -172,6 +161,10 @@ $('#product').on('click', '.add-remove-link', function() {
     }
   }
 });
+
+$('#product').on('click', '.review-count-top', function() {
+  $(window).scrollTop(500);
+})
 
 //Change cart quantity
 $('#view-cart').on('change', '.cart-qty', function() {
@@ -316,7 +309,6 @@ $(document).on('click', 'a', function() {
     }
   }
 });
-
 ////////////////////////////////////////////////////////////////////////////////
 //DOM APPENDING
 ////////////////////////////////////////////////////////////////////////////////
@@ -325,7 +317,7 @@ $(document).on('click', 'a', function() {
 for (var i = 0; i < recommended.length; i++) {
   var recommendedCol = $('<div class="col-xs-3 col-sm-3 col-md-3"></div>');
   var recommendedThumb = $('<a  class="thumbnail" href="#"></a>');
-  var recommendedImg = $('<img class="landing-image" src="' + recommended[i].image[0] + '">');
+  var recommendedImg = $('<img src="' + recommended[i].image[0] + '">');
   $('#landing').find('.recommendations').append(recommendedCol);
   $(recommendedCol).append(recommendedThumb);
   $(recommendedThumb).append(recommendedImg);
@@ -342,15 +334,15 @@ var spotlight = [productsTemp[Math.floor(Math.random()*productsTemp.length)]];
 var spotlightMediaCol = $('<div class="col-xs-12 col-sm-12 col-md-12"></div>');
 var spotlightMedia = $('<div class="media"></div>');
 var spotlightMediaLeft = $('<div class="media-left"></div>');
-var spotlightMediaImgLink = $('<a class="spotlight-link" href="#"></a>');
+var spotlightMediaImgLink = $('<a href="#"></a>');
 var spotlightImgWrapper = $('<div class="product-img-wrapper"></div>');
 var spotlightImg = $('<img class="product-img" src="' + spotlight[0].image[0] + '">');
 var spotlightMediaBody = $('<div class="media-body"></div>');
-var spotlightMediaHeadingLink = $('<a class="spotlight-link" href="#"></a>');
+var spotlightMediaHeadingLink = $('<a href="#"></a>');
 var spotlightMediaHeading = $('<h3 class="media-heading">' + spotlight[0].name + '</h3>');
-var spotlightMediaPrice = $('<p>Price: <span class="media-price">$' + spotlight[0].price + '</span></p>');
+var spotlightMediaPrice = $('<p>Price: <span class="product-price">$' + spotlight[0].price + '</span></p>');
 var spotlightMediaAboutUL = $('<ul class="media-ul"></ul>');
-$('#landing').find('.spacer').append(spotlightMediaCol);
+$('.spotlight').find('.todays-item').append(spotlightMediaCol);
 $(spotlightMediaCol).append(spotlightMedia);
 $(spotlightMedia).append(spotlightMediaLeft);
 $(spotlightMediaLeft).append(spotlightMediaImgLink);
@@ -414,7 +406,7 @@ function showItem(item) {
   var prodMediaBody = $('<div class="media-body"></div>');
   var prodMediaHeading = $('<h3 class="media-heading">' + item.name + '</h3>');
   var prodHR = $('<hr>');
-  var prodMediaPrice = $('<p>Price: <span class="media-price">$' + item.price + '</span></p>');
+  var prodMediaPrice = $('<p>Price: <span class="product-price">$' + item.price + '</span></p>');
   var prodMediaAboutUL = $('<ul class="media-ul"></ul>');
   var prodAddCol = $('<div class="col-xs-2 col-sm-2 col-md-2 add-col text-center"></div>');
   var prodQtyForm = $('<form class="form-inline"></form>');
@@ -424,10 +416,13 @@ function showItem(item) {
   var prodAdd = $('<button class="btn btn-warning add-to-cart">Add to Cart</button>');
   var prodAddRemoveLink = $('<a href="#"></a>')
   var prodAddRemoveList = $('<p class="add-remove-link">Add to list</p>');
-  var prodSimilarHRCol = $('<div class="col-xs-12 col-sm-12 col-md-12 spacer"></div>');
+  var prodSimilarHRCol = $('<div class="col-xs-12 col-sm-12 col-md-12"></div>');
   var prodSimilarHR = $('<hr>');
   var prodSimilarCol = $('<div class="col-xs-12 col-sm-12 col-md-12"></div>');
-  var prodSimilarHeader = $('<p class="section-header">Similar Products</p>');
+  var prodSimilarHeader = $('<h2>Similar Products</h2>');
+  var prodSimHR = $('<hr>');
+  var prodReviewCol = $('<div class="col-xs-12 col-sm-12 col-md-12"></div>');
+  var prodReviewHeader = $('<h2>Customer Reviews</h2>');
   prodRow.append(prodMediaCol);
   $(prodMediaCol).append(prodMedia);
   $(prodMedia).append(prodMediaLeft);
@@ -436,6 +431,7 @@ function showItem(item) {
   $(prodMediaLeft).append(prodAltImgWrapper);
   $(prodMedia).append(prodMediaBody);
   $(prodMediaBody).append(prodMediaHeading);
+  starRank(item, prodMediaBody, "fa-1x", "customer reviews");
   $(prodMediaBody).append(prodHR);
   $(prodMediaBody).append(prodMediaPrice);
   prodRow.append(prodAddCol);
@@ -452,7 +448,10 @@ function showItem(item) {
   $(prodSimilarCol).append(prodSimilarHeader);
   var similar = findRelated(item);
   appendSection(similar, prodRow);
-  // recommendedItems(recommended, prodRow);
+  prodRow.append(prodReviewCol);
+  $(prodReviewCol).append(prodReviewHeader);
+  starRank(item, '#product .row', 'fa-2x');
+  ratingTable(item, '#product .row');
   for (var i = 0; i < saveForLater.length; i++) {
     if (item === saveForLater[i]) {
       $('#product').find('.add-remove-link').text("Remove from list");
@@ -478,12 +477,12 @@ function showCart() {
   clearAll('cart');
   var subtotal = 0;
   //Shopping cart headers
-  var cartHeadNameCol = $('<div class="col-xs-7 col-sm-7 col-md-6"></div>');
-  var cartHeadName = $('<h3 class="cart-title-main">Shopping Cart</h3>');
-  var cartHeadPriceCol = $('<div class="col-xs-1 col-sm-1 col-md-2">');
-  var cartHeadPrice = $('<p class="cart-title">Price</p>');
-  var cartHeadQtyCol = $('<div class="col-xs-2 col-sm-2 col-md-2">');
-  var cartHeadQty = $('<p class="pull-right cart-title">Quantity</p>');
+  var cartHeadNameCol = $('<div class="col-xs-7 col-sm-7 col-md-6 cart-title"></div>');
+  var cartHeadName = $('<h3>Shopping Cart</h3>');
+  var cartHeadPriceCol = $('<div class="col-xs-1 col-sm-1 col-md-2 cart-title">');
+  var cartHeadPrice = $('<p>Price</p>');
+  var cartHeadQtyCol = $('<div class="col-xs-2 col-sm-2 col-md-2 cart-title">');
+  var cartHeadQty = $('<p class="pull-right">Quantity</p>');
   var cartHeadHrCol = $('<div class="col-xs-10 col-sm-10 col-md-10">');
   var cartHeadHr = $('<hr class="cart-hr">');
   $('#view-cart').find('.row').append(cartHeadNameCol);
@@ -513,17 +512,18 @@ function showCart() {
       var cartMedia = $('<li class="media"></li>');
       var cartMediaLeft = $('<div class="media-left"></div>');
       var cartMediaImgLink = $('<a href="#"></a>');
+      var cartMediaImgWrapper = $('<div class="img-wrapper"></div>')
       var cartMediaImg = $('<img class="media-object cart-img" src="' + cartContents[i][0].image + '">');
       var cartMediaBody = $('<div class="media-body"></div>');
       var cartMediaHeadingLink = $('<a href="#"></a>');
-      var cartMediaHeading = $('<h4 class="media-heading inline">' + cartContents[i][0].name + '</h4>');
-      var cartMediaBy = $('<p class="cart-pad inline">By ' + cartContents[i][0].by + '</p>');
+      var cartMediaHeading = $('<h4 class="media-heading">' + cartContents[i][0].name + '</h4>');
+      var cartMediaBy = $('<p class="cart-pad">By ' + cartContents[i][0].by + '</p>');
       var cartOptions = $('<div class="cart-options"></div>');
       var cartOptionsDelLink = $('<a href="#"></a>');
-      var cartOptionsDel = $('<p class="inline">Delete</p>');
-      var cartOptionsSpacer = $('<p class="cart-pad inline">|</p>');
+      var cartOptionsDel = $('<p>Delete</p>');
+      var cartOptionsSpacer = $('<p class="cart-pad">|</p>');
       var cartOptionsSaveLink = $('<a href="#"></a>');
-      var cartOptionsSave = $('<p class="cart-pad inline">Save for later</p>');
+      var cartOptionsSave = $('<p class="cart-pad">Save for later</p>');
       var cartPriceCol = $('<div class="col-xs-1 col-sm-1 col-md-2"></div>');
       var cartPrice = $('<h5 class="media-heading">$' + cartContents[i][0].price + '</h5>');
       var cartQtyCol = $('<div class="col-xs-2 col-sm-2 col-md-2"></div>');
@@ -538,7 +538,8 @@ function showCart() {
       $(cartMediaList).append(cartMedia);
       $(cartMedia).append(cartMediaLeft);
       $(cartMediaLeft).append(cartMediaImgLink);
-      $(cartMediaImgLink).append(cartMediaImg);
+      $(cartMediaImgLink).append(cartMediaImgWrapper);
+      $(cartMediaImgWrapper).append(cartMediaImg);
       $(cartMedia).append(cartMediaBody);
       $(cartMediaBody).append(cartMediaHeadingLink);
       $(cartMediaHeadingLink).append(cartMediaHeading);
@@ -562,8 +563,8 @@ function showCart() {
   //Append cart subtotal
   var cartSubtotalRow = $('<div class="row"></div>');
   var cartSubtotalCol = $('<div class="col-xs-10 col-sm-10 col-md-10"></div>');
-  var cartSubtotalCount = $('<h4 class="pull-right inline subtotal-footer">Subtotal ' + subTotalPreview() + '</h4>');
-  var cartSubtotalPrice = $('<h4 class="pull-right subtotal-footer cart-price inline">' + '$' + calcSubtotal(cartContents).toFixed(2) + '</h4>');
+  var cartSubtotalCount = $('<h4 class="pull-right">Subtotal ' + subTotalPreview() + '</h4>');
+  var cartSubtotalPrice = $('<h4 class="pull-right cart-price">' + '$' + calcSubtotal(cartContents).toFixed(2) + '</h4>');
   $('#view-cart').find('.row').append(cartSubtotalRow);
   $(cartSubtotalRow).append(cartSubtotalCol);
   $(cartSubtotalCol).append(cartSubtotalPrice);
@@ -574,26 +575,56 @@ function showCart() {
 //UTILITY FUNCTIONS
 ////////////////////////////////////////////////////////////////////////////////
 
+// Customer review star ranking
+function starRank(item, parent, size, optionText) {
+  var starAvg;
+  var total = 0;
+  var starFull;
+  var starHalf;
+  var starEmpty;
+  var prodStarFull = [];
+  var prodStarEmpty = [];
+  var prodStarHalf = [];
+  var columns = $('<div class="col-md-12"></div>');
+  for (var i = 0, x = item.review.length; i < x; i++) {
+    total += item.review[i].star;
+  }
+  // Set star values
+  starAvg = total / x;
+  starFull = Math.floor(starAvg);
+  starEmpty = 5 - (Math.ceil(starAvg));
+  starHalf = 5 - (starEmpty + starFull);
+  // Append stars to Dom
+  for (var i = 0; i < starFull; i++) {
+    prodStarFull[i] = $('<span><i class="fa fa-star full-star ' + size + '"></i></span>');
+    $(columns).append(prodStarFull[i]);
+  }
+  if (starHalf > 0) {
+    $(columns).append($('<span><i class="fa fa-star-half-o half-star ' + size + '"></i></span>'));
+  }
+  for (var i = 0; i < starEmpty; i++) {
+    prodStarEmpty[i] = $('<span><i class="fa fa-star-o empty-star ' + size + '"></i></span>');
+    $(columns).append(prodStarEmpty[i]);
+  }
+  if (arguments.length === 4) {
+    $(columns).append($('<p class="review-count-top">' + x + ' ' + optionText + '</p>'));
+  } else {
+    $(columns).append($('<p class="review-count-bottom">' + x + '</p>'));
+  }
+  $(parent).append(columns);
+}
+
 function appendSection(array, parent) {
   var i = 0,
       x = array.length;
-  do {
+  for (i; i < x && i < 4; i++) {
     var column = $('<div class="col-xs-3 col-sm-3 col-md-3"></div>');
-    var thumb = $('<a  class="thumbnail" href="#"></a>');
-    var image = $('<img class="landing-image" src="' + array[i].image[0] + '">');
+    var thumb = $('<a class="thumbnail" href="#"></a>');
+    var image = $('<img src="' + array[i].image[0] + '">');
     parent.append(column);
     $(column).append(thumb);
     $(thumb).append(image);
-    // Append horizontal rule after last item
-    if (i === 3) {
-      var columnHR = $('<div class="col-md-12"></div>');
-      parent.append(columnHR);
-      $(columnHR).append('<hr>');
-    }
-    i++;
   }
-  // Only append up to 4 items
-  while (i < x && i < 4);
 }
 
 function findRelated(item) {
@@ -706,30 +737,87 @@ function clearAll(destination) {
   $('#results').find('.row').empty();
   $('#product').find('.row').empty();
   $('#view-cart').find('.row').empty();
+  $('body').css('background', '#fff');
   $(window).scrollTop(0);
   if (destination !== 'home'){
     $('#landing').addClass('hide');
     $('footer').addClass('hide');
-    $('#cover-up').removeClass('hide');
   } else {
     $('#landing').removeClass('hide');
     $('footer').removeClass('hide');
-    $('#cover-up').addClass('hide');
+    $('body').css('background', '#fff url(http://blog.1worldsync.com/wp-content/uploads/2014/03/shopping-bags1.jpg) left top / cover no-repeat fixed');
     $('#landing').find('.viewed').empty();
   }
 }
-//
-// function findSimilar(item) {
-//   recommended = [];
-//   var category = item.tags[0];
-//   for (var i = 0, x = productsTemp.length; i < x; i++) {
-//     // for (var j = 0, y = productsTemp[i].tags.length; j < y; j++) {
-//       if (productsTemp[i].tags.indexOf(category) !== -1 && recommended.indexOf(productsTemp[i]) === -1 && item !== productsTemp[i]) {
-//         recommended.push(productsTemp[i]);
-//       }
-//     // }
-//   }
-//   while (recommended.length > 4) {
-//     recommended.pop();
-//   }
-// }
+
+function ratingTable(item, parent) {
+  // Get star counts
+  var starFive = 0;
+  var starFour = 0;
+  var starThree = 0;
+  var starTwo = 0;
+  var starOne = 0;
+  for (var i = 0, x = item.review.length; i < x; i++) {
+    switch(item.review[i].star) {
+      case 5:
+        starFive++;
+        break;
+      case 4:
+        starFour++;
+        break;
+      case 3:
+        starThree++;
+        break;
+      case 2:
+        starTwo++;
+        break;
+      case 1:
+        starOne++;
+        break;
+    }
+  }
+  var starFivePercent = Math.floor((starFive / x) * 100);
+  var starFourPercent = Math.floor((starFour / x) * 100);
+  var starThreePercent = Math.floor((starThree / x) * 100);
+  var starTwoPercent = Math.floor((starTwo / x) * 100);
+  var starOnePercent = Math.floor((starOne / x) * 100);
+  var columns = $('<div class="col-md-3"></div>');
+  var table = $('<table></table>');
+  $('#product').find('.row').append(table);
+  for (var j = 5; j > 0; j--) {
+    var tr = $('<tr></tr>');
+    var tdStar = $('<td>' + j + ' star</td>');
+    var tdStarContainer = $('<td class="star-container"></td>');
+    var starBar = $('<div class="star-bar bar-' + j + '"></div>');
+    var tdPercent;
+    switch(j) {
+      case 5:
+        tdPercent = $('<td>' + starFivePercent + '%</td>');
+        break;
+      case 4:
+        tdPercent = $('<td>' + starFourPercent + '%</td>');
+        break;
+      case 3:
+        tdPercent = $('<td>' + starThreePercent + '%</td>');
+        break;
+      case 2:
+        tdPercent = $('<td>' + starTwoPercent + '%</td>');
+        break;
+      case 1:
+        tdPercent = $('<td>' + starOnePercent + '%</td>');
+        break;
+    }
+    $(columns).append(table);
+    $(table).append(tr);
+    $(tr).append(tdStar);
+    $(tr).append(tdStarContainer);
+    $(tdStarContainer).append(starBar);
+    $(tr).append(tdPercent);
+  }
+  $(parent).append(table);
+  $('#product').find('.bar-5').width(starFivePercent);
+  $('#product').find('.bar-4').width(starFourPercent);
+  $('#product').find('.bar-3').width(starThreePercent);
+  $('#product').find('.bar-2').width(starTwoPercent);
+  $('#product').find('.bar-1').width(starOnePercent);
+}
