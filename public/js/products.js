@@ -482,6 +482,23 @@ var productsTemp = [
     ],
     price: 213.99,
     stock: 100,
+    review: [
+      {
+        star: 3,
+        name: "Bob Green",
+        comment: "Ludus mucius definitiones ei vix, eu solum ridens vulputate mei. Vis veniam lobortis inimicus ne, eros blandit expetenda ut vim, nullam laoreet epicurei usu an. Ea bonorum assueverit ullamcorper quo, ut utroque phaedrum pri, ne mel case accusam propriae. Ne ius vero modus maiorum. An eos nemore doctus patrioque, eum legere definitionem cu."
+      },
+      {
+        star: 4,
+        name: "Ted Bell",
+        comment: "Discere prodesset ea mea, stet albucius ut qui, qui te posse error. Usu ad lorem complectitur, augue scribentur ei vel, te alterum epicuri duo. Et vix nihil affert numquam. Sed id commodo nostrum necessitatibus, cum ut prima convenire. Qui an doctus intellegat percipitur, sed ridens noster cu. Cum ei nisl semper putant. Nulla utamur sententiae vel in."
+      },
+      {
+        star: 1,
+        name: "Don Parsley",
+        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      }
+    ],
     tags: ["iphone", "iphones", "phone", "apple"]
   },
   {
@@ -501,6 +518,23 @@ var productsTemp = [
     ],
     price: 270.99,
     stock: 100,
+    review: [
+      {
+        star: 2,
+        name: "Margaret Gray",
+        comment: "Ludus mucius definitiones ei vix, eu solum ridens vulputate mei. Vis veniam lobortis inimicus ne, eros blandit expetenda ut vim, nullam laoreet epicurei usu an. Ea bonorum assueverit ullamcorper quo, ut utroque phaedrum pri, ne mel case accusam propriae. Ne ius vero modus maiorum. An eos nemore doctus patrioque, eum legere definitionem cu."
+      },
+      {
+        star: 3,
+        name: "Lloyd Bonafide",
+        comment: "Discere prodesset ea mea, stet albucius ut qui, qui te posse error. Usu ad lorem complectitur, augue scribentur ei vel, te alterum epicuri duo. Et vix nihil affert numquam. Sed id commodo nostrum necessitatibus, cum ut prima convenire. Qui an doctus intellegat percipitur, sed ridens noster cu. Cum ei nisl semper putant. Nulla utamur sententiae vel in."
+      },
+      {
+        star: 4,
+        name: "Jay Santos",
+        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      }
+    ],
     tags: ["iphone", "iphones", "phone", "apple"]
   },
   {
@@ -521,6 +555,23 @@ var productsTemp = [
     ],
     price: 499.99,
     stock: 100,
+    review: [
+      {
+        star: 5,
+        name: "Doug Dannger",
+        comment: "Ludus mucius definitiones ei vix, eu solum ridens vulputate mei. Vis veniam lobortis inimicus ne, eros blandit expetenda ut vim, nullam laoreet epicurei usu an. Ea bonorum assueverit ullamcorper quo, ut utroque phaedrum pri, ne mel case accusam propriae. Ne ius vero modus maiorum. An eos nemore doctus patrioque, eum legere definitionem cu."
+      },
+      {
+        star: 5,
+        name: "Chris Norton",
+        comment: "Discere prodesset ea mea, stet albucius ut qui, qui te posse error. Usu ad lorem complectitur, augue scribentur ei vel, te alterum epicuri duo. Et vix nihil affert numquam. Sed id commodo nostrum necessitatibus, cum ut prima convenire. Qui an doctus intellegat percipitur, sed ridens noster cu. Cum ei nisl semper putant. Nulla utamur sententiae vel in."
+      },
+      {
+        star: 3,
+        name: "R.C Collins",
+        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      }
+    ],
     tags: ["iphone", "iphones", "phone", "apple"]
   },
   {
@@ -541,6 +592,23 @@ var productsTemp = [
     ],
     price: 59.99,
     stock: 100,
+    review: [
+      {
+        star: 2,
+        name: "Jim Sadler",
+        comment: "Ludus mucius definitiones ei vix, eu solum ridens vulputate mei. Vis veniam lobortis inimicus ne, eros blandit expetenda ut vim, nullam laoreet epicurei usu an. Ea bonorum assueverit ullamcorper quo, ut utroque phaedrum pri, ne mel case accusam propriae. Ne ius vero modus maiorum. An eos nemore doctus patrioque, eum legere definitionem cu."
+      },
+      {
+        star: 5,
+        name: "Bud Dickman",
+        comment: "Discere prodesset ea mea, stet albucius ut qui, qui te posse error. Usu ad lorem complectitur, augue scribentur ei vel, te alterum epicuri duo. Et vix nihil affert numquam. Sed id commodo nostrum necessitatibus, cum ut prima convenire. Qui an doctus intellegat percipitur, sed ridens noster cu. Cum ei nisl semper putant. Nulla utamur sententiae vel in."
+      },
+      {
+        star: 4,
+        name: "Bobbie Dooley",
+        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      }
+    ],
     tags: ["iphone", "iphones", "phone", "apple"]
   },
   {
@@ -560,6 +628,23 @@ var productsTemp = [
     ],
     price: 250.99,
     stock: 100,
+    review: [
+      {
+        star: 2,
+        name: "Justin McElroy",
+        comment: "Ludus mucius definitiones ei vix, eu solum ridens vulputate mei. Vis veniam lobortis inimicus ne, eros blandit expetenda ut vim, nullam laoreet epicurei usu an. Ea bonorum assueverit ullamcorper quo, ut utroque phaedrum pri, ne mel case accusam propriae. Ne ius vero modus maiorum. An eos nemore doctus patrioque, eum legere definitionem cu."
+      },
+      {
+        star: 4,
+        name: "Frank Gray",
+        comment: "Discere prodesset ea mea, stet albucius ut qui, qui te posse error. Usu ad lorem complectitur, augue scribentur ei vel, te alterum epicuri duo. Et vix nihil affert numquam. Sed id commodo nostrum necessitatibus, cum ut prima convenire. Qui an doctus intellegat percipitur, sed ridens noster cu. Cum ei nisl semper putant. Nulla utamur sententiae vel in."
+      },
+      {
+        star: 4,
+        name: "Bob Bakian",
+        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      }
+    ],
     tags: ["iphone", "iphones", "phone", "apple"]
   },
   {
@@ -580,6 +665,23 @@ var productsTemp = [
     ],
     price: 179.99,
     stock: 100,
+    review: [
+      {
+        star: 5,
+        name: "Ted Bell",
+        comment: "Ludus mucius definitiones ei vix, eu solum ridens vulputate mei. Vis veniam lobortis inimicus ne, eros blandit expetenda ut vim, nullam laoreet epicurei usu an. Ea bonorum assueverit ullamcorper quo, ut utroque phaedrum pri, ne mel case accusam propriae. Ne ius vero modus maiorum. An eos nemore doctus patrioque, eum legere definitionem cu."
+      },
+      {
+        star: 5,
+        name: "Art Griego",
+        comment: "Discere prodesset ea mea, stet albucius ut qui, qui te posse error. Usu ad lorem complectitur, augue scribentur ei vel, te alterum epicuri duo. Et vix nihil affert numquam. Sed id commodo nostrum necessitatibus, cum ut prima convenire. Qui an doctus intellegat percipitur, sed ridens noster cu. Cum ei nisl semper putant. Nulla utamur sententiae vel in."
+      },
+      {
+        star: 4,
+        name: "Harvey Wireman",
+        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      }
+    ],
     tags: ["iphone", "iphones", "phone", "apple"]
   },
   {
@@ -600,6 +702,23 @@ var productsTemp = [
     ],
     price: 559.95,
     stock: 100,
+    review: [
+      {
+        star: 5,
+        name: "Jay Santos",
+        comment: "Ludus mucius definitiones ei vix, eu solum ridens vulputate mei. Vis veniam lobortis inimicus ne, eros blandit expetenda ut vim, nullam laoreet epicurei usu an. Ea bonorum assueverit ullamcorper quo, ut utroque phaedrum pri, ne mel case accusam propriae. Ne ius vero modus maiorum. An eos nemore doctus patrioque, eum legere definitionem cu."
+      },
+      {
+        star: 3,
+        name: "Margaret Gray",
+        comment: "Discere prodesset ea mea, stet albucius ut qui, qui te posse error. Usu ad lorem complectitur, augue scribentur ei vel, te alterum epicuri duo. Et vix nihil affert numquam. Sed id commodo nostrum necessitatibus, cum ut prima convenire. Qui an doctus intellegat percipitur, sed ridens noster cu. Cum ei nisl semper putant. Nulla utamur sententiae vel in."
+      },
+      {
+        star: 4,
+        name: "Bob Green",
+        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      }
+    ],
     tags: ["iphone", "iphones", "phone", "apple"]
   },
   {
@@ -619,6 +738,23 @@ var productsTemp = [
     ],
     price: 92.99,
     stock: 100,
+    review: [
+      {
+        star: 2,
+        name: "Steve Dooley",
+        comment: "Ludus mucius definitiones ei vix, eu solum ridens vulputate mei. Vis veniam lobortis inimicus ne, eros blandit expetenda ut vim, nullam laoreet epicurei usu an. Ea bonorum assueverit ullamcorper quo, ut utroque phaedrum pri, ne mel case accusam propriae. Ne ius vero modus maiorum. An eos nemore doctus patrioque, eum legere definitionem cu."
+      },
+      {
+        star: 3,
+        name: "R.C. Collins",
+        comment: "Discere prodesset ea mea, stet albucius ut qui, qui te posse error. Usu ad lorem complectitur, augue scribentur ei vel, te alterum epicuri duo. Et vix nihil affert numquam. Sed id commodo nostrum necessitatibus, cum ut prima convenire. Qui an doctus intellegat percipitur, sed ridens noster cu. Cum ei nisl semper putant. Nulla utamur sententiae vel in."
+      },
+      {
+        star: 1,
+        name: "Bob Bakian",
+        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      }
+    ],
     tags: ["iphone", "iphones", "phone", "apple"]
   }
 ]
