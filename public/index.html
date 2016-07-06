@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/default.css">
   <title>Emozon 2.0</title>
 </head>
 <body>
+  <!-- start nav -->
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -45,75 +45,84 @@
       </div>
     </div>
   </nav>
+  <!-- end nav -->
 
-  <div id="cover-up" class="hide"></div>
-
+  <!-- start results -->
   <div id="results" class="container">
     <div class="row">
     </div>
   </div>
-
+  <!-- end results -->
+  <!-- start product -->
   <div id="product" class="container">
     <div class="row">
     </div>
   </div>
-
+  <!-- end product -->
+  <!-- start cart -->
   <div id="view-cart" class="container">
     <div class="row">
     </div>
   </div>
+  <!-- end cart -->
 
+  <!-- start landing -->
   <div id="landing">
-    <div id="need-it">YOU NEED IT<span id="got-it"> WE GOT IT</span></div>
-    <div>
-      <i class="fa fa-chevron-down fa-4x text-center scroll-down"></i>
+    <h1>You need it <span>We got it</span></h1>
+    <div class="scroll-down">
+      <i class="fa fa-chevron-down fa-4x"></i>
     </div>
-    <div class="wrapper-top">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <p class="section-header">Recommendations for you</p>
-            <div class="recommendations"></div>
-          </div>
-          <div class="col-md-12">
-            <p class="section-header">Recently viewed items</p>
-            <div class="viewed"></div>
-            <h2 class="text-center">Start exploring Emozon today</h2>
+    <!-- start suggestions -->
+    <div class="suggestions container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Recommendations for you</h2>
+          <div class="recommendations"></div>
+        </div>
+        <div class="col-md-12">
+          <h2>Recently viewed items</h2>
+          <div class="viewed">
+            <p>Start exploring Emozon today</p>
           </div>
         </div>
       </div>
     </div>
-    <div class="wrapper-mid">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-2 col-xs-offset-3 col-sm-2 col-sm-offset-3 col-md-2 col-md-offset-3">
-            <a href="#"><img id="icon-tv" class="icons" src="images/black-white-metro-tv-icon.png"></a>
-          </div>
-          <div class="col-xs-2 col-sm-2 col-md-2">
-            <a href="#"><img id="icon-book" class="icons" src="images/black-white-metro-book-icon.png"></a>
-          </div>
-          <div class="col-xs-2 col-sm-2 col-md-2">
-            <a href="#"><img id="icon-iphone" class="icons" src="images/black-white-metro-iphone-icon.png"></a>
-          </div>
-          <div class="col-xs-12 col-sm-12 col-md-12">
-            <p class="icons-text text-center">tvs | books | iphones</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="wrapper-bot">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12 landing-spotlight">
-            <p class="section-header">Todays product spotlight</p>
-            <div class="spacer"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    <!-- end suggestions -->
 
-  <!-- Add Item(s) To Cart Modal-->
+    <!-- start categories -->
+    <div class="categories container">
+      <div class="row">
+        <div class="col-xs-2 col-xs-offset-3 col-sm-2 col-sm-offset-3 col-md-2 col-md-offset-3">
+          <a href="#"><img id="icon-tv" class="icons" src="images/black-white-metro-tv-icon.png"></a>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2">
+          <a href="#"><img id="icon-book" class="icons" src="images/black-white-metro-book-icon.png"></a>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2">
+          <a href="#"><img id="icon-iphone" class="icons" src="images/black-white-metro-iphone-icon.png"></a>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+          <p class="icons-text text-center">tvs | books | iphones</p>
+        </div>
+      </div>
+    </div>
+    <!-- end categories -->
+
+    <!-- start spotlight -->
+    <div class="spotlight container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+          <h2>Todays product spotlight</h2>
+          <div class="todays-item"></div>
+        </div>
+      </div>
+    </div>
+    <!-- end spotlight -->
+
+  </div>
+  <!-- end landing -->
+
+  <!-- add to cart modal -->
   <div id="cartAddModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -129,15 +138,13 @@
     </div>
   </div>
   <footer>
-    <p class="footer-txt">
-      <img id="footer-logo" src="images/emozon-logo.png"><br>
-      Chris Metcalfe | github.com/metcalfec
-    </p>
+    <img src="images/emozon-logo.png">
+    <p class="footer-txt">Chris Metcalfe | github.com/metcalfec</p>
   </footer>
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  <script src="https://use.fontawesome.com/f42699f7bd.js"></script>
   <script src="js/products.js"></script>
   <script src="js/app.js"></script>
 </body>
