@@ -1,6 +1,6 @@
 # emozon 2.0
 
-(WIP)
+<img src="https://cloud.githubusercontent.com/assets/17256216/17342785/9c463890-58af-11e6-8660-5a2fcfc23c39.gif" width="90%"></img>
 
 ## Features
 * A user can search for an item
